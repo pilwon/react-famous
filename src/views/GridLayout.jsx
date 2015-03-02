@@ -9,6 +9,12 @@ import FamousUtil from '../lib/FamousUtil';
 export default React.createClass({
   mixins: [FamousMixin],
 
+  propTypes: {
+    dimensions: React.PropTypes.array,
+    gutterSize: React.PropTypes.array,
+    transition: React.PropTypes.boolean
+  },
+
   componentDidMount() {
     this._updateFamous(this.props);
   },
