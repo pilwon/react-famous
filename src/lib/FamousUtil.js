@@ -100,7 +100,13 @@ export function getOwner(instance) {
 }
 
 export function getFamousParentNode(instance) {
-  let [famousParent, key] = _findNearestFamousAncestor(instance);
+  let result = _findNearestFamousAncestor(instance);
+
+  if (!result) {
+    throw new Error('Missing Famous context.');
+  }
+
+  let [famousParent, key] = result;
   // console.log(famousParent);
   // console.log(ReactInstanceMap.get(famousParent)._rootNodeID);
   if (famousParent) {
