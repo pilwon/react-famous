@@ -12,4 +12,5 @@ Famo.us components build with React.
     cd react-famous
     npm install
     gulp examples
-    # http://localhost:8080
+
+* [http://localhost:8080](http://localhost:8080)
