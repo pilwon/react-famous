@@ -12,7 +12,7 @@ export default React.createClass({
   propTypes: {
     dimensions: React.PropTypes.array,
     gutterSize: React.PropTypes.array,
-    transition: React.PropTypes.boolean
+    transition: React.PropTypes.bool
   },
 
   componentDidMount() {
