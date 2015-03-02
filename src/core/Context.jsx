@@ -38,7 +38,7 @@ export default React.createClass({
     if (!node) {
       let container = React.findDOMNode(this.refs.container);
       node = Engine.createContext(container);
-      this.setFamousNode(node);
+      this.setFamousNode(node, node);
     }
 
     if (typeof props.perspective != 'undefined') {

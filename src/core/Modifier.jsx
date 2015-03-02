@@ -32,7 +32,8 @@ export default React.createClass({
     if (!node) {
       node = new Modifier(options);
       this.setFamousNode(
-        FamousUtil.getFamousParentNode(this).add(node)
+        FamousUtil.getFamousParentNode(this).add(node),
+        node
       );
     }
 

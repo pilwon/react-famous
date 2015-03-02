@@ -45,7 +45,8 @@ let Component = React.createClass({
     if (!node) {
       node = new HeaderFooterLayout(options);
       this.setFamousNode(
-        FamousUtil.getFamousParentNode(this).add(node)
+        FamousUtil.getFamousParentNode(this).add(node),
+        node
       );
       this._famousNodes = {
         content: node.content,

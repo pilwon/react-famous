@@ -44,7 +44,8 @@ export default React.createClass({
     if (!node) {
       node = new GridLayout(options);
       this.setFamousNode(
-        FamousUtil.getFamousParentNode(this).add(node)
+        FamousUtil.getFamousParentNode(this).add(node),
+        node
       );
       this._famousNodes = props.children.map((child) => new RenderNode());
       node.sequenceFrom(this._famousNodes);

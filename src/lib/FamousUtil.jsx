@@ -119,7 +119,8 @@ export function createPassDownComponent(name) {
       if (!node) {
         node = new RenderNode();
         this.setFamousNode(
-          getFamousParentNode(this).add(node)
+          getFamousParentNode(this).add(node),
+          node
         );
       }
 
