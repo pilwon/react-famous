@@ -6,7 +6,7 @@ Famo.us components build with React.
 **WIP**
 
 
-## Try Out
+## Try it out
 
     git clone git@github.com:pilwon/react-famous.git
     cd react-famous
