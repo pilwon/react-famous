@@ -1,0 +1,25 @@
+{
+  "name": "react-famous",
+  "description": "Famo.us components build with React",
+  "version": "0.1.1",
+  "homepage": "https://github.com/pilwon/react-famous",
+  "keywords": [
+    "react",
+    "react-component",
+    "famo.us",
+    "famous"
+  ],
+  "author": "Pilwon Huh <pilwon@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "pilwon/react-famous"
+  },
+  "bugs": {
+    "url": "https://github.com/pilwon/react-famous/issues"
+  },
+  "peerDependencies": {
+    "famous": ">=0.3.5",
+    "react": ">=0.13.0-rc1"
+  }
+}
