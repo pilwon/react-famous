@@ -1,8 +1,4 @@
 export default {
-  shouldComponentUpdate(nextProps, nextState) {
-    return false;
-  },
-
   getFamousNode() {
     return this._famousNode;
   },

@@ -1,14 +1,14 @@
 import Engine from 'famous/core/Engine';
 import React from 'react';
 
-import FamousMixin from '../lib/FamousMixin';
+import FamousNodeMixin from '../lib/FamousNodeMixin';
 
 Engine.setOptions({
   appMode: false
 });
 
 export default React.createClass({
-  mixins: [FamousMixin],
+  mixins: [FamousNodeMixin],
 
   propTypes: {
     perspective: React.PropTypes.number
@@ -20,6 +20,10 @@ export default React.createClass({
 
   componentWillReceiveProps(nextProps) {
     this._updateFamousNode(nextProps);
+  },
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return false;
   },
 
   componentWillUnmount() {

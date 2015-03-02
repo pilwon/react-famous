@@ -1,11 +1,12 @@
 import RenderNode from 'famous/core/RenderNode';
 import React from 'react';
 
-import FamousMixin from '../lib/FamousMixin';
+import FamousNodeMixin from '../lib/FamousNodeMixin';
+import FamousRenderMixin from '../lib/FamousRenderMixin';
 import FamousUtil from '../lib/FamousUtil';
 
 export default React.createClass({
-  mixins: [FamousMixin],
+  mixins: [FamousNodeMixin, FamousRenderMixin],
 
   componentDidMount() {
     this._updateFamous(this.props);
@@ -13,6 +14,10 @@ export default React.createClass({
 
   componentWillReceiveProps(nextProps) {
     this._updateFamous(nextProps);
+  },
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return false;
   },
 
   componentWillUnmount() {
@@ -35,10 +40,10 @@ export default React.createClass({
     }
   },
 
-  render() {
+  renderFamous() {
     return (
       <div data-famous="RenderNode">
-        {this.getFamousNode() ? this.props.children : null}
+        {this.props.children}
       </div>
     );
   }

@@ -3,11 +3,12 @@ import GridLayout from 'famous/views/GridLayout';
 import React from 'react';
 import cloneWithProps from 'react/lib/cloneWithProps';
 
-import FamousMixin from '../lib/FamousMixin';
+import FamousNodeMixin from '../lib/FamousNodeMixin';
+import FamousRenderMixin from '../lib/FamousRenderMixin';
 import FamousUtil from '../lib/FamousUtil';
 
 export default React.createClass({
-  mixins: [FamousMixin],
+  mixins: [FamousNodeMixin, FamousRenderMixin],
 
   propTypes: {
     dimensions: React.PropTypes.array,
@@ -21,6 +22,10 @@ export default React.createClass({
 
   componentWillReceiveProps(nextProps) {
     this._updateFamous(nextProps);
+  },
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return false;
   },
 
   componentWillUnmount() {
@@ -50,10 +55,10 @@ export default React.createClass({
     }
   },
 
-  render() {
+  renderFamous() {
     return (
       <div data-famous="GridLayout">
-        {this.getFamousNode() ? this.props.children.map((child, key) => cloneWithProps(child, {key})) : null}
+        {this.props.children.map((child, key) => cloneWithProps(child, {key}))}
       </div>
     );
   }
