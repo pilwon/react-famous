@@ -9,11 +9,12 @@ var mergeStream = require('merge-stream');
 var merge = require('lodash/object/merge');
 var minimist = require('minimist');
 
-gulp.task('clean', 'Clean built files.', function () {
-  var gulpClean = require('gulp-clean');
-  return gulp
-    .src(['build', 'dist'], {read: false})
-    .pipe(gulpClean({force: true}));
+gulp.task('clean', 'Clean built files.', function (cb) {
+  var del = require('del');
+  del([
+    'build',
+    'dist'
+  ], cb);
 });
 
 gulp.task('build', 'Build for all targets.', [
