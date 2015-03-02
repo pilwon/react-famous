@@ -4,13 +4,14 @@ import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
 import SpringTransition from 'react-famous/transitions/SpringTransition';
 import Transitionable from 'react-famous/transitions/Transitionable';
+import Timer from 'react-famous/utilities/Timer';
 import Deck from 'react-famous/views/Deck';
 
 Transitionable.registerMethod('spring', SpringTransition);
 
 export default React.createClass({
   componentDidMount() {
-    setTimeout(() => {
+    Timer.setInterval(() => {
       this.refs.deck.famousToggle();
     }, 500);
   },
