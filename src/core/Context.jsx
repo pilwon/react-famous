@@ -1,4 +1,4 @@
-import Engine from 'famous/core/Engine';
+import Engine from './Engine';
 import React from 'react';
 
 import FamousNodeMixin from '../lib/FamousNodeMixin';
