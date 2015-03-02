@@ -16,7 +16,7 @@ export default React.createClass({
   },
 
   componentWillUnmount() {
-    this.deleteFamousNode();
+    this.releaseFamousNode();
   },
 
   _updateFamous(props) {

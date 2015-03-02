@@ -3,12 +3,12 @@ export default {
     return false;
   },
 
-  deleteFamousNode() {
-    delete this._famousNode;
-  },
-
   getFamousNode() {
     return this._famousNode;
+  },
+
+  releaseFamousNode() {
+    delete this._famousNode;
   },
 
   setFamousNode(node) {

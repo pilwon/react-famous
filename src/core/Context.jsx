@@ -24,7 +24,7 @@ export default React.createClass({
 
   componentWillUnmount() {
     Engine.deregisterContext(this.getFamousNode());
-    this.deleteFamousNode();
+    this.releaseFamousNode();
   },
 
   _updateFamousNode(props) {

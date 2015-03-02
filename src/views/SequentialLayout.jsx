@@ -23,7 +23,7 @@ export default React.createClass({
   },
 
   componentWillUnmount() {
-    this.deleteFamousNode();
+    this.releaseFamousNode();
   },
 
   getFamousNodeByKey(key) {
