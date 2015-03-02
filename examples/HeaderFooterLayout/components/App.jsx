@@ -10,14 +10,10 @@ export default React.createClass({
   render() {
     return (
       <Context>
-        <Modifier align={[.5, .5]}
-                  origin={[.5, .5]}
-                  size={[300, 300]}
-                  transform={Transform.rotateZ(.2)}>
+        <Modifier align={[.5, .5]} origin={[.5, .5]} size={[300, 300]} transform={Transform.rotateZ(.2)}>
           <HeaderFooterLayout headerSize={100} footerSize={50}>
             <HeaderFooterLayout.Header>
-              <Surface properties={{backgroundColor: '#ff8888', lineHeight: '100px', textAlign: 'center'}}
-                       size={[undefined, 100]}>
+              <Surface properties={{backgroundColor: '#ff8888', lineHeight: '100px', textAlign: 'center'}} size={[undefined, 100]}>
                 Header
               </Surface>
             </HeaderFooterLayout.Header>
@@ -27,8 +23,7 @@ export default React.createClass({
               </Surface>
             </HeaderFooterLayout.Content>
             <HeaderFooterLayout.Footer>
-              <Surface properties={{backgroundColor: '#8888ff', lineHeight: '50px', textAlign: 'center'}}
-                       size={[undefined, 50]}>
+              <Surface properties={{backgroundColor: '#8888ff', lineHeight: '50px', textAlign: 'center'}} size={[undefined, 50]}>
                 Footer
               </Surface>
             </HeaderFooterLayout.Footer>
