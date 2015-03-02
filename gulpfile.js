@@ -97,12 +97,12 @@ gulp.task('publish-amd', 'Publish AMD.', function () {
 gulp.task('publish-cjs', 'Publish CommonJS.', function () {
   return gulp.src('')
     .pipe(gulpShell([
-      'npm publish build/cjs'
+      'npm publish dist/cjs'
     ], {cwd: __dirname}));
 });
 
 gulp.task('reload-js', false, function () {
-  return gulp.src('build/**/*.js')
+  return gulp.src('dist/**/*.js')
     .pipe(connect.reload());
 });
 
