@@ -1,4 +1,4 @@
-import Utility from 'famous/utilities/Utility';
+import Utility from 'react-famous/utilities/Utility';
 import React from 'react';
 import Context from 'react-famous/core/Context';
 import Modifier from 'react-famous/core/Modifier';
