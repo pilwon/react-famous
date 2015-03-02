@@ -1,9 +1,7 @@
 # react-famous
 
 
-Famo.us components build with React.
-
-**WIP**
+Famo.us components build with React (WIP)
 
 
 ## Try it out
