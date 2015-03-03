@@ -9,4 +9,8 @@ import Engine from 'famous/core/Engine';
 // });
 // Engine.on('prerender', ReactUpdates.flushBatchedUpdates.bind(ReactUpdates));
 
+Engine.setOptions({
+  appMode: false
+});
+
 export default Engine;

@@ -5,10 +5,6 @@ import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
 import FamousNodeMixin from '../lib/FamousNodeMixin';
 import Engine from './Engine';
 
-Engine.setOptions({
-  appMode: false
-});
-
 export default React.createClass({
   mixins: [FamousNodeMixin, PureRenderMixin],
 
