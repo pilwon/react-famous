@@ -1,7 +1,7 @@
-import Engine from './Engine';
 import React from 'react';
 
 import FamousNodeMixin from '../lib/FamousNodeMixin';
+import Engine from './Engine';
 
 Engine.setOptions({
   appMode: false
