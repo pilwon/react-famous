@@ -2,6 +2,7 @@ import RenderNode from 'famous/core/RenderNode';
 import isFunction from 'lodash/lang/isFunction';
 import omit from 'lodash/object/omit';
 import values from 'lodash/object/values';
+import startsWith from 'lodash/string/startsWith';
 import React from 'react';
 import ReactInstanceMap from 'react/lib/ReactInstanceMap';
 
@@ -145,10 +146,15 @@ export function renderContent(obj) {
   }
 }
 
+export function sanitizeProps(props) {
+  return omit(props, (v, k) => startsWith(k, '_'));
+}
+
 export default {
   createPassDownComponent,
   getOwner,
   getFamousParentNode,
   parseOptions,
-  renderContent
+  renderContent,
+  sanitizeProps
 };
