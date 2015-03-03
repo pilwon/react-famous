@@ -26,7 +26,9 @@ function _buildTraversePath(fromAncestor, toDescendant) {
       return [fromAncestor].concat(traversePath);
     }
   } else if (instance._renderedChildren) {
-    for (let child of values(instance._renderedChildren)) {
+    let children = values(instance._renderedChildren);
+    for (let i = 0; i < children.length; ++i) {
+      let child = children[i];
       let traversePath = _buildTraversePath(child.getPublicInstance(), toDescendant);
       if (traversePath) {
         return [fromAncestor].concat(traversePath);
@@ -39,7 +41,9 @@ function _buildTraversePath(fromAncestor, toDescendant) {
 function _findKeyFromNearestDescendant(traversePath, root) {
   for (let i = 0; i < traversePath.length; ++i) {
     if (traversePath[i] === root) {
-      for (let descendant of traversePath.slice(i + 1)) {
+      let descendants = traversePath.slice(i + 1);
+      for (let j = 0; j < descendants.length; ++j) {
+        let descendant = descendants[j];
         if (ReactInstanceMap.has(descendant)) {
           descendant = ReactInstanceMap.get(descendant);
         }
