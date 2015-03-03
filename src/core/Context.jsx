@@ -22,11 +22,11 @@ export default React.createClass({
     Engine.deregisterContext(this.getFamousNode());
   },
 
-  famousUpdate({props}) {
+  famousUpdate(nextProps) {
     let context = this.getFamous();
 
-    if (!isUndefined(props.perspective)) {
-      this._famousContext.setPerspective(props.perspective);
+    if (!isUndefined(nextProps.perspective)) {
+      this._famousContext.setPerspective(nextProps.perspective);
     }
   },
 

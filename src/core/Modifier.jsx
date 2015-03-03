@@ -7,32 +7,32 @@ import FamousUtil from '../lib/FamousUtil';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  famousCreate({options}) {
-    let modifier = new Modifier(options);
+  famousCreate() {
+    let modifier = new Modifier(this.props.options);
     this.setFamous(modifier);
     this.setFamousNode(FamousUtil.getFamousParentNode(this).add(modifier));
   },
 
-  famousUpdate({options}) {
+  famousUpdate(nextProps) {
     let modifier = this.getFamous();
 
-    if (options.transform) {
-      modifier.setTransform(options.transform);
+    if (nextProps.options.transform) {
+      modifier.setTransform(nextProps.options.transform);
     }
-    if (options.opacity !== undefined) {
-      modifier.setOpacity(options.opacity);
+    if (nextProps.options.opacity !== undefined) {
+      modifier.setOpacity(nextProps.options.opacity);
     }
-    if (options.origin) {
-      modifier.setOrigin(options.origin);
+    if (nextProps.options.origin) {
+      modifier.setOrigin(nextProps.options.origin);
     }
-    if (options.align) {
-      modifier.setAlign(options.align);
+    if (nextProps.options.align) {
+      modifier.setAlign(nextProps.options.align);
     }
-    if (options.size) {
-      modifier.setSize(options.size);
+    if (nextProps.options.size) {
+      modifier.setSize(nextProps.options.size);
     }
-    if (options.proportions) {
-      modifier.setProportions(options.proportions);
+    if (nextProps.options.proportions) {
+      modifier.setProportions(nextProps.options.proportions);
     }
   },
 

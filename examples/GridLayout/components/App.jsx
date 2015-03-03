@@ -10,38 +10,38 @@ export default React.createClass({
   render() {
     return (
       <Context>
-        <GridLayout dimensions={[3, 2]}>
+        <GridLayout options={{dimensions: [3, 2]}}>
           <RenderNode>
-            <Surface properties={{backgroundColor: 'red'}}/>
-            <Modifier align={[0.5, 0.5]} origin={[0.5, 0.5]}>
-              <Surface properties={{color: 'white'}} size={[true, true]}>
+            <Surface options={{properties: {backgroundColor: 'red'}}}/>
+            <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
+              <Surface options={{properties: {color: 'white'}, size: [true, true]}}>
                 <h1>Red</h1>
               </Surface>
             </Modifier>
           </RenderNode>
-          <Surface properties={{backgroundColor: 'green'}}>
+          <Surface options={{properties: {backgroundColor: 'green'}}}>
             Green
           </Surface>
-          <Surface properties={{backgroundColor: 'blue'}}>
+          <Surface options={{properties: {backgroundColor: 'blue'}}}>
             Blue
           </Surface>
-          <Surface properties={{backgroundColor: 'pink'}}>
+          <Surface options={{properties: {backgroundColor: 'pink'}}}>
             Pink
           </Surface>
-          <Surface properties={{backgroundColor: 'purple'}}>
+          <Surface options={{properties: {backgroundColor: 'purple'}}}>
             Purple
           </Surface>
-          <GridLayout dimensions={[2, 2]}>
-            <Surface properties={{backgroundColor: 'navy'}}>
+          <GridLayout options={{dimensions: [2, 2]}}>
+            <Surface options={{properties: {backgroundColor: 'navy'}}}>
               Navy
             </Surface>
-            <Surface properties={{backgroundColor: 'brown'}}>
+            <Surface options={{properties: {backgroundColor: 'brown'}}}>
               Brown
             </Surface>
-            <Surface properties={{backgroundColor: 'khaki'}}>
+            <Surface options={{properties: {backgroundColor: 'khaki'}}}>
               Khaki
             </Surface>
-            <Surface properties={{backgroundColor: 'maroon'}}>
+            <Surface options={{properties: {backgroundColor: 'maroon'}}}>
               Maroon
             </Surface>
           </GridLayout>

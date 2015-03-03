@@ -16,20 +16,20 @@ export default React.createClass({
     transition: React.PropTypes.bool
   },
 
-  famousCreate({children, options}) {
-    let gridLayout = new GridLayout(options);
+  famousCreate() {
+    let gridLayout = new GridLayout(this.props.options);
     this.setFamous(gridLayout);
     this.setFamousNode(FamousUtil.getFamousParentNode(this).add(gridLayout));
 
-    let sequence = children.map(() => new RenderNode());
+    let sequence = this.props.children.map(() => new RenderNode());
     gridLayout.sequenceFrom(sequence);
     this.setFamousKeyedNodes(toPlainObject(sequence));
   },
 
-  famousUpdate({options}) {
+  famousUpdate(nextProps) {
     let gridLayout = this.getFamous();
 
-    gridLayout.setOptions(options);
+    gridLayout.setOptions(nextProps.options);
   },
 
   render() {

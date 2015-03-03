@@ -10,7 +10,14 @@ export default {
   mixins: [FamousNodeMixin],
 
   propTypes: {
-    _onReady: React.PropTypes.func
+    onReady: React.PropTypes.func,
+    options: React.PropTypes.object
+  },
+
+  getDefaultProps() {
+    return {
+      options: {}
+    };
   },
 
   componentWillMount() {
@@ -19,17 +26,12 @@ export default {
 
   componentDidMount() {
     if (isFunction(this.famousCreate)) {
-      let props = FamousUtil.sanitizeProps(this.props);
-      let options = FamousUtil.parseOptions(props);
-      let children = props.children;
-      let states = this.states;
-      this.setFamousOptions(options);
-      this.famousCreate({children, options, props, states});
+      this.famousCreate();
     }
     this.setFamousReady(true);
     this.forceUpdate(() => {
-      if (this.props._onReady) {
-        this.props._onReady();
+      if (this.props.onReady) {
+        this.props.onReady();
       }
     });
   },
@@ -42,12 +44,7 @@ export default {
 
   componentWillUpdate(nextProps, nextState) {
     if (isFunction(this.famousUpdate)) {
-      let props = FamousUtil.sanitizeProps(nextProps);
-      let options = FamousUtil.parseOptions(props);
-      let children = props.children;
-      let states = nextState;
-      this.setFamousOptions(options);
-      this.famousUpdate({children, options, props, states});
+      this.famousUpdate(nextProps, nextState);
     }
   },
 

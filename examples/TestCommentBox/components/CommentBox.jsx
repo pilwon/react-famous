@@ -8,12 +8,14 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <Modifier size={[undefined, 210]}>
+        <Modifier options={{size: [150, true]}}>
           <Surface>
             <h1>Comments</h1>
           </Surface>
         </Modifier>
-        <CommentForm/>
+        <Modifier options={{align: [1, 0], origin: [1, 0], size: [150, true]}}>
+          <CommentForm/>
+        </Modifier>
       </div>
     );
   }

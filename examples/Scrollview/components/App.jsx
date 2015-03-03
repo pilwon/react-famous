@@ -16,7 +16,7 @@ export default React.createClass({
       };
 
       let surface = (
-        <Surface key={i} properties={properties} size={[undefined, 100]}>
+        <Surface key={i} options={{properties, size: [undefined, 100]}}>
           Surface: {i + 1}
         </Surface>
       );

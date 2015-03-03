@@ -39,8 +39,8 @@ export default React.createClass({
 
     return (
       <Context>
-        <Modifier align={[0.5, 0.5]} origin={[0.5, 0.5]}>
-          <Surface size={[150, 100]} properties={properties} _onReady={this.onReady}>
+        <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
+          <Surface options={{size: [150, 100], properties}} onReady={this.onReady}>
             {text}
           </Surface>
         </Modifier>

@@ -17,8 +17,8 @@ let Component = React.createClass({
     headerSize: React.PropTypes.number
   },
 
-  famousCreate({options}) {
-    let headerFooterlayout = new HeaderFooterLayout(options);
+  famousCreate() {
+    let headerFooterlayout = new HeaderFooterLayout(this.props.options);
     this.setFamous(headerFooterlayout);
     this.setFamousNode(FamousUtil.getFamousParentNode(this).add(headerFooterlayout));
     this.setFamousKeyedNodes({
@@ -28,10 +28,10 @@ let Component = React.createClass({
     });
   },
 
-  famousUpdate({options}) {
+  famousUpdate(nextProps) {
     let headerFooterlayout = this.getFamous();
 
-    headerFooterlayout.setOptions(options);
+    headerFooterlayout.setOptions(nextProps.options);
   },
 
   render() {

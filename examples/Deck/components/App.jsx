@@ -11,31 +11,44 @@ Transitionable.registerMethod('spring', SpringTransition);
 
 export default React.createClass({
   onReady() {
-    this.refs.deck.toggle();
+    this.refs.deck.famous.toggle();
   },
 
   render() {
     let surfaces = [];
-    let transition = {
-      method: 'spring',
-      period: 300,
-      dampingRatio: 0.5
-    };
 
     for (let i = 0; i < 5; i++) {
-      let backgroundColor = 'hsla(' + ((i * 5 + i) * 15 % 360) + ', 60%, 50%, 0.8)';
+      let options = {
+        properties: {
+          backgroundColor: 'hsla(' + ((i * 5 + i) * 15 % 360) + ', 60%, 50%, 0.8)',
+          color: 'white',
+          lineHeight: '200px',
+          textAlign: 'center'
+        },
+        size: [100, 200]
+      };
       let surface = (
-        <Surface key={i} properties={{backgroundColor}} size={[100, 200]}>
+        <Surface key={i} options={options}>
           {i}
         </Surface>
       );
       surfaces.push(surface);
     }
 
+    let options = {
+      itemSpacing: 10,
+      transition: {
+        method: 'spring',
+        period: 300,
+        dampingRatio: 0.5
+      },
+      stackRotation: 0.02
+    };
+
     return (
       <Context>
-        <Modifier align={[0.5, 0.5]} origin={[0.5, 0.5]}>
-          <Deck itemSpacing={10} transition={transition} stackRotation={0.02} ref="deck" _onReady={this.onReady}>
+        <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
+          <Deck ref="deck" onReady={this.onReady} options={options}>
             {surfaces}
           </Deck>
         </Modifier>

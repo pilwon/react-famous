@@ -105,10 +105,6 @@ export function getFamousParentNode(instance) {
   }
 }
 
-export function parseOptions(props) {
-  return omit(props, 'children');
-}
-
 export function renderContent(obj) {
   if (Array.isArray(obj)) {
     return obj.map((obj) => {
@@ -121,14 +117,8 @@ export function renderContent(obj) {
   }
 }
 
-export function sanitizeProps(props) {
-  return omit(props, (v, k) => startsWith(k, '_'));
-}
-
 export default {
   getOwner,
   getFamousParentNode,
-  parseOptions,
-  renderContent,
-  sanitizeProps
+  renderContent
 };
