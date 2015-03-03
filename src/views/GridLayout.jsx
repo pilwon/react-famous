@@ -3,12 +3,11 @@ import GridLayout from 'famous/views/GridLayout';
 import React from 'react';
 import cloneWithProps from 'react/lib/cloneWithProps';
 
-import FamousNodeMixin from '../lib/FamousNodeMixin';
-import FamousRenderMixin from '../lib/FamousRenderMixin';
+import FamousMixin from '../lib/FamousMixin';
 import FamousUtil from '../lib/FamousUtil';
 
 export default React.createClass({
-  mixins: [FamousNodeMixin, FamousRenderMixin],
+  mixins: [FamousMixin],
 
   propTypes: {
     dimensions: React.PropTypes.array,
@@ -16,28 +15,19 @@ export default React.createClass({
     transition: React.PropTypes.bool
   },
 
-  componentDidMount() {
-    this._updateFamous(this.props);
-  },
-
-  componentWillReceiveProps(nextProps) {
-    this._updateFamous(nextProps);
-  },
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return false;
-  },
-
-  componentWillUnmount() {
-    this.releaseFamous();
-    this.releaseFamousNode();
-  },
-
   getFamousNodeByKey(key) {
     return this._famousNodes[key];
   },
 
-  _updateFamous(props) {
+  renderFamous() {
+    return (
+      <div data-famous="GridLayout">
+        {this.props.children.map((child, key) => cloneWithProps(child, {key}))}
+      </div>
+    );
+  },
+
+  updateFamous(props) {
     let gridLayout = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);
@@ -56,13 +46,5 @@ export default React.createClass({
     if (render) {
       this.forceUpdate();
     }
-  },
-
-  renderFamous() {
-    return (
-      <div data-famous="GridLayout">
-        {this.props.children.map((child, key) => cloneWithProps(child, {key}))}
-      </div>
-    );
   }
 });

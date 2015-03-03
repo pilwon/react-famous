@@ -5,8 +5,7 @@ import values from 'lodash/object/values';
 import React from 'react';
 import ReactInstanceMap from 'react/lib/ReactInstanceMap';
 
-import FamousNodeMixin from './FamousNodeMixin';
-import FamousRenderMixin from './FamousRenderMixin';
+import FamousMixin from './FamousMixin';
 
 function _buildTraversePath(fromAncestor, toDescendant) {
   // console.log([
@@ -94,40 +93,7 @@ function _findNearestFamousAncestor(instance, searchedSubpath = []) {
 
 export function createPassDownComponent(name) {
   return React.createClass({
-    mixins: [FamousNodeMixin, FamousRenderMixin],
-
-    componentDidMount() {
-      this._updateFamous(this.props);
-    },
-
-    componentWillReceiveProps(nextProps) {
-      this._updateFamous(nextProps);
-    },
-
-    shouldComponentUpdate(nextProps, nextState) {
-      return false;
-    },
-
-    componentWillUnmount() {
-      this.releaseFamous();
-      this.releaseFamousNode();
-    },
-
-    _updateFamous(props) {
-      let renderNode = this.getFamousNode();
-      let render = true;
-
-      if (!renderNode) {
-        renderNode = new RenderNode();
-
-        this.setFamous(renderNode);
-        this.setFamousNode(getFamousParentNode(this).add(renderNode));
-      }
-
-      if (render) {
-        this.forceUpdate();
-      }
-    },
+    mixins: [FamousMixin],
 
     renderFamous() {
       return (
@@ -135,6 +101,21 @@ export function createPassDownComponent(name) {
           {this.props.children}
         </div>
       );
+    },
+
+    updateFamous(props) {
+      let renderNode = this.getFamous();
+      let render = true;
+
+      if (!renderNode) {
+        renderNode = new RenderNode();
+        this.setFamous(renderNode);
+        this.setFamousNode(getFamousParentNode(this).add(renderNode));
+      }
+
+      if (render) {
+        this.forceUpdate();
+      }
     }
   });
 }

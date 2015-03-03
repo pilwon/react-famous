@@ -1,31 +1,21 @@
 import Modifier from 'famous/core/Modifier';
 import React from 'react';
 
-import FamousNodeMixin from '../lib/FamousNodeMixin';
-import FamousRenderMixin from '../lib/FamousRenderMixin';
+import FamousMixin from '../lib/FamousMixin';
 import FamousUtil from '../lib/FamousUtil';
 
 export default React.createClass({
-  mixins: [FamousNodeMixin, FamousRenderMixin],
+  mixins: [FamousMixin],
 
-  componentDidMount() {
-    this._updateFamous(this.props);
+  renderFamous() {
+    return (
+      <div data-famous="Modifier">
+        {this.props.children}
+      </div>
+    );
   },
 
-  componentWillReceiveProps(nextProps) {
-    this._updateFamous(nextProps);
-  },
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return false;
-  },
-
-  componentWillUnmount() {
-    this.releaseFamous();
-    this.releaseFamousNode();
-  },
-
-  _updateFamous(props) {
+  updateFamous(props) {
     let modifier = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);
@@ -42,13 +32,5 @@ export default React.createClass({
     if (render) {
       this.forceUpdate();
     }
-  },
-
-  renderFamous() {
-    return (
-      <div data-famous="Modifier">
-        {this.props.children}
-      </div>
-    );
   }
 });

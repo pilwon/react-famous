@@ -16,11 +16,11 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    this._updateFamous(this.props);
+    this.updateFamous(this.props);
   },
 
   componentWillReceiveProps(nextProps) {
-    this._updateFamous(nextProps);
+    this.updateFamous(nextProps);
   },
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -34,7 +34,7 @@ export default React.createClass({
     this.releaseFamousNode();
   },
 
-  _updateFamous(props) {
+  updateFamous(props) {
     let context = this.getFamous();
     let render = true;
 

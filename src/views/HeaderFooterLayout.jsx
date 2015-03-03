@@ -2,12 +2,11 @@ import HeaderFooterLayout from 'famous/views/HeaderFooterLayout';
 import React from 'react';
 import cloneWithProps from 'react/lib/cloneWithProps';
 
-import FamousNodeMixin from '../lib/FamousNodeMixin';
-import FamousRenderMixin from '../lib/FamousRenderMixin';
+import FamousMixin from '../lib/FamousMixin';
 import FamousUtil from '../lib/FamousUtil';
 
 let Component = React.createClass({
-  mixins: [FamousNodeMixin, FamousRenderMixin],
+  mixins: [FamousMixin],
 
   propTypes: {
     defaultFooterSize: React.PropTypes.number,
@@ -17,49 +16,8 @@ let Component = React.createClass({
     headerSize: React.PropTypes.number
   },
 
-  componentDidMount() {
-    this._updateFamous(this.props);
-  },
-
-  componentWillReceiveProps(nextProps) {
-    this._updateFamous(nextProps);
-  },
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return false;
-  },
-
-  componentWillUnmount() {
-    this.releaseFamous();
-    this.releaseFamousNode();
-  },
-
   getFamousNodeByKey(key) {
     return this._famousNodes[key];
-  },
-
-  _updateFamous(props) {
-    let headerFooterlayout = this.getFamous();
-    let options = FamousUtil.parseOptions(props);
-    let optionsChanged = this.setFamousOptions(options);
-    let render = true;
-
-    if (!headerFooterlayout) {
-      headerFooterlayout = new HeaderFooterLayout(options);
-      this.setFamous(headerFooterlayout);
-      this.setFamousNode(FamousUtil.getFamousParentNode(this).add(headerFooterlayout));
-      this._famousNodes = {
-        content: headerFooterlayout.content,
-        footer: headerFooterlayout.footer,
-        header: headerFooterlayout.header
-      };
-    } else if (optionsChanged) {
-      surface.setOptions(options);
-    }
-
-    if (render) {
-      this.forceUpdate();
-    }
   },
 
   renderFamous() {
@@ -81,6 +39,30 @@ let Component = React.createClass({
         {children}
       </div>
     );
+  },
+
+  updateFamous(props) {
+    let headerFooterlayout = this.getFamous();
+    let options = FamousUtil.parseOptions(props);
+    let optionsChanged = this.setFamousOptions(options);
+    let render = true;
+
+    if (!headerFooterlayout) {
+      headerFooterlayout = new HeaderFooterLayout(options);
+      this.setFamous(headerFooterlayout);
+      this.setFamousNode(FamousUtil.getFamousParentNode(this).add(headerFooterlayout));
+      this._famousNodes = {
+        content: headerFooterlayout.content,
+        footer: headerFooterlayout.footer,
+        header: headerFooterlayout.header
+      };
+    } else if (optionsChanged) {
+      surface.setOptions(options);
+    }
+
+    if (render) {
+      this.forceUpdate();
+    }
   }
 });
 

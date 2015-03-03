@@ -3,40 +3,34 @@ import Deck from 'famous/views/Deck';
 import React from 'react';
 import cloneWithProps from 'react/lib/cloneWithProps';
 
-import FamousNodeMixin from '../lib/FamousNodeMixin';
-import FamousRenderMixin from '../lib/FamousRenderMixin';
+import FamousMixin from '../lib/FamousMixin';
 import FamousUtil from '../lib/FamousUtil';
 
 export default React.createClass({
-  mixins: [FamousNodeMixin, FamousRenderMixin],
+  mixins: [FamousMixin],
 
   propTypes: {
     transition: React.PropTypes.object,
     stackRotation: React.PropTypes.number
   },
 
-  componentDidMount() {
-    this._updateFamous(this.props);
-  },
-
-  componentWillReceiveProps(nextProps) {
-    this._updateFamous(nextProps);
-  },
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return false;
-  },
-
-  componentWillUnmount() {
-    this.releaseFamous();
-    this.releaseFamousNode();
+  famousToggle() {
+    return this.getFamous().toggle();
   },
 
   getFamousNodeByKey(key) {
     return this._famousNodes[key];
   },
 
-  _updateFamous(props) {
+  renderFamous() {
+    return (
+      <div data-famous="Deck">
+        {this.props.children.map((child, key) => cloneWithProps(child, {key}))}
+      </div>
+    );
+  },
+
+  updateFamous(props) {
     let deck = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);
@@ -55,17 +49,5 @@ export default React.createClass({
     if (render) {
       this.forceUpdate();
     }
-  },
-
-  famousToggle() {
-    return this.getFamous().toggle();
-  },
-
-  renderFamous() {
-    return (
-      <div data-famous="Deck">
-        {this.props.children.map((child, key) => cloneWithProps(child, {key}))}
-      </div>
-    );
   }
 });

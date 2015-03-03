@@ -3,12 +3,11 @@ import Scrollview from 'famous/views/Scrollview';
 import React from 'react';
 import cloneWithProps from 'react/lib/cloneWithProps';
 
-import FamousNodeMixin from '../lib/FamousNodeMixin';
-import FamousRenderMixin from '../lib/FamousRenderMixin';
+import FamousMixin from '../lib/FamousMixin';
 import FamousUtil from '../lib/FamousUtil';
 
 export default React.createClass({
-  mixins: [FamousNodeMixin, FamousRenderMixin],
+  mixins: [FamousMixin],
 
   propTypes: {
     direction: React.PropTypes.number,
@@ -29,28 +28,19 @@ export default React.createClass({
     syncScale: React.PropTypes.number
   },
 
-  componentDidMount() {
-    this._updateFamous(this.props);
-  },
-
-  componentWillReceiveProps(nextProps) {
-    this._updateFamous(nextProps);
-  },
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return false;
-  },
-
-  componentWillUnmount() {
-    this.releaseFamous();
-    this.releaseFamousNode();
-  },
-
   getFamousNodeByKey(key) {
     return this._famousNodes[key];
   },
 
-  _updateFamous(props) {
+  renderFamous() {
+    return (
+      <div data-famous="Scrollview">
+        {this.props.children.map((child, key) => cloneWithProps(child, {key}))}
+      </div>
+    );
+  },
+
+  updateFamous(props) {
     let scrollview = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);
@@ -69,13 +59,5 @@ export default React.createClass({
     if (render) {
       this.forceUpdate();
     }
-  },
-
-  renderFamous() {
-    return (
-      <div data-famous="Scrollview">
-        {this.props.children.map((child, key) => cloneWithProps(child, {key}))}
-      </div>
-    );
   }
 });
