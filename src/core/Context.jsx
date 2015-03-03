@@ -1,5 +1,6 @@
 import isUndefined from 'lodash/lang/isUndefined';
 import React from 'react';
+import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
 
 import FamousNodeMixin from '../lib/FamousNodeMixin';
 import Engine from './Engine';
@@ -9,22 +10,23 @@ Engine.setOptions({
 });
 
 export default React.createClass({
-  mixins: [FamousNodeMixin],
+  mixins: [FamousNodeMixin, PureRenderMixin],
 
   propTypes: {
     perspective: React.PropTypes.number
   },
 
+  componentWillMount() {
+    this.setFamousReady(false);
+  },
+
   componentDidMount() {
     this.updateFamous(this.props);
+    this.setFamousReady(true);
   },
 
   componentWillReceiveProps(nextProps) {
     this.updateFamous(nextProps);
-  },
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return false;
   },
 
   componentWillUnmount() {
@@ -57,7 +59,7 @@ export default React.createClass({
     return (
       <div className="famous">
         <div data-famous="Context" style={{display: 'none'}}>
-          {this.getFamousNode() ? this.props.children : null}
+          {this.getFamousReady() ? this.props.children : null}
         </div>
         <div className="famous-container" ref="container"/>
       </div>

@@ -13,6 +13,10 @@ export default {
     return this._famousOptions;
   },
 
+  getFamousReady() {
+    return this._famousReady;
+  },
+
   releaseFamous() {
     delete this._famous;
   },
@@ -36,5 +40,9 @@ export default {
       changed = true;
     }
     return changed;
+  },
+
+  setFamousReady(ready) {
+    this._famousReady = ready;
   }
 };
