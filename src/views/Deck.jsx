@@ -5,7 +5,6 @@ import React from 'react';
 import cloneWithProps from 'react/lib/cloneWithProps';
 
 import FamousMixin from '../lib/FamousMixin';
-import FamousUtil from '../lib/FamousUtil';
 
 export default React.createClass({
   mixins: [FamousMixin],
@@ -13,7 +12,7 @@ export default React.createClass({
   famousCreate() {
     let deck = new Deck(this.props.options);
     this.setFamous(deck);
-    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(deck));
+    this.setFamousNode(this.getFamousParentNode().add(deck));
 
     let sequence = this.props.children.map(() => new RenderNode());
     deck.sequenceFrom(sequence);
