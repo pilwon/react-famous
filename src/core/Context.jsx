@@ -26,7 +26,7 @@ export default React.createClass({
     let context = this.getFamous();
 
     if (!isUndefined(nextProps.perspective)) {
-      this._famousContext.setPerspective(nextProps.perspective);
+      context.setPerspective(nextProps.perspective);
     }
   },
 
