@@ -36,6 +36,7 @@ export default {
     delete this[FAMOUS_KEYED_NODES_KEY];
     delete this[FAMOUS_NODE_KEY];
     delete this[FAMOUS_OPTIONS_KEY];
+    delete this[FAMOUS_READY_KEY]
   },
 
   setFamous(famousInstance) {
