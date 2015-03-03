@@ -34,7 +34,7 @@ export default React.createClass({
   },
 
   _updateFamous(props) {
-    let context = this.getFamousNode();
+    let context = this.getFamous();
     let render = true;
 
     if (!context) {

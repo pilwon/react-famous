@@ -38,7 +38,7 @@ export default React.createClass({
   },
 
   _updateFamous(props) {
-    let gridLayout = this.getFamousNode();
+    let gridLayout = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let render = true;
 

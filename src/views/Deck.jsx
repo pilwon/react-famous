@@ -37,7 +37,7 @@ export default React.createClass({
   },
 
   _updateFamous(props) {
-    let deck = this.getFamousNode();
+    let deck = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let render = true;
 

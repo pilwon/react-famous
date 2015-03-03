@@ -51,7 +51,7 @@ export default React.createClass({
   },
 
   _updateFamous(props) {
-    let scrollview = this.getFamousNode();
+    let scrollview = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let render = true;
 

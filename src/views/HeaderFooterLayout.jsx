@@ -39,7 +39,7 @@ let Component = React.createClass({
   },
 
   _updateFamous(props) {
-    let headerFooterlayout = this.getFamousNode();
+    let headerFooterlayout = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let render = true;
 
