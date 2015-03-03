@@ -58,8 +58,7 @@ export default React.createClass({
   },
 
   famousToggle() {
-    let deck = this.getFamous();
-    return deck.toggle();
+    return this.getFamous().toggle();
   },
 
   renderFamous() {
