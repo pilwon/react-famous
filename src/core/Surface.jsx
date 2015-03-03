@@ -1,4 +1,5 @@
 import Surface from 'famous/core/Surface';
+import isUndefined from 'lodash/lang/isUndefined';
 import React from 'react';
 
 import FamousNodeMixin from '../lib/FamousNodeMixin';
@@ -39,7 +40,7 @@ export default React.createClass({
       surface.setOptions(options);
     }
 
-    if (props.children) {
+    if (!isUndefined(props.children)) {
       surface.setContent(FamousUtil.renderContent(props.children));
     }
 
