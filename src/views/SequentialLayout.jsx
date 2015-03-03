@@ -15,7 +15,7 @@ export default React.createClass({
     itemSpacing: React.PropTypes.number
   },
 
-  famousCreate(props) {
+  famousCreate({props}) {
     let options = FamousUtil.parseOptions(props);
     this.setFamousOptions(options);
 
@@ -28,7 +28,7 @@ export default React.createClass({
     this.setFamousKeyedNodes(toPlainObject(sequence));
   },
 
-  famusUpdate(props) {
+  famusUpdate({props}) {
     let sequentialLayout = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);

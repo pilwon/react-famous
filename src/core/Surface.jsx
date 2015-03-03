@@ -8,7 +8,7 @@ import FamousUtil from '../lib/FamousUtil';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  famousCreate(props) {
+  famousCreate({props}) {
     let options = FamousUtil.parseOptions(props);
     this.setFamousOptions(options);
 
@@ -21,7 +21,7 @@ export default React.createClass({
     }
   },
 
-  famousUpdate(props) {
+  famousUpdate({props}) {
     let surface = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);

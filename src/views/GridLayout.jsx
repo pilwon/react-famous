@@ -16,7 +16,7 @@ export default React.createClass({
     transition: React.PropTypes.bool
   },
 
-  famousCreate(props) {
+  famousCreate({props}) {
     let options = FamousUtil.parseOptions(props);
     this.setFamousOptions(options);
 
@@ -29,7 +29,7 @@ export default React.createClass({
     this.setFamousKeyedNodes(toPlainObject(sequence));
   },
 
-  famousUpdate(props) {
+  famousUpdate({props}) {
     let gridLayout = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);

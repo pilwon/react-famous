@@ -12,7 +12,7 @@ export default React.createClass({
     perspective: React.PropTypes.number
   },
 
-  famousCreate(props) {
+  famousCreate({props}) {
     let context = Engine.createContext(React.findDOMNode(this.refs.container));
     this.setFamous(context);
     this.setFamousNode(context);
@@ -22,7 +22,7 @@ export default React.createClass({
     Engine.deregisterContext(this.getFamousNode());
   },
 
-  famousUpdate(props) {
+  famousUpdate({props}) {
     let context = this.getFamous();
 
     if (!isUndefined(props.perspective)) {

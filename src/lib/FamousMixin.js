@@ -18,7 +18,8 @@ export default {
 
   componentDidMount() {
     if (isFunction(this.famousCreate)) {
-      this.famousCreate(FamousUtil.sanitizeProps(this.props));
+      let props = FamousUtil.sanitizeProps(this.props);
+      this.famousCreate({props});
     }
     this.setFamousReady(true);
     this.forceUpdate(() => {
@@ -30,7 +31,8 @@ export default {
 
   componentWillReceiveProps(nextProps) {
     if (isFunction(this.famousUpdate)) {
-      this.famousUpdate(FamousUtil.sanitizeProps(nextProps));
+      let props = FamousUtil.sanitizeProps(nextProps);
+      this.famousUpdate({props});
     }
   },
 

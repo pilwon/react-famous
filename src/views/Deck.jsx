@@ -15,7 +15,7 @@ export default React.createClass({
     stackRotation: React.PropTypes.number
   },
 
-  famousCreate(props) {
+  famousCreate({props}) {
     let options = FamousUtil.parseOptions(props);
     this.setFamousOptions(options);
 
@@ -28,7 +28,7 @@ export default React.createClass({
     this.setFamousKeyedNodes(toPlainObject(sequence));
   },
 
-  famousUpdate(props) {
+  famousUpdate({props}) {
     let deck = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);
