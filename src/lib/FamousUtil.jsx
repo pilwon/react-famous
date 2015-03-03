@@ -8,11 +8,6 @@ import ReactInstanceMap from 'react/lib/ReactInstanceMap';
 import FamousMixin from './FamousMixin';
 
 function _buildTraversePath(fromAncestor, toDescendant) {
-  // console.log([
-  //   ReactInstanceMap.has(fromAncestor) ? ReactInstanceMap.get(fromAncestor)._rootNodeID : fromAncestor._rootNodeID,
-  //   ReactInstanceMap.has(toDescendant) ? ReactInstanceMap.get(toDescendant)._rootNodeID : toDescendant._rootNodeID
-  // ]);
-  // console.log(fromAncestor);
   if (fromAncestor === toDescendant) {
     return [fromAncestor];
   }
@@ -34,7 +29,6 @@ function _buildTraversePath(fromAncestor, toDescendant) {
     }
   } else if (instance._renderedChildren) {
     for (let child of values(instance._renderedChildren)) {
-      // console.log(child._rootNodeID);
       let traversePath = _buildTraversePath(child.getPublicInstance(), toDescendant);
       if (traversePath) {
         return [fromAncestor].concat(traversePath);
@@ -50,26 +44,15 @@ function _findNearestFamousAncestor(instance, searchedSubpath = []) {
     return null;
   }
   let traversePath = _buildTraversePath(owner, instance).concat(searchedSubpath);
-  // console.log(traversePath);
-  // console.log('N==>', traversePath.map((node) => {
-  //   if (ReactInstanceMap.has(node)) {
-  //     return ReactInstanceMap.get(node)._rootNodeID;
-  //   } else {
-  //     return node._rootNodeID;
-  //   }
-  // }));
   let famousTraversePath = traversePath.slice(0, -1).filter((instance) => {
     return isFunction(instance.getFamousNode);
   });
   if (famousTraversePath.length) {
-    // console.log('F==>', famousTraversePath.map((node) => ReactInstanceMap.get(node)._rootNodeID));
     let result = famousTraversePath.slice(-1)[0];
     let key = null;
     if (isFunction(result.getFamousNodeByKey)) {
       for (let i = 0; i < traversePath.length; ++i) {
         if (traversePath[i] === result) {
-          // console.log(traversePath);
-          // console.log(i, traversePath.slice(i + 1));
           for (let descendant of traversePath.slice(i + 1)) {
             if (ReactInstanceMap.has(descendant)) {
               descendant = ReactInstanceMap.get(descendant);
@@ -85,7 +68,6 @@ function _findNearestFamousAncestor(instance, searchedSubpath = []) {
     }
     return [result, key];
   } else {
-    // console.log('again');
     let searchedSubpath = traversePath.slice(1);
     return _findNearestFamousAncestor(owner, searchedSubpath);
   }
@@ -139,8 +121,6 @@ export function getFamousParentNode(instance) {
   }
 
   let [famousParent, key] = result;
-  // console.log(famousParent);
-  // console.log(ReactInstanceMap.get(famousParent)._rootNodeID);
   if (famousParent) {
     if (isFunction(famousParent.getFamousNodeByKey)) {
       return famousParent.getFamousNodeByKey(key);
