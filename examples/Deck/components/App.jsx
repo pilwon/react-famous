@@ -12,7 +12,7 @@ Transitionable.registerMethod('spring', SpringTransition);
 export default React.createClass({
   componentDidMount() {
     Timer.setInterval(() => {
-      this.refs.deck.famousToggle();
+      this.refs.deck.toggle();
     }, 500);
   },
 

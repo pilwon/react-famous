@@ -37,6 +37,10 @@ export default React.createClass({
     }
   },
 
+  toggle() {
+    return this.getFamous().toggle();
+  },
+
   render() {
     if (!this.getFamousReady()) { return null; }
 
