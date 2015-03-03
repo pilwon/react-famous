@@ -2,7 +2,6 @@ import Modifier from 'famous/core/Modifier';
 import React from 'react';
 
 import FamousMixin from '../lib/FamousMixin';
-import FamousUtil from '../lib/FamousUtil';
 
 export default React.createClass({
   mixins: [FamousMixin],
@@ -10,7 +9,7 @@ export default React.createClass({
   famousCreate() {
     let modifier = new Modifier(this.props.options);
     this.setFamous(modifier);
-    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(modifier));
+    this.setFamousNode(this.getFamousParentNode().add(modifier));
   },
 
   famousUpdate(nextProps) {

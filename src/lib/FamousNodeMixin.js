@@ -1,5 +1,7 @@
 import isEqual from 'lodash/lang/isEqual';
 
+import FamousUtil from './FamousUtil';
+
 const FAMOUS_KEY = Symbol('famous');
 const FAMOUS_KEYED_NODES_KEY = Symbol('famousKeyedNodes');
 const FAMOUS_NODE_KEY = Symbol('famousNode');
@@ -16,6 +18,10 @@ export default {
 
   getFamousNode() {
     return this[FAMOUS_NODE_KEY];
+  },
+
+  getFamousParentNode() {
+    return FamousUtil.getFamousParentNode(this);
   },
 
   getFamousReady() {

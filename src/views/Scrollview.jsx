@@ -5,7 +5,6 @@ import React from 'react';
 import cloneWithProps from 'react/lib/cloneWithProps';
 
 import FamousMixin from '../lib/FamousMixin';
-import FamousUtil from '../lib/FamousUtil';
 
 export default React.createClass({
   mixins: [FamousMixin],
@@ -32,7 +31,7 @@ export default React.createClass({
   famousCreate() {
     let scrollview = new Scrollview(this.props.options);
     this.setFamous(scrollview);
-    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(scrollview));
+    this.setFamousNode(this.getFamousParentNode().add(scrollview));
 
     let sequence = this.props.children.map(() => new RenderNode());
     scrollview.sequenceFrom(sequence);

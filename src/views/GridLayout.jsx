@@ -5,7 +5,6 @@ import React from 'react';
 import cloneWithProps from 'react/lib/cloneWithProps';
 
 import FamousMixin from '../lib/FamousMixin';
-import FamousUtil from '../lib/FamousUtil';
 
 export default React.createClass({
   mixins: [FamousMixin],
@@ -19,7 +18,7 @@ export default React.createClass({
   famousCreate() {
     let gridLayout = new GridLayout(this.props.options);
     this.setFamous(gridLayout);
-    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(gridLayout));
+    this.setFamousNode(this.getFamousParentNode().add(gridLayout));
 
     let sequence = this.props.children.map(() => new RenderNode());
     gridLayout.sequenceFrom(sequence);

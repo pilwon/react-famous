@@ -11,7 +11,7 @@ export default React.createClass({
   famousCreate() {
     let surface = new Surface(this.props.options);
     this.setFamous(surface);
-    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(surface));
+    this.setFamousNode(this.getFamousParentNode().add(surface));
 
     if (!isUndefined(this.props.children)) {
       surface.setContent(FamousUtil.renderContent(this.props.children));

@@ -2,7 +2,6 @@ import RenderNode from 'famous/core/RenderNode';
 import React from 'react';
 
 import FamousMixin from '../lib/FamousMixin';
-import FamousUtil from '../lib/FamousUtil';
 
 export default React.createClass({
   mixins: [FamousMixin],
@@ -10,7 +9,7 @@ export default React.createClass({
   famousCreate() {
     let renderNode = new RenderNode();
     this.setFamous(renderNode);
-    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(renderNode));
+    this.setFamousNode(this.getFamousParentNode().add(renderNode));
   },
 
   render() {

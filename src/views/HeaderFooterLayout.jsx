@@ -4,7 +4,6 @@ import React from 'react';
 import cloneWithProps from 'react/lib/cloneWithProps';
 
 import FamousMixin from '../lib/FamousMixin';
-import FamousUtil from '../lib/FamousUtil';
 
 let Component = React.createClass({
   mixins: [FamousMixin],
@@ -20,7 +19,7 @@ let Component = React.createClass({
   famousCreate() {
     let headerFooterlayout = new HeaderFooterLayout(this.props.options);
     this.setFamous(headerFooterlayout);
-    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(headerFooterlayout));
+    this.setFamousNode(this.getFamousParentNode().add(headerFooterlayout));
     this.setFamousKeyedNodes({
       content: headerFooterlayout.content,
       footer: headerFooterlayout.footer,
@@ -64,7 +63,7 @@ Component.Content = React.createClass({
   famousCreate() {
     let renderNode = new RenderNode();
     this.setFamous(renderNode);
-    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(renderNode));
+    this.setFamousNode(this.getFamousParentNode().add(renderNode));
   },
 
   render() {
@@ -84,7 +83,7 @@ Component.Footer = React.createClass({
   famousCreate() {
     let renderNode = new RenderNode();
     this.setFamous(renderNode);
-    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(renderNode));
+    this.setFamousNode(this.getFamousParentNode().add(renderNode));
   },
 
   render() {
@@ -104,7 +103,7 @@ Component.Header = React.createClass({
   famousCreate() {
     let renderNode = new RenderNode();
     this.setFamous(renderNode);
-    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(renderNode));
+    this.setFamousNode(this.getFamousParentNode().add(renderNode));
   },
 
   render() {
