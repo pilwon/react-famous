@@ -17,10 +17,7 @@ let Component = React.createClass({
     headerSize: React.PropTypes.number
   },
 
-  famousCreate({props}) {
-    let options = FamousUtil.parseOptions(props);
-    this.setFamousOptions(options);
-
+  famousCreate({options}) {
     let headerFooterlayout = new HeaderFooterLayout(options);
     this.setFamous(headerFooterlayout);
     this.setFamousNode(FamousUtil.getFamousParentNode(this).add(headerFooterlayout));
@@ -31,14 +28,10 @@ let Component = React.createClass({
     });
   },
 
-  famousUpdate({props}) {
+  famousUpdate({options}) {
     let headerFooterlayout = this.getFamous();
-    let options = FamousUtil.parseOptions(props);
-    let optionsChanged = this.setFamousOptions(options);
 
-    if (optionsChanged) {
-      headerFooterlayout.setOptions(options);
-    }
+    headerFooterlayout.setOptions(options);
   },
 
   render() {
@@ -68,7 +61,7 @@ let Component = React.createClass({
 Component.Content = React.createClass({
   mixins: [FamousMixin],
 
-  famousCreate({props}) {
+  famousCreate() {
     let renderNode = new RenderNode();
     this.setFamous(renderNode);
     this.setFamousNode(FamousUtil.getFamousParentNode(this).add(renderNode));
@@ -88,7 +81,7 @@ Component.Content = React.createClass({
 Component.Footer = React.createClass({
   mixins: [FamousMixin],
 
-  famousCreate({props}) {
+  famousCreate() {
     let renderNode = new RenderNode();
     this.setFamous(renderNode);
     this.setFamousNode(FamousUtil.getFamousParentNode(this).add(renderNode));
@@ -108,7 +101,7 @@ Component.Footer = React.createClass({
 Component.Header = React.createClass({
   mixins: [FamousMixin],
 
-  famousCreate({props}) {
+  famousCreate() {
     let renderNode = new RenderNode();
     this.setFamous(renderNode);
     this.setFamousNode(FamousUtil.getFamousParentNode(this).add(renderNode));

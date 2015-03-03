@@ -15,27 +15,20 @@ export default React.createClass({
     itemSpacing: React.PropTypes.number
   },
 
-  famousCreate({props}) {
-    let options = FamousUtil.parseOptions(props);
-    this.setFamousOptions(options);
-
+  famousCreate({children, options}) {
     let sequentialLayout = new SequentialLayout(options);
     this.setFamous(sequentialLayout);
     this.setFamousNode(FamousUtil.getFamousParentNode(this).add(sequentialLayout));
 
-    let sequence = props.children.map(() => new RenderNode());
+    let sequence = children.map(() => new RenderNode());
     sequentialLayout.sequenceFrom(sequence);
     this.setFamousKeyedNodes(toPlainObject(sequence));
   },
 
-  famusUpdate({props}) {
+  famusUpdate({options}) {
     let sequentialLayout = this.getFamous();
-    let options = FamousUtil.parseOptions(props);
-    let optionsChanged = this.setFamousOptions(options);
 
-    if (optionsChanged) {
-      surface.setOptions(options);
-    }
+    surface.setOptions(options);
   },
 
   render() {

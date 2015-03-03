@@ -12,7 +12,7 @@ export default React.createClass({
     perspective: React.PropTypes.number
   },
 
-  famousCreate({props}) {
+  famousCreate() {
     let context = Engine.createContext(React.findDOMNode(this.refs.container));
     this.setFamous(context);
     this.setFamousNode(context);

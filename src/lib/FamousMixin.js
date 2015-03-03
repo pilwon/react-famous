@@ -19,7 +19,11 @@ export default {
   componentDidMount() {
     if (isFunction(this.famousCreate)) {
       let props = FamousUtil.sanitizeProps(this.props);
-      this.famousCreate({props});
+      let options = FamousUtil.parseOptions(props);
+      let children = props.children;
+      let states = this.states;
+      this.setFamousOptions(options);
+      this.famousCreate({children, options, props, states});
     }
     this.setFamousReady(true);
     this.forceUpdate(() => {
@@ -29,10 +33,14 @@ export default {
     });
   },
 
-  componentWillReceiveProps(nextProps) {
+  componentWillUpdate(nextProps, nextState) {
     if (isFunction(this.famousUpdate)) {
       let props = FamousUtil.sanitizeProps(nextProps);
-      this.famousUpdate({props});
+      let options = FamousUtil.parseOptions(props);
+      let children = props.children;
+      let states = nextState;
+      this.setFamousOptions(options);
+      this.famousUpdate({children, options, props, states});
     }
   },
 
