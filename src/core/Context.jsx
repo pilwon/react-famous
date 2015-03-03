@@ -1,3 +1,4 @@
+import isUndefined from 'lodash/lang/isUndefined';
 import React from 'react';
 
 import FamousNodeMixin from '../lib/FamousNodeMixin';
@@ -43,7 +44,7 @@ export default React.createClass({
       this.setFamousNode(context);
     }
 
-    if (typeof props.perspective != 'undefined') {
+    if (!isUndefined(props.perspective)) {
       this._famousContext.setPerspective(props.perspective);
     }
 
