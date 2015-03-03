@@ -9,19 +9,20 @@ export default React.createClass({
     let surfaces = [];
 
     for (let i = 0; i < 40; ++i) {
-      let properties = {
-        backgroundColor: 'hsl(' + (i * 360 / 40) + ', 100%, 50%)',
-        lineHeight: '100px',
-        textAlign: 'center'
+      let surfaceOptions = {
+        properties: {
+          backgroundColor: 'hsl(' + (i * 360 / 40) + ', 100%, 50%)',
+          lineHeight: '100px',
+          textAlign: 'center'
+        },
+        size: [undefined, 100]
       };
 
-      let surface = (
-        <Surface key={i} options={{properties, size: [undefined, 100]}}>
+      surfaces.push(
+        <Surface key={i} options={surfaceOptions}>
           Surface: {i + 1}
         </Surface>
       );
-
-      surfaces.push(surface);
     }
 
     return (
