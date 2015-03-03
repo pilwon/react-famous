@@ -109,19 +109,19 @@ export function createPassDownComponent(name) {
     },
 
     componentWillUnmount() {
+      this.releaseFamous();
       this.releaseFamousNode();
     },
 
     _updateFamous(props) {
-      let node = this.getFamousNode();
+      let renderNode = this.getFamousNode();
       let render = true;
 
-      if (!node) {
-        node = new RenderNode();
-        this.setFamousNode(
-          getFamousParentNode(this).add(node),
-          node
-        );
+      if (!renderNode) {
+        renderNode = new RenderNode();
+
+        this.setFamous(renderNode);
+        this.setFamousNode(getFamousParentNode(this).add(renderNode));
       }
 
       if (render) {

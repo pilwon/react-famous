@@ -30,6 +30,7 @@ let Component = React.createClass({
   },
 
   componentWillUnmount() {
+    this.releaseFamous();
     this.releaseFamousNode();
   },
 
@@ -38,20 +39,20 @@ let Component = React.createClass({
   },
 
   _updateFamous(props) {
-    let node = this.getFamousNode();
+    let headerFooterlayout = this.getFamousNode();
     let options = FamousUtil.parseOptions(props);
     let render = true;
 
-    if (!node) {
-      node = new HeaderFooterLayout(options);
-      this.setFamousNode(
-        FamousUtil.getFamousParentNode(this).add(node),
-        node
-      );
+    if (!headerFooterlayout) {
+      headerFooterlayout = new HeaderFooterLayout(options);
+
+      this.setFamous(headerFooterlayout);
+      this.setFamousNode(FamousUtil.getFamousParentNode(this).add(headerFooterlayout));
+
       this._famousNodes = {
-        content: node.content,
-        footer: node.footer,
-        header: node.header
+        content: headerFooterlayout.content,
+        footer: headerFooterlayout.footer,
+        header: headerFooterlayout.header
       };
     }
 

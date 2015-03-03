@@ -15,11 +15,11 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    this._updateFamousNode(this.props);
+    this._updateFamous(this.props);
   },
 
   componentWillReceiveProps(nextProps) {
-    this._updateFamousNode(nextProps);
+    this._updateFamous(nextProps);
   },
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -28,17 +28,20 @@ export default React.createClass({
 
   componentWillUnmount() {
     Engine.deregisterContext(this.getFamousNode());
+
+    this.releaseFamous();
     this.releaseFamousNode();
   },
 
-  _updateFamousNode(props) {
-    let node = this.getFamousNode();
+  _updateFamous(props) {
+    let context = this.getFamousNode();
     let render = true;
 
-    if (!node) {
-      let container = React.findDOMNode(this.refs.container);
-      node = Engine.createContext(container);
-      this.setFamousNode(node, node);
+    if (!context) {
+      context = Engine.createContext(React.findDOMNode(this.refs.container));
+
+      this.setFamous(context);
+      this.setFamousNode(context);
     }
 
     if (typeof props.perspective != 'undefined') {

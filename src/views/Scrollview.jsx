@@ -42,6 +42,7 @@ export default React.createClass({
   },
 
   componentWillUnmount() {
+    this.releaseFamous();
     this.releaseFamousNode();
   },
 
@@ -50,18 +51,18 @@ export default React.createClass({
   },
 
   _updateFamous(props) {
-    let node = this.getFamousNode();
+    let scrollview = this.getFamousNode();
     let options = FamousUtil.parseOptions(props);
     let render = true;
 
-    if (!node) {
-      node = new Scrollview(options);
-      this.setFamousNode(
-        FamousUtil.getFamousParentNode(this).add(node),
-        node
-      );
+    if (!scrollview) {
+      scrollview = new Scrollview(options);
+
+      this.setFamous(scrollview);
+      this.setFamousNode(FamousUtil.getFamousParentNode(this).add(scrollview));
+
       this._famousNodes = props.children.map((child) => new RenderNode());
-      node.sequenceFrom(this._famousNodes);
+      scrollview.sequenceFrom(this._famousNodes);
     }
 
     if (render) {

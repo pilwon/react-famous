@@ -21,24 +21,26 @@ export default React.createClass({
   },
 
   componentWillUnmount() {
+    this.releaseFamous();
     this.releaseFamousNode();
   },
 
   _updateFamous(props) {
-    let node = this.getFamousNode();
+    let surface = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let render = true;
 
-    if (!node) {
-      node = new Surface(options);
-      this.setFamousNode(
-        FamousUtil.getFamousParentNode(this).add(node),
-        node
-      );
+    if (!surface) {
+      surface = new Surface(options);
+
+      this.setFamous(surface);
+      this.setFamousNode(FamousUtil.getFamousParentNode(this).add(surface));
+    } else {
+      surface.setOptions(options);
     }
 
     if (props.children) {
-      node.setContent(FamousUtil.renderContent(props.children));
+      surface.setContent(FamousUtil.renderContent(props.children));
     }
 
     if (render) {

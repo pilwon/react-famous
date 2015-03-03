@@ -21,20 +21,20 @@ export default React.createClass({
   },
 
   componentWillUnmount() {
+    this.releaseFamous();
     this.releaseFamousNode();
   },
 
   _updateFamous(props) {
-    let node = this.getFamousNode();
+    let modifier = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let render = true;
 
-    if (!node) {
-      node = new Modifier(options);
-      this.setFamousNode(
-        FamousUtil.getFamousParentNode(this).add(node),
-        node
-      );
+    if (!modifier) {
+      modifier = new Modifier(options);
+
+      this.setFamous(modifier);
+      this.setFamousNode(FamousUtil.getFamousParentNode(this).add(modifier));
     }
 
     if (render) {

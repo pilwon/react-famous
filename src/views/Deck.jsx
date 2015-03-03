@@ -28,6 +28,7 @@ export default React.createClass({
   },
 
   componentWillUnmount() {
+    this.releaseFamous();
     this.releaseFamousNode();
   },
 
@@ -36,18 +37,18 @@ export default React.createClass({
   },
 
   _updateFamous(props) {
-    let node = this.getFamousNode();
+    let deck = this.getFamousNode();
     let options = FamousUtil.parseOptions(props);
     let render = true;
 
-    if (!node) {
-      node = new Deck(options);
-      this.setFamousNode(
-        FamousUtil.getFamousParentNode(this).add(node),
-        node
-      );
+    if (!deck) {
+      deck = new Deck(options);
+
+      this.setFamous(deck);
+      this.setFamousNode(FamousUtil.getFamousParentNode(this).add(deck));
+
       this._famousNodes = props.children.map((child) => new RenderNode());
-      node.sequenceFrom(this._famousNodes);
+      deck.sequenceFrom(this._famousNodes);
     }
 
     if (render) {
@@ -56,10 +57,8 @@ export default React.createClass({
   },
 
   famousToggle() {
-    let node = this.getFamousNode(false);
-    if (node) {
-      node.toggle();
-    }
+    let deck = this.getFamous();
+    return deck.toggle();
   },
 
   renderFamous() {

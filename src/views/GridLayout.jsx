@@ -29,6 +29,7 @@ export default React.createClass({
   },
 
   componentWillUnmount() {
+    this.releaseFamous();
     this.releaseFamousNode();
   },
 
@@ -37,18 +38,18 @@ export default React.createClass({
   },
 
   _updateFamous(props) {
-    let node = this.getFamousNode();
+    let gridLayout = this.getFamousNode();
     let options = FamousUtil.parseOptions(props);
     let render = true;
 
-    if (!node) {
-      node = new GridLayout(options);
-      this.setFamousNode(
-        FamousUtil.getFamousParentNode(this).add(node),
-        node
-      );
+    if (!gridLayout) {
+      gridLayout = new GridLayout(options);
+
+      this.setFamous(gridLayout);
+      this.setFamousNode(FamousUtil.getFamousParentNode(this).add(gridLayout));
+
       this._famousNodes = props.children.map((child) => new RenderNode());
-      node.sequenceFrom(this._famousNodes);
+      gridLayout.sequenceFrom(this._famousNodes);
     }
 
     if (render) {

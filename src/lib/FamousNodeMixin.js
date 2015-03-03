@@ -1,19 +1,25 @@
 export default {
-  getFamousNode(returnReactNode = true) {
-    if (returnReactNode) {
-      return this._famousReactNode;
-    } else {
-      return this._famousNode;
-    }
+  getFamous() {
+    return this._famous;
+  },
+
+  getFamousNode() {
+    return this._famousNode;
+  },
+
+  releaseFamous() {
+    delete this._famous;
   },
 
   releaseFamousNode() {
-    delete this._famousReactNode;
     delete this._famousNode;
   },
 
-  setFamousNode(reactNode, famousNode) {
-    this._famousReactNode = reactNode;
+  setFamous(famousInstance) {
+    this._famous = famousInstance;
+  },
+
+  setFamousNode(famousNode) {
     this._famousNode = famousNode;
   }
 };
