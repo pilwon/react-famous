@@ -45,7 +45,7 @@ function _findNearestFamousAncestor(instance, searchedSubpath = []) {
   }
   let traversePath = _buildTraversePath(owner, instance).concat(searchedSubpath);
   let famousTraversePath = traversePath.slice(0, -1).filter((instance) => {
-    return isFunction(instance.getFamousNode);
+    return isFunction(instance.isFamous) && instance.isFamous();
   });
   if (famousTraversePath.length) {
     let result = famousTraversePath.slice(-1)[0];
