@@ -1,12 +1,13 @@
+import isEqual from 'lodash/lang/isEqual';
 import isFunction from 'lodash/lang/isFunction';
 import React from 'react';
-import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
+import shallowEqual from 'react/lib/shallowEqual';
 
 import FamousNodeMixin from './FamousNodeMixin';
 import FamousUtil from './FamousUtil';
 
 export default {
-  mixins: [FamousNodeMixin, PureRenderMixin],
+  mixins: [FamousNodeMixin],
 
   propTypes: {
     _onReady: React.PropTypes.func
@@ -31,6 +32,12 @@ export default {
         this.props._onReady();
       }
     });
+  },
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !shallowEqual(this.props, nextProps) ||
+           !shallowEqual(this.state, nextState) ||
+           !isEqual(this.props.options, nextProps.options);
   },
 
   componentWillUpdate(nextProps, nextState) {
