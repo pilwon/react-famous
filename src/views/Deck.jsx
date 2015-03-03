@@ -2,7 +2,6 @@ import RenderNode from 'famous/core/RenderNode';
 import Deck from 'famous/views/Deck';
 import toPlainObject from 'lodash/lang/toPlainObject';
 import React from 'react';
-import cloneWithProps from 'react/lib/cloneWithProps';
 
 import FamousMixin from '../lib/FamousMixin';
 
@@ -30,7 +29,7 @@ export default React.createClass({
 
     return (
       <div data-famous="Deck">
-        {this.props.children.map((child, idx) => cloneWithProps(child, {key: idx}))}
+        {this.props.children.map((child, idx) => React.cloneElement(child, {key: idx}))}
       </div>
     );
   }

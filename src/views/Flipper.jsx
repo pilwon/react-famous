@@ -1,7 +1,6 @@
 import RenderNode from 'famous/core/RenderNode';
 import Flipper from 'famous/views/Flipper';
 import React from 'react';
-import cloneWithProps from 'react/lib/cloneWithProps';
 
 import FamousMixin from '../lib/FamousMixin';
 
@@ -36,9 +35,9 @@ let Component = React.createClass({
     let children = this.props.children.map((child) => {
       switch (child.type) {
         case Component.Back:
-          return cloneWithProps(child, {key: 'back'});
+          return React.cloneElement(child, {key: 'back'});
         case Component.Front:
-          return cloneWithProps(child, {key: 'front'});
+          return React.cloneElement(child, {key: 'front'});
         default:
           return null;
       }

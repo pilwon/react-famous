@@ -2,7 +2,6 @@ import RenderNode from 'famous/core/RenderNode';
 import Scrollview from 'famous/views/Scrollview';
 import toPlainObject from 'lodash/lang/toPlainObject';
 import React from 'react';
-import cloneWithProps from 'react/lib/cloneWithProps';
 
 import FamousMixin from '../lib/FamousMixin';
 
@@ -30,7 +29,7 @@ export default React.createClass({
 
     return (
       <div data-famous="Scrollview">
-        {this.props.children.map((child, key) => cloneWithProps(child, {key}))}
+        {this.props.children.map((child, key) => React.cloneElement(child, {key}))}
       </div>
     );
   }

@@ -1,7 +1,6 @@
 import RenderNode from 'famous/core/RenderNode';
 import HeaderFooterLayout from 'famous/views/HeaderFooterLayout';
 import React from 'react';
-import cloneWithProps from 'react/lib/cloneWithProps';
 
 import FamousMixin from '../lib/FamousMixin';
 
@@ -31,11 +30,11 @@ let Component = React.createClass({
     let children = this.props.children.map((child) => {
       switch (child.type) {
         case Component.Content:
-          return cloneWithProps(child, {key: 'content'});
+          return React.cloneElement(child, {key: 'content'});
         case Component.Footer:
-          return cloneWithProps(child, {key: 'footer'});
+          return React.cloneElement(child, {key: 'footer'});
         case Component.Header:
-          return cloneWithProps(child, {key: 'header'});
+          return React.cloneElement(child, {key: 'header'});
         default:
           return null;
       }
