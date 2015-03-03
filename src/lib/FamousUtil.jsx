@@ -77,14 +77,6 @@ export function createPassDownComponent(name) {
   return React.createClass({
     mixins: [FamousMixin],
 
-    renderFamous() {
-      return (
-        <div data-famous={name}>
-          {this.props.children}
-        </div>
-      );
-    },
-
     updateFamous(props) {
       let renderNode = this.getFamous();
 
@@ -93,6 +85,16 @@ export function createPassDownComponent(name) {
         this.setFamous(renderNode);
         this.setFamousNode(getFamousParentNode(this).add(renderNode));
       }
+    },
+
+    render() {
+      if (!this.getFamousReady()) { return null; }
+
+      return (
+        <div data-famous={name}>
+          {this.props.children}
+        </div>
+      );
     }
   });
 }

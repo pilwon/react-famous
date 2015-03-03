@@ -2,34 +2,18 @@ import isUndefined from 'lodash/lang/isUndefined';
 import React from 'react';
 import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
 
-import FamousNodeMixin from '../lib/FamousNodeMixin';
+import FamousMixin from '../lib/FamousMixin';
 import Engine from './Engine';
 
 export default React.createClass({
-  mixins: [FamousNodeMixin, PureRenderMixin],
+  mixins: [FamousMixin],
 
   propTypes: {
     perspective: React.PropTypes.number
   },
 
-  componentWillMount() {
-    this.setFamousReady(false);
-  },
-
-  componentDidMount() {
-    this.updateFamous(this.props);
-    this.setFamousReady(true);
-    this.forceUpdate();
-  },
-
-  componentWillReceiveProps(nextProps) {
-    this.updateFamous(nextProps);
-  },
-
-  componentWillUnmount() {
+  famousWillUnmount() {
     Engine.deregisterContext(this.getFamousNode());
-
-    this.releaseFamous();
   },
 
   updateFamous(props) {

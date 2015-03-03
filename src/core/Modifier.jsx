@@ -7,14 +7,6 @@ import FamousUtil from '../lib/FamousUtil';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  renderFamous() {
-    return (
-      <div data-famous="Modifier">
-        {this.props.children}
-      </div>
-    );
-  },
-
   updateFamous(props) {
     let modifier = this.getFamous();
     let options = FamousUtil.parseOptions(props);
@@ -27,5 +19,15 @@ export default React.createClass({
     } else if (optionsChanged) {
       surface.setOptions(options);
     }
+  },
+
+  render() {
+    if (!this.getFamousReady()) { return null; }
+
+    return (
+      <div data-famous="Modifier">
+        {this.props.children}
+      </div>
+    );
   }
 });

@@ -15,14 +15,6 @@ export default React.createClass({
     itemSpacing: React.PropTypes.number
   },
 
-  renderFamous() {
-    return (
-      <div data-famous="SequentialLayout">
-        {this.props.children.map((child, key) => cloneWithProps(child, {key}))}
-      </div>
-    );
-  },
-
   updateFamous(props) {
     let sequentialLayout = this.getFamous();
     let options = FamousUtil.parseOptions(props);
@@ -39,5 +31,15 @@ export default React.createClass({
     } else if (optionsChanged) {
       surface.setOptions(options);
     }
+  },
+
+  render() {
+    if (!this.getFamousReady()) { return null; }
+
+    return (
+      <div data-famous="SequentialLayout">
+        {this.props.children.map((child, key) => cloneWithProps(child, {key}))}
+      </div>
+    );
   }
 });

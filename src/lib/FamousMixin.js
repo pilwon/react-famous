@@ -1,3 +1,4 @@
+import isFunction from 'lodash/lang/isFunction';
 import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
 
 import FamousNodeMixin from './FamousNodeMixin';
@@ -20,14 +21,9 @@ export default {
   },
 
   componentWillUnmount() {
-    this.releaseFamous();
-  },
-
-  render() {
-    if (this.getFamousReady()) {
-      return this.renderFamous();
-    } else {
-      return null;
+    if (isFunction(this.famousWillUnmount)) {
+      this.famousWillUnmount();
     }
+    this.releaseFamous();
   }
 };

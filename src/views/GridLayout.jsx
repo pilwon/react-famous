@@ -16,14 +16,6 @@ export default React.createClass({
     transition: React.PropTypes.bool
   },
 
-  renderFamous() {
-    return (
-      <div data-famous="GridLayout">
-        {this.props.children.map((child, key) => cloneWithProps(child, {key}))}
-      </div>
-    );
-  },
-
   updateFamous(props) {
     let gridLayout = this.getFamous();
     let options = FamousUtil.parseOptions(props);
@@ -40,5 +32,15 @@ export default React.createClass({
     } else if (optionsChanged) {
       surface.setOptions(options);
     }
+  },
+
+  render() {
+    if (!this.getFamousReady()) { return null; }
+
+    return (
+      <div data-famous="GridLayout">
+        {this.props.children.map((child, key) => cloneWithProps(child, {key}))}
+      </div>
+    );
   }
 });

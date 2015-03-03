@@ -7,14 +7,6 @@ import FamousUtil from '../lib/FamousUtil';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  renderFamous() {
-    return (
-      <div data-famous="RenderNode">
-        {this.props.children}
-      </div>
-    );
-  },
-
   updateFamous(props) {
     let renderNode = this.getFamous();
 
@@ -23,5 +15,15 @@ export default React.createClass({
       this.setFamous(renderNode);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(renderNode));
     }
+  },
+
+  render() {
+    if (!this.getFamousReady()) { return null; }
+
+    return (
+      <div data-famous="RenderNode">
+        {this.props.children}
+      </div>
+    );
   }
 });

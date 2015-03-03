@@ -19,14 +19,6 @@ export default React.createClass({
     return this.getFamous().toggle();
   },
 
-  renderFamous() {
-    return (
-      <div data-famous="Deck">
-        {this.props.children.map((child, idx) => cloneWithProps(child, {key: idx}))}
-      </div>
-    );
-  },
-
   updateFamous(props) {
     let deck = this.getFamous();
     let options = FamousUtil.parseOptions(props);
@@ -43,5 +35,15 @@ export default React.createClass({
     } else if (optionsChanged) {
       deck.setOptions(options);
     }
+  },
+
+  render() {
+    if (!this.getFamousReady()) { return null; }
+
+    return (
+      <div data-famous="Deck">
+        {this.props.children.map((child, idx) => cloneWithProps(child, {key: idx}))}
+      </div>
+    );
   }
 });

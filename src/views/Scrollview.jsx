@@ -29,14 +29,6 @@ export default React.createClass({
     syncScale: React.PropTypes.number
   },
 
-  renderFamous() {
-    return (
-      <div data-famous="Scrollview">
-        {this.props.children.map((child, key) => cloneWithProps(child, {key}))}
-      </div>
-    );
-  },
-
   updateFamous(props) {
     let scrollview = this.getFamous();
     let options = FamousUtil.parseOptions(props);
@@ -53,5 +45,15 @@ export default React.createClass({
     } else if (optionsChanged) {
       surface.setOptions(options);
     }
+  },
+
+  render() {
+    if (!this.getFamousReady()) { return null; }
+
+    return (
+      <div data-famous="Scrollview">
+        {this.props.children.map((child, key) => cloneWithProps(child, {key}))}
+      </div>
+    );
   }
 });

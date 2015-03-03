@@ -8,14 +8,6 @@ import FamousUtil from '../lib/FamousUtil';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  renderFamous() {
-    return (
-      <div data-famous="Surface">
-        {this.props.children}
-      </div>
-    );
-  },
-
   updateFamous(props) {
     let surface = this.getFamous();
     let options = FamousUtil.parseOptions(props);
@@ -32,5 +24,15 @@ export default React.createClass({
     if (!isUndefined(props.children)) {
       surface.setContent(FamousUtil.renderContent(props.children));
     }
+  },
+
+  render() {
+    if (!this.getFamousReady()) { return null; }
+
+    return (
+      <div data-famous="Surface">
+        {this.props.children}
+      </div>
+    );
   }
 });
