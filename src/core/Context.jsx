@@ -31,11 +31,15 @@ export default React.createClass({
   },
 
   render() {
+    let context = (
+      <div data-famous="Context" style={{display: 'none'}}>
+        {this.props.children}
+      </div>
+    );
+
     return (
       <div className="famous">
-        <div data-famous="Context" style={{display: 'none'}}>
-          {this.getFamousReady() ? this.props.children : null}
-        </div>
+        {this.getFamousReady() ? context : null}
         <div className="famous-container" ref="container"/>
       </div>
     );
