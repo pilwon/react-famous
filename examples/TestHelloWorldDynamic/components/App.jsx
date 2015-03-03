@@ -10,7 +10,7 @@ export default React.createClass({
     };
   },
 
-  componentDidMount() {
+  onReady() {
     this._intervalId = setInterval(() => {
       this.setState((state) => ({
         count: state.count + 1
@@ -40,7 +40,7 @@ export default React.createClass({
     return (
       <Context>
         <Modifier align={[0.5, 0.5]} origin={[0.5, 0.5]}>
-          <Surface size={[150, 100]} properties={properties}>
+          <Surface size={[150, 100]} properties={properties} _onReady={this.onReady}>
             {text}
           </Surface>
         </Modifier>
