@@ -18,7 +18,7 @@ export default React.createClass({
   render() {
     let surfaces = [];
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; ++i) {
       let surfaceOptions = {
         properties: {
           backgroundColor: 'hsla(' + ((i * 5 + i) * 15 % 360) + ', 60%, 50%, 0.8)',
