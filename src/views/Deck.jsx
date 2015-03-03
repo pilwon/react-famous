@@ -39,6 +39,7 @@ export default React.createClass({
   _updateFamous(props) {
     let deck = this.getFamous();
     let options = FamousUtil.parseOptions(props);
+    let optionsChanged = this.setFamousOptions(options);
     let render = true;
 
     if (!deck) {
@@ -49,6 +50,8 @@ export default React.createClass({
 
       this._famousNodes = props.children.map((child) => new RenderNode());
       deck.sequenceFrom(this._famousNodes);
+    } else if (optionsChanged) {
+      deck.setOptions(options);
     }
 
     if (render) {

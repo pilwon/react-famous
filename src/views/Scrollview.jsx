@@ -53,6 +53,7 @@ export default React.createClass({
   _updateFamous(props) {
     let scrollview = this.getFamous();
     let options = FamousUtil.parseOptions(props);
+    let optionsChanged = this.setFamousOptions(options);
     let render = true;
 
     if (!scrollview) {
@@ -63,6 +64,8 @@ export default React.createClass({
 
       this._famousNodes = props.children.map((child) => new RenderNode());
       scrollview.sequenceFrom(this._famousNodes);
+    } else if (optionsChanged) {
+      surface.setOptions(options);
     }
 
     if (render) {

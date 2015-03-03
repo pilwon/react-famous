@@ -28,6 +28,7 @@ export default React.createClass({
   _updateFamous(props) {
     let modifier = this.getFamous();
     let options = FamousUtil.parseOptions(props);
+    let optionsChanged = this.setFamousOptions(options);
     let render = true;
 
     if (!modifier) {
@@ -35,6 +36,8 @@ export default React.createClass({
 
       this.setFamous(modifier);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(modifier));
+    } else if (optionsChanged) {
+      surface.setOptions(options);
     }
 
     if (render) {

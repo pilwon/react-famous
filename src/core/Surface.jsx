@@ -29,6 +29,7 @@ export default React.createClass({
   _updateFamous(props) {
     let surface = this.getFamous();
     let options = FamousUtil.parseOptions(props);
+    let optionsChanged = this.setFamousOptions(options);
     let render = true;
 
     if (!surface) {
@@ -36,7 +37,7 @@ export default React.createClass({
 
       this.setFamous(surface);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(surface));
-    } else {
+    } else if (optionsChanged) {
       surface.setOptions(options);
     }
 

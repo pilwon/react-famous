@@ -39,6 +39,7 @@ export default React.createClass({
   _updateFamous(props) {
     let sequentialLayout = this.getFamous();
     let options = FamousUtil.parseOptions(props);
+    let optionsChanged = this.setFamousOptions(options);
     let render = true;
 
     if (!sequentialLayout) {
@@ -49,6 +50,8 @@ export default React.createClass({
 
       this._famousNodes = props.children.map((child) => new RenderNode());
       sequentialLayout.sequenceFrom(this._famousNodes);
+    } else if (optionsChanged) {
+      surface.setOptions(options);
     }
 
     if (render) {
