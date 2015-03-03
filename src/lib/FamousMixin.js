@@ -20,7 +20,6 @@ export default {
 
   componentWillUnmount() {
     this.releaseFamous();
-    this.releaseFamousNode();
   },
 
   render() {

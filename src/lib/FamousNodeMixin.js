@@ -17,11 +17,13 @@ export default {
     return this._famousReady;
   },
 
-  releaseFamous() {
-    delete this._famous;
+  isFamous() {
+    return true;
   },
 
-  releaseFamousNode() {
+  releaseFamous() {
+    delete this._famous;
+    delete this._famousKeyedNodes;
     delete this._famousNode;
   },
 

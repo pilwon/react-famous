@@ -33,7 +33,6 @@ export default React.createClass({
     Engine.deregisterContext(this.getFamousNode());
 
     this.releaseFamous();
-    this.releaseFamousNode();
   },
 
   updateFamous(props) {
