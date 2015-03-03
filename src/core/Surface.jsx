@@ -34,7 +34,6 @@ export default React.createClass({
 
     if (!surface) {
       surface = new Surface(options);
-
       this.setFamous(surface);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(surface));
     } else if (optionsChanged) {

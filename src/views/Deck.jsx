@@ -44,10 +44,8 @@ export default React.createClass({
 
     if (!deck) {
       deck = new Deck(options);
-
       this.setFamous(deck);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(deck));
-
       this._famousNodes = props.children.map((child) => new RenderNode());
       deck.sequenceFrom(this._famousNodes);
     } else if (optionsChanged) {

@@ -45,10 +45,8 @@ export default React.createClass({
 
     if (!gridLayout) {
       gridLayout = new GridLayout(options);
-
       this.setFamous(gridLayout);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(gridLayout));
-
       this._famousNodes = props.children.map((child) => new RenderNode());
       gridLayout.sequenceFrom(this._famousNodes);
     } else if (optionsChanged) {

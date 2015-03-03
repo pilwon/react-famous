@@ -46,10 +46,8 @@ let Component = React.createClass({
 
     if (!headerFooterlayout) {
       headerFooterlayout = new HeaderFooterLayout(options);
-
       this.setFamous(headerFooterlayout);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(headerFooterlayout));
-
       this._famousNodes = {
         content: headerFooterlayout.content,
         footer: headerFooterlayout.footer,

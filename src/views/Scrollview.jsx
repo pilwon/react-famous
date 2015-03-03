@@ -58,10 +58,8 @@ export default React.createClass({
 
     if (!scrollview) {
       scrollview = new Scrollview(options);
-
       this.setFamous(scrollview);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(scrollview));
-
       this._famousNodes = props.children.map((child) => new RenderNode());
       scrollview.sequenceFrom(this._famousNodes);
     } else if (optionsChanged) {

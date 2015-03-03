@@ -44,10 +44,8 @@ export default React.createClass({
 
     if (!sequentialLayout) {
       sequentialLayout = new SequentialLayout(options);
-
       this.setFamous(sequentialLayout);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(sequentialLayout));
-
       this._famousNodes = props.children.map((child) => new RenderNode());
       sequentialLayout.sequenceFrom(this._famousNodes);
     } else if (optionsChanged) {

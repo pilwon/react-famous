@@ -33,7 +33,6 @@ export default React.createClass({
 
     if (!modifier) {
       modifier = new Modifier(options);
-
       this.setFamous(modifier);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(modifier));
     } else if (optionsChanged) {

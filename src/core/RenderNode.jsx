@@ -31,7 +31,6 @@ export default React.createClass({
 
     if (!renderNode) {
       renderNode = new RenderNode();
-
       this.setFamous(renderNode);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(renderNode));
     }
