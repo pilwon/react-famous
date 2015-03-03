@@ -7,17 +7,14 @@ import Surface from 'react-famous/core/Surface';
 import Flipper from 'react-famous/views/Flipper';
 
 export default React.createClass({
-  onFlipperReady() {
+  onReady() {
     let toggle = false;
-
     Engine.on('click', () => {
       let angle = toggle ? 0 : Math.PI;
-
       this.refs.flipper.famous.setAngle(angle, {
         curve: 'easeOutBounce',
         duration: 500
       });
-
       toggle = !toggle;
     });
   },
@@ -49,7 +46,7 @@ export default React.createClass({
           Click anywhere on the screen.
         </Surface>
         <Modifier options={{align: [.5, .5], origin: [.5, .5]}}>
-          <Flipper ref="flipper" onReady={this.onFlipperReady} options={{headerSize: 100, footerSize: 50}}>
+          <Flipper ref="flipper" onReady={this.onReady} options={{headerSize: 100, footerSize: 50}}>
             <Flipper.Front>
               <Surface options={frontOptions}>
                 front
