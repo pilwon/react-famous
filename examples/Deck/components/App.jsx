@@ -10,7 +10,8 @@ import Deck from 'react-famous/views/Deck';
 Transitionable.registerMethod('spring', SpringTransition);
 
 export default React.createClass({
-  onReady() {
+  onSurfaceClick(eventKey) {
+    console.log('Clicked surface #' + eventKey);
     this.refs.deck.famous.toggle();
   },
 
@@ -18,7 +19,7 @@ export default React.createClass({
     let surfaces = [];
 
     for (let i = 0; i < 5; i++) {
-      let options = {
+      let surfaceOptions = {
         properties: {
           backgroundColor: 'hsla(' + ((i * 5 + i) * 15 % 360) + ', 60%, 50%, 0.8)',
           color: 'white',
@@ -28,14 +29,14 @@ export default React.createClass({
         size: [100, 200]
       };
       let surface = (
-        <Surface key={i} options={options}>
+        <Surface eventKey={i} key={i} onClick={this.onSurfaceClick} options={surfaceOptions}>
           {i}
         </Surface>
       );
       surfaces.push(surface);
     }
 
-    let options = {
+    let deckOptions = {
       itemSpacing: 10,
       transition: {
         method: 'spring',
@@ -47,8 +48,11 @@ export default React.createClass({
 
     return (
       <Context>
+        <Surface options={{properties: {lineHeight: '100px', textAlign: 'center'}, size: [undefined, 100]}}>
+          Open the developer console, then click the deck.
+        </Surface>
         <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
-          <Deck ref="deck" onReady={this.onReady} options={options}>
+          <Deck ref="deck" options={deckOptions}>
             {surfaces}
           </Deck>
         </Modifier>

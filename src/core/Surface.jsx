@@ -8,10 +8,21 @@ import FamousUtil from '../lib/FamousUtil';
 export default React.createClass({
   mixins: [FamousMixin],
 
+  propTypes: {
+    eventKey: React.PropTypes.any,
+    onClick: React.PropTypes.func
+  },
+
   famousCreate() {
     let surface = new Surface(this.props.options);
     this.setFamous(surface);
     this.setFamousNode(this.getFamousParentNode().add(surface));
+
+    if (this.props.onClick) {
+      surface.on('click', () => {
+        this.props.onClick(this.props.eventKey);
+      });
+    }
 
     if (!isUndefined(this.props.children)) {
       surface.setContent(FamousUtil.renderContent(this.props.children));
