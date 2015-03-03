@@ -23,6 +23,7 @@ export default React.createClass({
   componentDidMount() {
     this.updateFamous(this.props);
     this.setFamousReady(true);
+    this.forceUpdate();
   },
 
   componentWillReceiveProps(nextProps) {
@@ -37,7 +38,6 @@ export default React.createClass({
 
   updateFamous(props) {
     let context = this.getFamous();
-    let render = true;
 
     if (!context) {
       context = Engine.createContext(React.findDOMNode(this.refs.container));
@@ -47,10 +47,6 @@ export default React.createClass({
 
     if (!isUndefined(props.perspective)) {
       this._famousContext.setPerspective(props.perspective);
-    }
-
-    if (render) {
-      this.forceUpdate();
     }
   },
 

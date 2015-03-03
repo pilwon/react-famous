@@ -31,7 +31,6 @@ export default React.createClass({
     let deck = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);
-    let render = true;
 
     if (!deck) {
       deck = new Deck(options);
@@ -43,10 +42,6 @@ export default React.createClass({
       this.setFamousKeyedNodes(toPlainObject(sequence));
     } else if (optionsChanged) {
       deck.setOptions(options);
-    }
-
-    if (render) {
-      this.forceUpdate();
     }
   }
 });

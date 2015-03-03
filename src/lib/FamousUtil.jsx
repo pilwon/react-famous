@@ -87,16 +87,11 @@ export function createPassDownComponent(name) {
 
     updateFamous(props) {
       let renderNode = this.getFamous();
-      let render = true;
 
       if (!renderNode) {
         renderNode = new RenderNode();
         this.setFamous(renderNode);
         this.setFamousNode(getFamousParentNode(this).add(renderNode));
-      }
-
-      if (render) {
-        this.forceUpdate();
       }
     }
   });

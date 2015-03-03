@@ -28,7 +28,6 @@ export default React.createClass({
     let gridLayout = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);
-    let render = true;
 
     if (!gridLayout) {
       gridLayout = new GridLayout(options);
@@ -40,10 +39,6 @@ export default React.createClass({
       this.setFamousKeyedNodes(toPlainObject(sequence));
     } else if (optionsChanged) {
       surface.setOptions(options);
-    }
-
-    if (render) {
-      this.forceUpdate();
     }
   }
 });

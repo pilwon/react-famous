@@ -41,7 +41,6 @@ export default React.createClass({
     let scrollview = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);
-    let render = true;
 
     if (!scrollview) {
       scrollview = new Scrollview(options);
@@ -53,10 +52,6 @@ export default React.createClass({
       this.setFamousKeyedNodes(toPlainObject(sequence));
     } else if (optionsChanged) {
       surface.setOptions(options);
-    }
-
-    if (render) {
-      this.forceUpdate();
     }
   }
 });

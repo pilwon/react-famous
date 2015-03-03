@@ -41,7 +41,6 @@ let Component = React.createClass({
     let headerFooterlayout = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);
-    let render = true;
 
     if (!headerFooterlayout) {
       headerFooterlayout = new HeaderFooterLayout(options);
@@ -54,10 +53,6 @@ let Component = React.createClass({
       });
     } else if (optionsChanged) {
       surface.setOptions(options);
-    }
-
-    if (render) {
-      this.forceUpdate();
     }
   }
 });

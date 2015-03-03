@@ -20,7 +20,6 @@ export default React.createClass({
     let surface = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);
-    let render = true;
 
     if (!surface) {
       surface = new Surface(options);
@@ -32,10 +31,6 @@ export default React.createClass({
 
     if (!isUndefined(props.children)) {
       surface.setContent(FamousUtil.renderContent(props.children));
-    }
-
-    if (render) {
-      this.forceUpdate();
     }
   }
 });

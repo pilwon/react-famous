@@ -27,7 +27,6 @@ export default React.createClass({
     let sequentialLayout = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);
-    let render = true;
 
     if (!sequentialLayout) {
       sequentialLayout = new SequentialLayout(options);
@@ -39,10 +38,6 @@ export default React.createClass({
       this.setFamousKeyedNodes(toPlainObject(sequence));
     } else if (optionsChanged) {
       surface.setOptions(options);
-    }
-
-    if (render) {
-      this.forceUpdate();
     }
   }
 });

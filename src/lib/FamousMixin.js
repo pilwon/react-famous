@@ -12,6 +12,7 @@ export default {
   componentDidMount() {
     this.updateFamous(this.props);
     this.setFamousReady(true);
+    this.forceUpdate();
   },
 
   componentWillReceiveProps(nextProps) {

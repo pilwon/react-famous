@@ -17,16 +17,11 @@ export default React.createClass({
 
   updateFamous(props) {
     let renderNode = this.getFamous();
-    let render = true;
 
     if (!renderNode) {
       renderNode = new RenderNode();
       this.setFamous(renderNode);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(renderNode));
-    }
-
-    if (render) {
-      this.forceUpdate();
     }
   }
 });
