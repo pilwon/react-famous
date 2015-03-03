@@ -1,5 +1,6 @@
 import RenderNode from 'famous/core/RenderNode';
 import SequentialLayout from 'famous/views/SequentialLayout';
+import toPlainObject from 'lodash/lang/toPlainObject';
 import React from 'react';
 import cloneWithProps from 'react/lib/cloneWithProps';
 
@@ -12,10 +13,6 @@ export default React.createClass({
   propTypes: {
     direction: React.PropTypes.number,
     itemSpacing: React.PropTypes.number
-  },
-
-  getFamousNodeByKey(key) {
-    return this._famousNodes[key];
   },
 
   renderFamous() {
@@ -36,8 +33,10 @@ export default React.createClass({
       sequentialLayout = new SequentialLayout(options);
       this.setFamous(sequentialLayout);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(sequentialLayout));
-      this._famousNodes = props.children.map((child) => new RenderNode());
-      sequentialLayout.sequenceFrom(this._famousNodes);
+
+      let sequence = props.children.map(() => new RenderNode());
+      sequentialLayout.sequenceFrom(sequence);
+      this.setFamousKeyedNodes(toPlainObject(sequence));
     } else if (optionsChanged) {
       surface.setOptions(options);
     }

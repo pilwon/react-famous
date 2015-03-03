@@ -5,6 +5,10 @@ export default {
     return this._famous;
   },
 
+  getFamousKeyedNodes() {
+    return this._famousKeyedNodes;
+  },
+
   getFamousNode() {
     return this._famousNode;
   },
@@ -29,6 +33,10 @@ export default {
 
   setFamous(famousInstance) {
     this._famous = famousInstance;
+  },
+
+  setFamousKeyedNodes(keyedNodes) {
+    this._famousKeyedNodes = keyedNodes;
   },
 
   setFamousNode(famousNode) {

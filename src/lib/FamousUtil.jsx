@@ -50,7 +50,7 @@ function _findNearestFamousAncestor(instance, searchedSubpath = []) {
   if (famousTraversePath.length) {
     let result = famousTraversePath.slice(-1)[0];
     let key = null;
-    if (isFunction(result.getFamousNodeByKey)) {
+    if (isFunction(result.getFamousKeyedNodes) && result.getFamousKeyedNodes()) {
       for (let i = 0; i < traversePath.length; ++i) {
         if (traversePath[i] === result) {
           for (let descendant of traversePath.slice(i + 1)) {
@@ -122,10 +122,11 @@ export function getFamousParentNode(instance) {
 
   let [famousParent, key] = result;
   if (famousParent) {
-    if (isFunction(famousParent.getFamousNodeByKey)) {
-      return famousParent.getFamousNodeByKey(key);
+    if (isFunction(famousParent.getFamousKeyedNodes) && famousParent.getFamousKeyedNodes()) {
+      return famousParent.getFamousKeyedNodes()[key];
+    } else {
+      return famousParent.getFamousNode();
     }
-    return famousParent.getFamousNode();
   } else {
     return null;
   }

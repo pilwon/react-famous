@@ -1,5 +1,6 @@
 import RenderNode from 'famous/core/RenderNode';
 import GridLayout from 'famous/views/GridLayout';
+import toPlainObject from 'lodash/lang/toPlainObject';
 import React from 'react';
 import cloneWithProps from 'react/lib/cloneWithProps';
 
@@ -13,10 +14,6 @@ export default React.createClass({
     dimensions: React.PropTypes.array,
     gutterSize: React.PropTypes.array,
     transition: React.PropTypes.bool
-  },
-
-  getFamousNodeByKey(key) {
-    return this._famousNodes[key];
   },
 
   renderFamous() {
@@ -37,8 +34,10 @@ export default React.createClass({
       gridLayout = new GridLayout(options);
       this.setFamous(gridLayout);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(gridLayout));
-      this._famousNodes = props.children.map((child) => new RenderNode());
-      gridLayout.sequenceFrom(this._famousNodes);
+
+      let sequence = props.children.map(() => new RenderNode());
+      gridLayout.sequenceFrom(sequence);
+      this.setFamousKeyedNodes(toPlainObject(sequence));
     } else if (optionsChanged) {
       surface.setOptions(options);
     }

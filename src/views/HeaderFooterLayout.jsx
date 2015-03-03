@@ -16,10 +16,6 @@ let Component = React.createClass({
     headerSize: React.PropTypes.number
   },
 
-  getFamousNodeByKey(key) {
-    return this._famousNodes[key];
-  },
-
   renderFamous() {
     let children = this.props.children.map((child) => {
       switch (child.type) {
@@ -51,11 +47,11 @@ let Component = React.createClass({
       headerFooterlayout = new HeaderFooterLayout(options);
       this.setFamous(headerFooterlayout);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(headerFooterlayout));
-      this._famousNodes = {
+      this.setFamousKeyedNodes({
         content: headerFooterlayout.content,
         footer: headerFooterlayout.footer,
         header: headerFooterlayout.header
-      };
+      });
     } else if (optionsChanged) {
       surface.setOptions(options);
     }

@@ -1,5 +1,6 @@
 import RenderNode from 'famous/core/RenderNode';
 import Scrollview from 'famous/views/Scrollview';
+import toPlainObject from 'lodash/lang/toPlainObject';
 import React from 'react';
 import cloneWithProps from 'react/lib/cloneWithProps';
 
@@ -28,10 +29,6 @@ export default React.createClass({
     syncScale: React.PropTypes.number
   },
 
-  getFamousNodeByKey(key) {
-    return this._famousNodes[key];
-  },
-
   renderFamous() {
     return (
       <div data-famous="Scrollview">
@@ -50,8 +47,10 @@ export default React.createClass({
       scrollview = new Scrollview(options);
       this.setFamous(scrollview);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(scrollview));
-      this._famousNodes = props.children.map((child) => new RenderNode());
-      scrollview.sequenceFrom(this._famousNodes);
+
+      let sequence = props.children.map(() => new RenderNode());
+      scrollview.sequenceFrom(sequence);
+      this.setFamousKeyedNodes(toPlainObject(sequence));
     } else if (optionsChanged) {
       surface.setOptions(options);
     }

@@ -1,5 +1,6 @@
 import RenderNode from 'famous/core/RenderNode';
 import Deck from 'famous/views/Deck';
+import toPlainObject from 'lodash/lang/toPlainObject';
 import React from 'react';
 import cloneWithProps from 'react/lib/cloneWithProps';
 
@@ -18,14 +19,10 @@ export default React.createClass({
     return this.getFamous().toggle();
   },
 
-  getFamousNodeByKey(key) {
-    return this._famousNodes[key];
-  },
-
   renderFamous() {
     return (
       <div data-famous="Deck">
-        {this.props.children.map((child, key) => cloneWithProps(child, {key}))}
+        {this.props.children.map((child, idx) => cloneWithProps(child, {key: idx}))}
       </div>
     );
   },
@@ -40,8 +37,10 @@ export default React.createClass({
       deck = new Deck(options);
       this.setFamous(deck);
       this.setFamousNode(FamousUtil.getFamousParentNode(this).add(deck));
-      this._famousNodes = props.children.map((child) => new RenderNode());
-      deck.sequenceFrom(this._famousNodes);
+
+      let sequence = props.children.map(() => new RenderNode());
+      deck.sequenceFrom(sequence);
+      this.setFamousKeyedNodes(toPlainObject(sequence));
     } else if (optionsChanged) {
       deck.setOptions(options);
     }
