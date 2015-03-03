@@ -8,21 +8,29 @@ import FamousUtil from '../lib/FamousUtil';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  updateFamous(props) {
+  famousCreate(props) {
+    let options = FamousUtil.parseOptions(props);
+
+    let surface = new Surface(options);
+    this.setFamous(surface);
+    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(surface));
+
+    if (!isUndefined(props.children)) {
+      surface.setContent(FamousUtil.renderContent(props.children));
+    }
+  },
+
+  famousUpdate(props) {
     let surface = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);
 
-    if (!surface) {
-      surface = new Surface(options);
-      this.setFamous(surface);
-      this.setFamousNode(FamousUtil.getFamousParentNode(this).add(surface));
-    } else if (optionsChanged) {
+    if (optionsChanged) {
       surface.setOptions(options);
-    }
 
-    if (!isUndefined(props.children)) {
-      surface.setContent(FamousUtil.renderContent(props.children));
+      if (!isUndefined(props.children)) {
+        surface.setContent(FamousUtil.renderContent(props.children));
+      }
     }
   },
 

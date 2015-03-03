@@ -77,14 +77,10 @@ export function createPassDownComponent(name) {
   return React.createClass({
     mixins: [FamousMixin],
 
-    updateFamous(props) {
-      let renderNode = this.getFamous();
-
-      if (!renderNode) {
-        renderNode = new RenderNode();
-        this.setFamous(renderNode);
-        this.setFamousNode(getFamousParentNode(this).add(renderNode));
-      }
+    famousCreate(props) {
+      let renderNode = new RenderNode();
+      this.setFamous(renderNode);
+      this.setFamousNode(getFamousParentNode(this).add(renderNode));
     },
 
     render() {

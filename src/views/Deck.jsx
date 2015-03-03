@@ -15,24 +15,24 @@ export default React.createClass({
     stackRotation: React.PropTypes.number
   },
 
-  famousToggle() {
-    return this.getFamous().toggle();
+  famousCreate(props) {
+    let options = FamousUtil.parseOptions(props);
+
+    let deck = new Deck(options);
+    this.setFamous(deck);
+    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(deck));
+
+    let sequence = props.children.map(() => new RenderNode());
+    deck.sequenceFrom(sequence);
+    this.setFamousKeyedNodes(toPlainObject(sequence));
   },
 
-  updateFamous(props) {
+  famousUpdate(props) {
     let deck = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);
 
-    if (!deck) {
-      deck = new Deck(options);
-      this.setFamous(deck);
-      this.setFamousNode(FamousUtil.getFamousParentNode(this).add(deck));
-
-      let sequence = props.children.map(() => new RenderNode());
-      deck.sequenceFrom(sequence);
-      this.setFamousKeyedNodes(toPlainObject(sequence));
-    } else if (optionsChanged) {
+    if (optionsChanged) {
       deck.setOptions(options);
     }
   },

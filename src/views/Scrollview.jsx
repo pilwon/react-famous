@@ -29,21 +29,25 @@ export default React.createClass({
     syncScale: React.PropTypes.number
   },
 
-  updateFamous(props) {
+  famousCreate(props) {
+    let options = FamousUtil.parseOptions(props);
+
+    let scrollview = new Scrollview(options);
+    this.setFamous(scrollview);
+    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(scrollview));
+
+    let sequence = props.children.map(() => new RenderNode());
+    scrollview.sequenceFrom(sequence);
+    this.setFamousKeyedNodes(toPlainObject(sequence));
+  },
+
+  famousUpdate(props) {
     let scrollview = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);
 
-    if (!scrollview) {
-      scrollview = new Scrollview(options);
-      this.setFamous(scrollview);
-      this.setFamousNode(FamousUtil.getFamousParentNode(this).add(scrollview));
-
-      let sequence = props.children.map(() => new RenderNode());
-      scrollview.sequenceFrom(sequence);
-      this.setFamousKeyedNodes(toPlainObject(sequence));
-    } else if (optionsChanged) {
-      surface.setOptions(options);
+    if (optionsChanged) {
+      scrollview.setOptions(options);
     }
   },
 

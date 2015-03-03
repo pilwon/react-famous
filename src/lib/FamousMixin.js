@@ -11,18 +11,22 @@ export default {
   },
 
   componentDidMount() {
-    this.updateFamous(this.props);
+    if (isFunction(this.famousCreate)) {
+      this.famousCreate(this.props);
+    }
     this.setFamousReady(true);
     this.forceUpdate();
   },
 
   componentWillReceiveProps(nextProps) {
-    this.updateFamous(nextProps);
+    if (isFunction(this.famousUpdate)) {
+      this.famousUpdate(nextProps);
+    }
   },
 
   componentWillUnmount() {
-    if (isFunction(this.famousWillUnmount)) {
-      this.famousWillUnmount();
+    if (isFunction(this.famousDelete)) {
+      this.famousDelete();
     }
     this.releaseFamous();
   }

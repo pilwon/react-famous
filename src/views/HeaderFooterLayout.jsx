@@ -16,22 +16,26 @@ let Component = React.createClass({
     headerSize: React.PropTypes.number
   },
 
-  updateFamous(props) {
+  famousCreate(props) {
+    let options = FamousUtil.parseOptions(props);
+
+    let headerFooterlayout = new HeaderFooterLayout(options);
+    this.setFamous(headerFooterlayout);
+    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(headerFooterlayout));
+    this.setFamousKeyedNodes({
+      content: headerFooterlayout.content,
+      footer: headerFooterlayout.footer,
+      header: headerFooterlayout.header
+    });
+  },
+
+  famousUpdate(props) {
     let headerFooterlayout = this.getFamous();
     let options = FamousUtil.parseOptions(props);
     let optionsChanged = this.setFamousOptions(options);
 
-    if (!headerFooterlayout) {
-      headerFooterlayout = new HeaderFooterLayout(options);
-      this.setFamous(headerFooterlayout);
-      this.setFamousNode(FamousUtil.getFamousParentNode(this).add(headerFooterlayout));
-      this.setFamousKeyedNodes({
-        content: headerFooterlayout.content,
-        footer: headerFooterlayout.footer,
-        header: headerFooterlayout.header
-      });
-    } else if (optionsChanged) {
-      surface.setOptions(options);
+    if (optionsChanged) {
+      headerFooterlayout.setOptions(options);
     }
   },
 

@@ -12,18 +12,18 @@ export default React.createClass({
     perspective: React.PropTypes.number
   },
 
-  famousWillUnmount() {
+  famousCreate(props) {
+    let context = Engine.createContext(React.findDOMNode(this.refs.container));
+    this.setFamous(context);
+    this.setFamousNode(context);
+  },
+
+  famousDelete() {
     Engine.deregisterContext(this.getFamousNode());
   },
 
-  updateFamous(props) {
+  famousUpdate(props) {
     let context = this.getFamous();
-
-    if (!context) {
-      context = Engine.createContext(React.findDOMNode(this.refs.container));
-      this.setFamous(context);
-      this.setFamousNode(context);
-    }
 
     if (!isUndefined(props.perspective)) {
       this._famousContext.setPerspective(props.perspective);
