@@ -1,12 +1,9 @@
-import RenderNode from 'famous/core/RenderNode';
 import isFunction from 'lodash/lang/isFunction';
 import omit from 'lodash/object/omit';
 import values from 'lodash/object/values';
 import startsWith from 'lodash/string/startsWith';
 import React from 'react';
 import ReactInstanceMap from 'react/lib/ReactInstanceMap';
-
-import FamousMixin from './FamousMixin';
 
 function _buildTraversePath(fromAncestor, toDescendant) {
   if (fromAncestor === toDescendant) {
@@ -78,28 +75,6 @@ function _findNearestFamousAncestor(instance, searchedSubpath = []) {
   }
 }
 
-export function createPassDownComponent(name) {
-  return React.createClass({
-    mixins: [FamousMixin],
-
-    famousCreate(props) {
-      let renderNode = new RenderNode();
-      this.setFamous(renderNode);
-      this.setFamousNode(getFamousParentNode(this).add(renderNode));
-    },
-
-    render() {
-      if (!this.getFamousReady()) { return null; }
-
-      return (
-        <div data-famous={name}>
-          {this.props.children}
-        </div>
-      );
-    }
-  });
-}
-
 export function getOwner(instance) {
   let pointer = ReactInstanceMap.get(instance);
   let owner = null;
@@ -151,7 +126,6 @@ export function sanitizeProps(props) {
 }
 
 export default {
-  createPassDownComponent,
   getOwner,
   getFamousParentNode,
   parseOptions,

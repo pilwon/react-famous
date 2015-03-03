@@ -1,3 +1,4 @@
+import RenderNode from 'famous/core/RenderNode';
 import HeaderFooterLayout from 'famous/views/HeaderFooterLayout';
 import React from 'react';
 import cloneWithProps from 'react/lib/cloneWithProps';
@@ -64,8 +65,64 @@ let Component = React.createClass({
   }
 });
 
-Component.Content = FamousUtil.createPassDownComponent('HeaderFooterLayout.Content');
-Component.Footer = FamousUtil.createPassDownComponent('HeaderFooterLayout.Footer');
-Component.Header = FamousUtil.createPassDownComponent('HeaderFooterLayout.Header');
+Component.Content = React.createClass({
+  mixins: [FamousMixin],
+
+  famousCreate(props) {
+    let renderNode = new RenderNode();
+    this.setFamous(renderNode);
+    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(renderNode));
+  },
+
+  render() {
+    if (!this.getFamousReady()) { return null; }
+
+    return (
+      <div data-famous="HeaderFooterLayout.Content">
+        {this.props.children}
+      </div>
+    );
+  }
+});
+
+Component.Footer = React.createClass({
+  mixins: [FamousMixin],
+
+  famousCreate(props) {
+    let renderNode = new RenderNode();
+    this.setFamous(renderNode);
+    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(renderNode));
+  },
+
+  render() {
+    if (!this.getFamousReady()) { return null; }
+
+    return (
+      <div data-famous="HeaderFooterLayout.Footer">
+        {this.props.children}
+      </div>
+    );
+  }
+});
+
+Component.Header = React.createClass({
+  mixins: [FamousMixin],
+
+  famousCreate(props) {
+    let renderNode = new RenderNode();
+    this.setFamous(renderNode);
+    this.setFamousNode(FamousUtil.getFamousParentNode(this).add(renderNode));
+  },
+
+  render() {
+    if (!this.getFamousReady()) { return null; }
+
+    return (
+      <div data-famous="HeaderFooterLayout.Header">
+        {this.props.children}
+      </div>
+    );
+  }
+});
 
 export default Component;
