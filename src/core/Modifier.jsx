@@ -21,7 +21,24 @@ export default React.createClass({
     let optionsChanged = this.setFamousOptions(options);
 
     if (optionsChanged) {
-      surface.setOptions(options);
+      if (options.transform) {
+        modifier.setTransform(options.transform);
+      }
+      if (options.opacity !== undefined) {
+        modifier.setOpaicty(options.opacity);
+      }
+      if (options.origin) {
+        modifier.setOrigin(options.origin);
+      }
+      if (options.align) {
+        modifier.setAlign(options.align);
+      }
+      if (options.size) {
+        modifier.setSize(options.size);
+      }
+      if (options.proportions) {
+        modifier.setProportions(options.proportions);
+      }
     }
   },
 
