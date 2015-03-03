@@ -10,6 +10,7 @@ export default React.createClass({
 
   famousCreate(props) {
     let options = FamousUtil.parseOptions(props);
+    this.setFamousOptions(options);
 
     let surface = new Surface(options);
     this.setFamous(surface);

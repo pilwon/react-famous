@@ -31,6 +31,7 @@ export default React.createClass({
 
   famousCreate(props) {
     let options = FamousUtil.parseOptions(props);
+    this.setFamousOptions(options);
 
     let scrollview = new Scrollview(options);
     this.setFamous(scrollview);

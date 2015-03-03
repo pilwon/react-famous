@@ -18,6 +18,7 @@ let Component = React.createClass({
 
   famousCreate(props) {
     let options = FamousUtil.parseOptions(props);
+    this.setFamousOptions(options);
 
     let headerFooterlayout = new HeaderFooterLayout(options);
     this.setFamous(headerFooterlayout);

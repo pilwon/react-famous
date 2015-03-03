@@ -17,6 +17,7 @@ export default React.createClass({
 
   famousCreate(props) {
     let options = FamousUtil.parseOptions(props);
+    this.setFamousOptions(options);
 
     let sequentialLayout = new SequentialLayout(options);
     this.setFamous(sequentialLayout);

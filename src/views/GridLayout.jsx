@@ -18,6 +18,7 @@ export default React.createClass({
 
   famousCreate(props) {
     let options = FamousUtil.parseOptions(props);
+    this.setFamousOptions(options);
 
     let gridLayout = new GridLayout(options);
     this.setFamous(gridLayout);

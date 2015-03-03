@@ -9,6 +9,7 @@ export default React.createClass({
 
   famousCreate(props) {
     let options = FamousUtil.parseOptions(props);
+    this.setFamousOptions(options);
 
     let modifier = new Modifier(options);
     this.setFamous(modifier);
