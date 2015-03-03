@@ -9,25 +9,6 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  propTypes: {
-    direction: React.PropTypes.number,
-    drag: React.PropTypes.number,
-    friction: React.PropTypes.number,
-    edgeDamp: React.PropTypes.number,
-    edgeGrip: React.PropTypes.number,
-    edgePeriod: React.PropTypes.number,
-    groupScroll: React.PropTypes.bool,
-    margin: React.PropTypes.number,
-    pageDamp: React.PropTypes.number,
-    pagePeriod: React.PropTypes.number,
-    pageStopSpeed: React.PropTypes.number,
-    pageSwitchSpeed: React.PropTypes.number,
-    paginated: React.PropTypes.bool,
-    rails: React.PropTypes.bool,
-    speedLimit: React.PropTypes.number,
-    syncScale: React.PropTypes.number
-  },
-
   famousCreate() {
     let scrollview = new Scrollview(this.props.options);
     this.setFamous(scrollview);

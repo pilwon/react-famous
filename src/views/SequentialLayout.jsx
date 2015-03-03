@@ -9,11 +9,6 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  propTypes: {
-    direction: React.PropTypes.number,
-    itemSpacing: React.PropTypes.number
-  },
-
   famousCreate() {
     let sequentialLayout = new SequentialLayout(this.props.options);
     this.setFamous(sequentialLayout);

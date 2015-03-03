@@ -10,11 +10,6 @@ import FamousUtil from '../lib/FamousUtil';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  propTypes: {
-    transition: React.PropTypes.object,
-    stackRotation: React.PropTypes.number
-  },
-
   famousCreate() {
     let deck = new Deck(this.props.options);
     this.setFamous(deck);

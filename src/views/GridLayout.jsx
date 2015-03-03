@@ -9,12 +9,6 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  propTypes: {
-    dimensions: React.PropTypes.array,
-    gutterSize: React.PropTypes.array,
-    transition: React.PropTypes.bool
-  },
-
   famousCreate() {
     let gridLayout = new GridLayout(this.props.options);
     this.setFamous(gridLayout);

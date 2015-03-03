@@ -8,14 +8,6 @@ import FamousMixin from '../lib/FamousMixin';
 let Component = React.createClass({
   mixins: [FamousMixin],
 
-  propTypes: {
-    defaultFooterSize: React.PropTypes.number,
-    defaultHeaderSize: React.PropTypes.number,
-    direction: React.PropTypes.number,
-    footerSize: React.PropTypes.number,
-    headerSize: React.PropTypes.number
-  },
-
   famousCreate() {
     let headerFooterlayout = new HeaderFooterLayout(this.props.options);
     this.setFamous(headerFooterlayout);
