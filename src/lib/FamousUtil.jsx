@@ -38,6 +38,23 @@ function _buildTraversePath(fromAncestor, toDescendant) {
   return null;
 }
 
+function _findKeyFromNearestDescendant(traversePath, root) {
+  for (let i = 0; i < traversePath.length; ++i) {
+    if (traversePath[i] === root) {
+      for (let descendant of traversePath.slice(i + 1)) {
+        if (ReactInstanceMap.has(descendant)) {
+          descendant = ReactInstanceMap.get(descendant);
+        }
+        if (descendant._currentElement.key) {
+          return descendant._currentElement.key;
+        }
+      }
+      break;
+    }
+  }
+  return null;
+}
+
 function _findNearestFamousAncestor(instance, searchedSubpath = []) {
   let owner = getOwner(instance);
   if (!owner || owner === instance) {
@@ -51,20 +68,7 @@ function _findNearestFamousAncestor(instance, searchedSubpath = []) {
     let result = famousTraversePath.slice(-1)[0];
     let key = null;
     if (isFunction(result.getFamousKeyedNodes) && result.getFamousKeyedNodes()) {
-      for (let i = 0; i < traversePath.length; ++i) {
-        if (traversePath[i] === result) {
-          for (let descendant of traversePath.slice(i + 1)) {
-            if (ReactInstanceMap.has(descendant)) {
-              descendant = ReactInstanceMap.get(descendant);
-            }
-            if (descendant._currentElement.key) {
-              key = descendant._currentElement.key;
-              break;
-            }
-          }
-          break;
-        }
-      }
+      key = _findKeyFromNearestDescendant(traversePath, result);
     }
     return [result, key];
   } else {
