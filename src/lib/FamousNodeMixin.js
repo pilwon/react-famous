@@ -1,24 +1,30 @@
 import isEqual from 'lodash/lang/isEqual';
 
+const FAMOUS_KEY = Symbol('famous');
+const FAMOUS_KEYED_NODES_KEY = Symbol('famousKeyedNodes');
+const FAMOUS_NODE_KEY = Symbol('famousNode');
+const FAMOUS_OPTIONS_KEY = Symbol('famousOptions');
+const FAMOUS_READY_KEY = Symbol('famousReady');
+
 export default {
   getFamous() {
-    return this._famous;
+    return this[FAMOUS_KEY];
   },
 
   getFamousKeyedNodes() {
-    return this._famousKeyedNodes;
+    return this[FAMOUS_KEYED_NODES_KEY];
   },
 
   getFamousNode() {
-    return this._famousNode;
+    return this[FAMOUS_NODE_KEY];
   },
 
   getFamousOptions() {
-    return this._famousOptions;
+    return this[FAMOUS_OPTIONS_KEY];
   },
 
   getFamousReady() {
-    return this._famousReady;
+    return this[FAMOUS_READY_KEY];
   },
 
   isFamous() {
@@ -26,33 +32,34 @@ export default {
   },
 
   releaseFamous() {
-    delete this._famous;
-    delete this._famousKeyedNodes;
-    delete this._famousNode;
+    delete this[FAMOUS_KEY];
+    delete this[FAMOUS_KEYED_NODES_KEY];
+    delete this[FAMOUS_NODE_KEY];
+    delete this[FAMOUS_OPTIONS_KEY];
   },
 
   setFamous(famousInstance) {
-    this._famous = famousInstance;
+    this[FAMOUS_KEY] = famousInstance;
   },
 
   setFamousKeyedNodes(keyedNodes) {
-    this._famousKeyedNodes = keyedNodes;
+    this[FAMOUS_KEYED_NODES_KEY] = keyedNodes;
   },
 
   setFamousNode(famousNode) {
-    this._famousNode = famousNode;
+    this[FAMOUS_NODE_KEY] = famousNode;
   },
 
   setFamousOptions(options) {
     let changed = false;
-    if (!isEqual(options, this._famousOptions)) {
-      this._famousOptions = options;
+    if (!isEqual(options, this[FAMOUS_OPTIONS_KEY])) {
+      this[FAMOUS_OPTIONS_KEY] = options;
       changed = true;
     }
     return changed;
   },
 
   setFamousReady(ready) {
-    this._famousReady = ready;
+    this[FAMOUS_READY_KEY] = ready;
   }
 };
