@@ -27,7 +27,7 @@ export default React.createClass({
     let toggle = false;
     Engine.on('click', () => {
       let ratios = toggle ? INITIAL_RATIOS : FINAL_RATIOS;
-      this.refs.flexibleLayout.famous.setRatios(ratios, {
+      this.refs.flexibleLayout.getFamous().setRatios(ratios, {
         curve: 'easeOut',
         duration: 500
       });

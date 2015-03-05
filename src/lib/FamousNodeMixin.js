@@ -42,7 +42,6 @@ export default {
 
   setFamous(famousInstance) {
     this[FAMOUS_KEY] = famousInstance;
-    this.famous = famousInstance;
   },
 
   setFamousKeyedNodes(keyedNodes) {

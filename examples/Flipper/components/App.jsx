@@ -11,7 +11,7 @@ export default React.createClass({
     let toggle = false;
     Engine.on('click', () => {
       let angle = toggle ? 0 : Math.PI;
-      this.refs.flipper.famous.setAngle(angle, {
+      this.refs.flipper.getFamous().setAngle(angle, {
         curve: 'easeOutBounce',
         duration: 500
       });
