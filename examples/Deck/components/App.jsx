@@ -11,8 +11,10 @@ Transitionable.registerMethod('spring', SpringTransition);
 
 export default React.createClass({
   onSurfaceClick(eventKey) {
+    let deck = this.refs.deck.getFamous();
+
     console.log('Clicked surface #' + eventKey);
-    this.refs.deck.getFamous().toggle();
+    deck.toggle();
   },
 
   render() {

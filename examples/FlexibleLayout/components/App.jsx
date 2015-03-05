@@ -24,10 +24,12 @@ const FINAL_RATIOS = [4, true, 1, true, 0, true, 7, true];
 
 export default React.createClass({
   onReady() {
+    let flexibleLayout = this.refs.flexibleLayout.getFamous();
     let toggle = false;
+
     Engine.on('click', () => {
       let ratios = toggle ? INITIAL_RATIOS : FINAL_RATIOS;
-      this.refs.flexibleLayout.getFamous().setRatios(ratios, {
+      flexibleLayout.setRatios(ratios, {
         curve: 'easeOut',
         duration: 500
       });

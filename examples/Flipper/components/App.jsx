@@ -8,10 +8,12 @@ import Flipper from 'react-famous/views/Flipper';
 
 export default React.createClass({
   onReady() {
+    let flipper = this.refs.flipper.getFamous();
     let toggle = false;
+
     Engine.on('click', () => {
       let angle = toggle ? 0 : Math.PI;
-      this.refs.flipper.getFamous().setAngle(angle, {
+      flipper.setAngle(angle, {
         curve: 'easeOutBounce',
         duration: 500
       });
