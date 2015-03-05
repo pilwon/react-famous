@@ -34,7 +34,7 @@ export default React.createClass({
           Container surface is created, but scrollview is not being rendered since it currently draws asynchronously. (TODO)
         </Surface>
         <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
-          <ContainerSurface options={{properties: {border: '1px solid black', overflow: 'hidden'}, size: [400, 400]}}>
+          <ContainerSurface options={{properties: {border: '1px solid black', overflow: 'hidden'}, size: [300, 300]}}>
             <Scrollview>
               {surfaces}
             </Scrollview>
