@@ -5,16 +5,32 @@ var webpack = require('webpack');
 var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 
 function _getExamples() {
-  return fs.readdirSync(__dirname).filter(function (file) {
-    return fs.statSync(path.join(__dirname, file)).isDirectory();
-  });
+  return fs.readdirSync(__dirname)
+    .filter(function (groupDir) {
+      return fs.statSync(path.join(__dirname, groupDir)).isDirectory();
+    })
+    .reduce(function (result, groupDir) {
+      result = result.concat(
+        fs.readdirSync(path.join(__dirname, groupDir))
+          .filter(function (idDir) {
+            return fs.statSync(path.join(__dirname, groupDir, idDir)).isDirectory();
+          })
+          .map(function (idDir) {
+            return {
+              group: groupDir,
+              id: idDir
+            };
+          })
+      );
+      return result;
+    }, []);
 }
 
 module.exports = {
   debug: true,
   devtool: 'source-map',
-  entry: _getExamples().reduce(function (result, exampleId) {
-    result[exampleId] = path.join(__dirname, exampleId);
+  entry: _getExamples().reduce(function (result, example) {
+    result[example.group + '/' + example.id] = path.join(__dirname, example.group, example.id);
     return result;
   }, {}),
   module: {
