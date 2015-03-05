@@ -5,7 +5,7 @@ import Surface from 'react-famous/core/Surface';
 
 export default React.createClass({
   render() {
-    let surfaceOptions = {
+    let options = {
       size: [150, 100],
       properties: {
         backgroundColor: 'red',
@@ -18,7 +18,7 @@ export default React.createClass({
     return (
       <Context>
         <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
-          <Surface options={surfaceOptions}>
+          <Surface options={options}>
             Hello World
           </Surface>
         </Modifier>
