@@ -4,29 +4,26 @@ export default {
     Engine: require('./core/Engine'),
     Modifier: require('./core/Modifier'),
     RenderNode: require('./core/RenderNode'),
-    Surface: require('./core/Surface'),
-    Transform: require('./core/Transform')
+    Surface: require('./core/Surface')
   },
-  transitions: {
-    CachedMap: require('./transitions/CachedMap'),
-    Easing: require('./transitions/Easing'),
-    MultipleTransition: require('./transitions/MultipleTransition'),
-    SnapTransition: require('./transitions/SnapTransition'),
-    SpringTransition: require('./transitions/SpringTransition'),
-    Transitionable: require('./transitions/Transitionable'),
-    TransitionableTransform: require('./transitions/TransitionableTransform'),
-    TweenTransition: require('./transitions/TweenTransition'),
-    WallTransition: require('./transitions/WallTransition')
+  lib: {
+    FamousMixin: require('./lib/FamousMixin'),
+    FamousNodeMixin: require('./lib/FamousNodeMixin'),
+    FamousUtil: require('./lib/FamousUtil')
   },
-  utilities: {
-    KeyCodes: require('./utilities/KeyCodes'),
-    Timer: require('./utilities/Timer'),
-    Utility: require('./utilities/Utility')
+  surfaces: {
+    CanvasSurface: require('./surfaces/CanvasSurface'),
+    ContainerSurface: require('./surfaces/ContainerSurface'),
+    ImageSurface: require('./surfaces/ImageSurface')
   },
   views: {
     Deck: require('./views/Deck'),
+    EdgeSwapper: require('./views/EdgeSwapper'),
+    FlexibleLayout: require('./views/FlexibleLayout'),
+    Flipper: require('./views/Flipper'),
     GridLayout: require('./views/GridLayout'),
     HeaderFooterLayout: require('./views/HeaderFooterLayout'),
+    RenderController: require('./views/RenderController'),
     Scrollview: require('./views/Scrollview'),
     SequentialLayout: require('./views/SequentialLayout')
   }

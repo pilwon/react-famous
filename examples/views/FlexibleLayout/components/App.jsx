@@ -1,11 +1,11 @@
+import SpringTransition from 'famous/transitions/SpringTransition';
+import Transitionable from 'famous/transitions/Transitionable';
+import Timer from 'famous/utilities/Timer';
 import React from 'react';
 import Context from 'react-famous/core/Context';
 import Engine from 'react-famous/core/Engine';
 import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
-import SpringTransition from 'react-famous/transitions/SpringTransition';
-import Transitionable from 'react-famous/transitions/Transitionable';
-import Timer from 'react-famous/utilities/Timer';
 import FlexibleLayout from 'react-famous/views/FlexibleLayout';
 
 const COLORS = [

@@ -1,9 +1,8 @@
+import Transform from 'famous/core/Transform';
 import React from 'react';
-
 import Context from 'react-famous/core/Context';
 import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
-import Transform from 'react-famous/core/Transform';
 import HeaderFooterLayout from 'react-famous/views/HeaderFooterLayout';
 
 export default React.createClass({
