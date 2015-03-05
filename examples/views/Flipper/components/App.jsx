@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Context from 'react-famous/core/Context';
 import Engine from 'react-famous/core/Engine';
 import Modifier from 'react-famous/core/Modifier';

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Context from 'react-famous/core/Context';
 import Surface from 'react-famous/core/Surface';
 import Scrollview from 'react-famous/views/Scrollview';

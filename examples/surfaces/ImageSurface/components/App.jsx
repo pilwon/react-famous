@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Context from 'react-famous/core/Context';
 import Modifier from 'react-famous/core/Modifier';
 import ImageSurface from 'react-famous/surfaces/ImageSurface';
