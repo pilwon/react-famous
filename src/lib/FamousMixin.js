@@ -4,7 +4,6 @@ import React from 'react';
 import shallowEqual from 'react/lib/shallowEqual';
 
 import FamousNodeMixin from './FamousNodeMixin';
-import FamousUtil from './FamousUtil';
 
 export default {
   mixins: [FamousNodeMixin],
