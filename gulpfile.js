@@ -27,7 +27,7 @@ gulp.task('build-amd', 'Build for AMD.', function() {
   var gulpWrapAMD = require('gulp-wrap-amd');
 
   var publish = gulp
-    .src('publish/amd/**')
+    .src('tools/publish/amd/**')
     .pipe(gulp.dest('dist/amd'));
 
   var src = gulp
@@ -42,7 +42,7 @@ gulp.task('build-amd', 'Build for AMD.', function() {
 
 gulp.task('build-cjs', 'Build for CommonJS.', function () {
   var publish = gulp
-    .src('publish/cjs/**')
+    .src('tools/publish/cjs/**')
     .pipe(gulp.dest('dist/cjs'));
 
   var src = gulp
