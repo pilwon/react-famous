@@ -1,3 +1,4 @@
+import range from 'lodash/utility/range';
 import React from 'react';
 import Context from 'react-famous/core/Context';
 import Engine from 'react-famous/core/Engine';
@@ -25,10 +26,8 @@ export default React.createClass({
   },
 
   render() {
-    let surfaces = [];
-
-    for (let i = 0; i < 10; ++i) {
-      let surfaceOptions = {
+    let surfaces = range(10).map((i) => {
+      let options = {
         size: [200, 200],
         properties: {
           backgroundColor: 'hsl(' + (i * 360 / 10) + ', 100%, 50%)',
@@ -36,15 +35,12 @@ export default React.createClass({
           textAlign: 'center'
         }
       };
-
-      let surface = (
-        <Surface key={i} ref={`surface${i}`} options={surfaceOptions}>
+      return (
+        <Surface key={i} ref={`surface${i}`} options={options}>
           Surface: {i + 1}
         </Surface>
       );
-
-      surfaces.push(surface);
-    }
+    });
 
     return (
       <Context>

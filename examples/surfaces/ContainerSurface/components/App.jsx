@@ -1,3 +1,4 @@
+import range from 'lodash/utility/range';
 import React from 'react';
 import Context from 'react-famous/core/Context';
 import Modifier from 'react-famous/core/Modifier';
@@ -7,10 +8,8 @@ import Scrollview from 'react-famous/views/Scrollview';
 
 export default React.createClass({
   render() {
-    let surfaces = [];
-
-    for (let i = 0; i < 100; ++i) {
-      let surfaceOptions = {
+    let surfaces = range(100).map((i) => {
+      let options = {
         properties: {
           backgroundColor: 'rgba(255, 0, 0, 0.5)',
           color: 'white',
@@ -19,13 +18,12 @@ export default React.createClass({
         },
         size: [undefined, 50]
       };
-
-      surfaces.push(
-        <Surface key={i} options={surfaceOptions}>
+      return (
+        <Surface key={i} options={options}>
           I am surface: {i + 1}
         </Surface>
       );
-    }
+    });
 
     return (
       <Context>

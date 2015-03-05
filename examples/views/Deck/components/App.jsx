@@ -1,3 +1,4 @@
+import range from 'lodash/utility/range';
 import SpringTransition from 'famous/transitions/SpringTransition';
 import Transitionable from 'famous/transitions/Transitionable';
 import Timer from 'famous/utilities/Timer';
@@ -18,10 +19,8 @@ export default React.createClass({
   },
 
   render() {
-    let surfaces = [];
-
-    for (let i = 0; i < 5; ++i) {
-      let surfaceOptions = {
+    let surfaces = range(5).map((i) => {
+      let options = {
         properties: {
           backgroundColor: 'hsla(' + ((i * 5 + i) * 15 % 360) + ', 60%, 50%, 0.8)',
           color: 'white',
@@ -30,13 +29,12 @@ export default React.createClass({
         },
         size: [100, 200]
       };
-      let surface = (
-        <Surface eventKey={i} key={i} onClick={this.onSurfaceClick} options={surfaceOptions}>
+      return (
+        <Surface eventKey={i} key={i} onClick={this.onSurfaceClick} options={options}>
           {i}
         </Surface>
       );
-      surfaces.push(surface);
-    }
+    });
 
     let deckOptions = {
       itemSpacing: 10,

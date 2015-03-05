@@ -1,3 +1,4 @@
+import range from 'lodash/utility/range';
 import SpringTransition from 'famous/transitions/SpringTransition';
 import Transitionable from 'famous/transitions/Transitionable';
 import Timer from 'famous/utilities/Timer';
@@ -38,20 +39,17 @@ export default React.createClass({
   },
 
   render() {
-    let surfaces = [];
-
-    for (let i = 0; i <= 8; ++i) {
-      let surfaceOptions = {
+    let surfaces = range(COLORS.length - 1).map((i) => {
+      let options = {
         properties: {
           backgroundColor: COLORS[i - 1]
         },
         size: (i % 2 === 0) ? [10, undefined] : [undefined, undefined]
       };
-      let surface = (
-        <Surface key={i} options={surfaceOptions}/>
+      return (
+        <Surface key={i} options={options}/>
       );
-      surfaces.push(surface);
-    }
+    });
 
     return (
       <Context>
