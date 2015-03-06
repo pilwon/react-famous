@@ -41,6 +41,8 @@ export default React.createClass({
     onTouchStart: React.PropTypes.func
   },
 
+  famousName: 'Surface',
+
   famousCreate() {
     let surface = new Surface(this.props.options);
     this.setFamous(surface);
@@ -73,7 +75,7 @@ export default React.createClass({
     if (!this.getFamousReady()) { return null; }
 
     return (
-      <div data-famous="Surface">
+      <div data-famous={this.famousName}>
         {this.props.children}
       </div>
     );

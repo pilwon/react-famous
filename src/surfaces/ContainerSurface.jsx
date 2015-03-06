@@ -13,6 +13,8 @@ export default React.createClass({
     onClick: React.PropTypes.func
   },
 
+  famousName: 'ContainerSurface',
+
   famousCreate() {
     let containerSurface = new ContainerSurface(this.props.options);
     this.setFamous(containerSurface);
@@ -43,7 +45,7 @@ export default React.createClass({
     if (!this.getFamousReady()) { return null; }
 
     return (
-      <div data-famous="ContainerSurface">
+      <div data-famous={this.famousName}>
         {this.props.children}
       </div>
     );

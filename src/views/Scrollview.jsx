@@ -8,6 +8,8 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
+  famousName: 'Scrollview',
+
   famousCreate() {
     let scrollview = new Scrollview(this.props.options);
     this.setFamous(scrollview);
@@ -28,7 +30,7 @@ export default React.createClass({
     if (!this.getFamousReady()) { return null; }
 
     return (
-      <div data-famous="Scrollview">
+      <div data-famous={this.famousName}>
         {this.props.children.map((child, key) => React.cloneElement(child, {key}))}
       </div>
     );

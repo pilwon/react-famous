@@ -6,6 +6,8 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
+  famousName: 'Modifier',
+
   famousCreate() {
     let modifier = new Modifier(this.props.options);
     this.setFamous(modifier);
@@ -39,7 +41,7 @@ export default React.createClass({
     if (!this.getFamousReady()) { return null; }
 
     return (
-      <div data-famous="Modifier">
+      <div data-famous={this.famousName}>
         {this.props.children}
       </div>
     );

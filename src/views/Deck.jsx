@@ -8,6 +8,8 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
+  famousName: 'Deck',
+
   famousCreate() {
     let deck = new Deck(this.props.options);
     this.setFamous(deck);
@@ -28,7 +30,7 @@ export default React.createClass({
     if (!this.getFamousReady()) { return null; }
 
     return (
-      <div data-famous="Deck">
+      <div data-famous={this.famousName}>
         {this.props.children.map((child, idx) => React.cloneElement(child, {key: idx}))}
       </div>
     );

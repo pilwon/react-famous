@@ -8,6 +8,8 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
+  famousName: 'FlexibleLayout',
+
   famousCreate() {
     let flexibleLayout = new FlexibleLayout(this.props.options);
     this.setFamous(flexibleLayout);
@@ -28,7 +30,7 @@ export default React.createClass({
     if (!this.getFamousReady()) { return null; }
 
     return (
-      <div data-famous="FlexibleLayout">
+      <div data-famous={this.famousName}>
         {this.props.children.map((child, idx) => React.cloneElement(child, {key: idx}))}
       </div>
     );

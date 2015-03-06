@@ -7,6 +7,8 @@ import FamousMixin from '../lib/FamousMixin';
 let Component = React.createClass({
   mixins: [FamousMixin],
 
+  famousName: 'HeaderFooterLayout',
+
   famousCreate() {
     let headerFooterlayout = new HeaderFooterLayout(this.props.options);
     this.setFamous(headerFooterlayout);
@@ -41,7 +43,7 @@ let Component = React.createClass({
     });
 
     return (
-      <div data-famous="HeaderFooterLayout">
+      <div data-famous={this.famousName}>
         {children}
       </div>
     );
@@ -51,6 +53,8 @@ let Component = React.createClass({
 Component.Content = React.createClass({
   mixins: [FamousMixin],
 
+  famousName: 'HeaderFooterLayout.Content',
+
   famousCreate() {
     let renderNode = new RenderNode();
     this.setFamous(renderNode);
@@ -61,7 +65,7 @@ Component.Content = React.createClass({
     if (!this.getFamousReady()) { return null; }
 
     return (
-      <div data-famous="HeaderFooterLayout.Content">
+      <div data-famous={this.famousName}>
         {this.props.children}
       </div>
     );
@@ -71,6 +75,8 @@ Component.Content = React.createClass({
 Component.Footer = React.createClass({
   mixins: [FamousMixin],
 
+  famousName: 'HeaderFooterLayout.Footer',
+
   famousCreate() {
     let renderNode = new RenderNode();
     this.setFamous(renderNode);
@@ -81,7 +87,7 @@ Component.Footer = React.createClass({
     if (!this.getFamousReady()) { return null; }
 
     return (
-      <div data-famous="HeaderFooterLayout.Footer">
+      <div data-famous={this.famousName}>
         {this.props.children}
       </div>
     );
@@ -91,6 +97,8 @@ Component.Footer = React.createClass({
 Component.Header = React.createClass({
   mixins: [FamousMixin],
 
+  famousName: 'HeaderFooterLayout.Header',
+
   famousCreate() {
     let renderNode = new RenderNode();
     this.setFamous(renderNode);
@@ -101,7 +109,7 @@ Component.Header = React.createClass({
     if (!this.getFamousReady()) { return null; }
 
     return (
-      <div data-famous="HeaderFooterLayout.Header">
+      <div data-famous={this.famousName}>
         {this.props.children}
       </div>
     );

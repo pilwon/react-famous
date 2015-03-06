@@ -6,6 +6,8 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
+  famousName: 'RenderNode',
+
   famousCreate() {
     let renderNode = new RenderNode();
     this.setFamous(renderNode);
@@ -16,7 +18,7 @@ export default React.createClass({
     if (!this.getFamousReady()) { return null; }
 
     return (
-      <div data-famous="RenderNode">
+      <div data-famous={this.famousName}>
         {this.props.children}
       </div>
     );

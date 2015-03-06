@@ -8,6 +8,8 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
+  famousName: 'GridLayout',
+
   famousCreate() {
     let gridLayout = new GridLayout(this.props.options);
     this.setFamous(gridLayout);
@@ -28,7 +30,7 @@ export default React.createClass({
     if (!this.getFamousReady()) { return null; }
 
     return (
-      <div data-famous="GridLayout">
+      <div data-famous={this.famousName}>
         {this.props.children.map((child, key) => React.cloneElement(child, {key}))}
       </div>
     );

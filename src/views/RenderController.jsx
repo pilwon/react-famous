@@ -6,6 +6,8 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
+  famousName: 'RenderController',
+
   famousCreate() {
     let renderController = new RenderController(this.props.options);
     this.setFamous(renderController);
@@ -22,7 +24,7 @@ export default React.createClass({
     if (!this.getFamousReady()) { return null; }
 
     return (
-      <div data-famous="RenderController">
+      <div data-famous={this.famousName}>
         {this.props.children}
       </div>
     );

@@ -7,6 +7,8 @@ import FamousMixin from '../lib/FamousMixin';
 let Component = React.createClass({
   mixins: [FamousMixin],
 
+  famousName: 'Flipper',
+
   famousCreate() {
     let flipper = new Flipper(this.props.options);
     this.setFamous(flipper);
@@ -44,7 +46,7 @@ let Component = React.createClass({
     });
 
     return (
-      <div data-famous="Flipper">
+      <div data-famous={this.famousName}>
         {children}
       </div>
     );
@@ -54,6 +56,8 @@ let Component = React.createClass({
 Component.Back = React.createClass({
   mixins: [FamousMixin],
 
+  famousName: 'Flipper.Back',
+
   famousCreate() {
     let renderNode = new RenderNode();
     this.setFamous(renderNode);
@@ -64,7 +68,7 @@ Component.Back = React.createClass({
     if (!this.getFamousReady()) { return null; }
 
     return (
-      <div data-famous="Flipper.Back">
+      <div data-famous={this.famousName}>
         {this.props.children}
       </div>
     );
@@ -74,6 +78,8 @@ Component.Back = React.createClass({
 Component.Front = React.createClass({
   mixins: [FamousMixin],
 
+  famousName: 'Flipper.Front',
+
   famousCreate() {
     let renderNode = new RenderNode();
     this.setFamous(renderNode);
@@ -84,7 +90,7 @@ Component.Front = React.createClass({
     if (!this.getFamousReady()) { return null; }
 
     return (
-      <div data-famous="Flipper.Front">
+      <div data-famous={this.famousName}>
         {this.props.children}
       </div>
     );

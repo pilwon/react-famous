@@ -8,6 +8,8 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
+  famousName: 'SequentialLayout',
+
   famousCreate() {
     let sequentialLayout = new SequentialLayout(this.props.options);
     this.setFamous(sequentialLayout);
@@ -28,7 +30,7 @@ export default React.createClass({
     if (!this.getFamousReady()) { return null; }
 
     return (
-      <div data-famous="SequentialLayout">
+      <div data-famous={this.famousName}>
         {this.props.children.map((child, key) => React.cloneElement(child, {key}))}
       </div>
     );

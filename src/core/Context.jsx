@@ -12,6 +12,8 @@ export default React.createClass({
     perspective: React.PropTypes.number
   },
 
+  famousName: 'Context',
+
   famousCreate() {
     let context = Engine.createContext(React.findDOMNode(this.refs.container));
     this.setFamous(context);
@@ -32,7 +34,7 @@ export default React.createClass({
 
   render() {
     let context = (
-      <div data-famous="Context" style={{display: 'none'}}>
+      <div data-famous={this.famousName} style={{display: 'none'}}>
         {this.props.children}
       </div>
     );

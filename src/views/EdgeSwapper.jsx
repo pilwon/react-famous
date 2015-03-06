@@ -6,6 +6,8 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
+  famousName: 'EdgeSwapper',
+
   famousCreate() {
     let edgeSwapper = new EdgeSwapper(this.props.options);
     this.setFamous(edgeSwapper);
@@ -22,7 +24,7 @@ export default React.createClass({
     if (!this.getFamousReady()) { return null; }
 
     return (
-      <div data-famous="EdgeSwapper">
+      <div data-famous={this.famousName}>
         {this.props.children}
       </div>
     );
