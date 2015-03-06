@@ -1,3 +1,4 @@
+import range from 'lodash/utility/range';
 import RenderNode from 'famous/core/RenderNode';
 import FlexibleLayout from 'famous/views/FlexibleLayout';
 import toPlainObject from 'lodash/lang/toPlainObject';
@@ -17,7 +18,7 @@ export default React.createClass({
       this.setFamousNode(parentNode.add(flexibleLayout));
     }
 
-    let sequence = this.props.children.map(() => new RenderNode());
+    let sequence = range(this.props.children.length).map((idx) => this.refs[idx].getFamous());
     flexibleLayout.sequenceFrom(sequence);
     this.setFamousKeyedNodes(toPlainObject(sequence));
   },
@@ -29,11 +30,14 @@ export default React.createClass({
   },
 
   render() {
-    if (!this.getFamousReady()) { return null; }
+    let children = this.props.children.map((child, idx) => React.cloneElement(child, {
+      key: idx,
+      ref: idx
+    }));
 
     return (
       <div data-famous={this.famousName}>
-        {this.props.children.map((child, idx) => React.cloneElement(child, {key: idx}))}
+        {children}
       </div>
     );
   }

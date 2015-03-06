@@ -17,8 +17,7 @@ const COLORS = [
   'rgba(0, 255, 0, .7)',
   'rgba(0, 0, 255, .7)',
   'rgba(255, 0, 0, .7)',
-  'rgba(0, 255, 0, .7)',
-  'rgba(0, 0, 255, .7)'
+  'rgba(0, 255, 0, .7)'
 ];
 const INITIAL_RATIOS = [1, true, 1, true, 1, true, 1, true];
 const FINAL_RATIOS = [4, true, 1, true, 0, true, 7, true];
@@ -39,15 +38,15 @@ export default React.createClass({
   },
 
   render() {
-    let surfaces = range(COLORS.length - 1).map((i) => {
+    let surfaces = range(COLORS.length).map((idx) => {
       let options = {
         properties: {
-          backgroundColor: COLORS[i - 1]
+          backgroundColor: COLORS[idx]
         },
-        size: (i % 2 === 0) ? [10, undefined] : [undefined, undefined]
+        size: (idx % 2 === 0) ? [undefined, undefined] : [10, undefined]
       };
       return (
-        <Surface key={i} options={options}/>
+        <Surface key={idx} options={options}/>
       );
     });
 
