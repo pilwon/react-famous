@@ -1,5 +1,6 @@
 import isEqual from 'lodash/lang/isEqual';
 import isFunction from 'lodash/lang/isFunction';
+import isObject from 'lodash/lang/isObject';
 import React from 'react';
 import shallowEqual from 'react/lib/shallowEqual';
 
@@ -23,16 +24,27 @@ export default {
     this.setFamousReady(false);
   },
 
-  componentDidMount() {
-    if (isFunction(this.famousCreate)) {
-      this.famousCreate();
-    }
+  _famousNotifyReady() {
     this.setFamousReady(true);
     this.forceUpdate(() => {
       if (this.props.onReady) {
-        this.props.onReady();
+        this.props.onReady(this.props.eventKey);
       }
     });
+  },
+
+  componentDidMount() {
+    if (isFunction(this.famousCreate)) {
+      let parentNode = this.getFamousParentNode();
+      let result = this.famousCreate(parentNode);
+      if (isObject(result) && isFunction(result.then)) {
+        result.then(() => {
+          this._famousNotifyReady();
+        });
+      } else {
+        this._famousNotifyReady();
+      }
+    }
   },
 
   shouldComponentUpdate(nextProps, nextState) {
