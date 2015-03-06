@@ -93,9 +93,7 @@ export function getOwner(instance) {
 export function getFamousParentNode(instance) {
   let result = _findNearestFamousAncestor(instance);
 
-  if (!result) {
-    throw new Error('Missing Famous context.');
-  }
+  if (!result) { return null; }
 
   let [famousParent, key] = result;
   if (famousParent) {
