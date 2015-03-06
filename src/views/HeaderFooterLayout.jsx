@@ -9,10 +9,12 @@ let Component = React.createClass({
 
   famousName: 'HeaderFooterLayout',
 
-  famousCreate() {
+  famousCreate(parentNode) {
     let headerFooterlayout = new HeaderFooterLayout(this.props.options);
     this.setFamous(headerFooterlayout);
-    this.setFamousNode(this.getFamousParentNode().add(headerFooterlayout));
+    if (parentNode) {
+      this.setFamousNode(parentNode.add(headerFooterlayout));
+    }
     this.setFamousKeyedNodes({
       content: headerFooterlayout.content,
       footer: headerFooterlayout.footer,

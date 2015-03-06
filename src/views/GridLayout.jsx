@@ -10,10 +10,12 @@ export default React.createClass({
 
   famousName: 'GridLayout',
 
-  famousCreate() {
+  famousCreate(parentNode) {
     let gridLayout = new GridLayout(this.props.options);
     this.setFamous(gridLayout);
-    this.setFamousNode(this.getFamousParentNode().add(gridLayout));
+    if (parentNode) {
+      this.setFamousNode(parentNode.add(gridLayout));
+    }
 
     let sequence = this.props.children.map(() => new RenderNode());
     gridLayout.sequenceFrom(sequence);

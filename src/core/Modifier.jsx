@@ -8,10 +8,12 @@ export default React.createClass({
 
   famousName: 'Modifier',
 
-  famousCreate() {
+  famousCreate(parentNode) {
     let modifier = new Modifier(this.props.options);
     this.setFamous(modifier);
-    this.setFamousNode(this.getFamousParentNode().add(modifier));
+    if (parentNode) {
+      this.setFamousNode(parentNode.add(modifier));
+    }
   },
 
   famousUpdate(nextProps) {

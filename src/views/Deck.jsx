@@ -10,10 +10,12 @@ export default React.createClass({
 
   famousName: 'Deck',
 
-  famousCreate() {
+  famousCreate(parentNode) {
     let deck = new Deck(this.props.options);
     this.setFamous(deck);
-    this.setFamousNode(this.getFamousParentNode().add(deck));
+    if (parentNode) {
+      this.setFamousNode(parentNode.add(deck));
+    }
 
     let sequence = this.props.children.map(() => new RenderNode());
     deck.sequenceFrom(sequence);

@@ -9,10 +9,12 @@ let Component = React.createClass({
 
   famousName: 'Flipper',
 
-  famousCreate() {
+  famousCreate(parentNode) {
     let flipper = new Flipper(this.props.options);
     this.setFamous(flipper);
-    this.setFamousNode(this.getFamousParentNode().add(flipper));
+    if (parentNode) {
+      this.setFamousNode(parentNode.add(flipper));
+    }
 
     let backNode = new RenderNode();
     let frontNode = new RenderNode();

@@ -8,10 +8,12 @@ export default React.createClass({
 
   famousName: 'EdgeSwapper',
 
-  famousCreate() {
+  famousCreate(parentNode) {
     let edgeSwapper = new EdgeSwapper(this.props.options);
     this.setFamous(edgeSwapper);
-    this.setFamousNode(this.getFamousParentNode().add(edgeSwapper));
+    if (parentNode) {
+      this.setFamousNode(parentNode.add(edgeSwapper));
+    }
   },
 
   famousUpdate(nextProps) {

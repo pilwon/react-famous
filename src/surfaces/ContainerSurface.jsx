@@ -15,10 +15,12 @@ export default React.createClass({
 
   famousName: 'ContainerSurface',
 
-  famousCreate() {
+  famousCreate(parentNode) {
     let containerSurface = new ContainerSurface(this.props.options);
     this.setFamous(containerSurface);
-    this.setFamousNode(this.getFamousParentNode().add(containerSurface));
+    if (parentNode) {
+      this.setFamousNode(parentNode.add(containerSurface));
+    }
 
     if (this.props.onClick) {
       containerSurface.on('click', () => {

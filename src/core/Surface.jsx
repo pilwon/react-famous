@@ -43,10 +43,12 @@ export default React.createClass({
 
   famousName: 'Surface',
 
-  famousCreate() {
+  famousCreate(parentNode) {
     let surface = new Surface(this.props.options);
     this.setFamous(surface);
-    this.setFamousNode(this.getFamousParentNode().add(surface));
+    if (parentNode) {
+      this.setFamousNode(parentNode.add(surface));
+    }
 
     SURFACE_EVENTS.forEach((event) => {
       if (this.props[event.prop]) {

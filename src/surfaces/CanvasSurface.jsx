@@ -8,10 +8,12 @@ export default React.createClass({
 
   famousName: 'CanvasSurface',
 
-  famousCreate() {
+  famousCreate(parentNode) {
     let canvasSurface = new CanvasSurface(this.props.options);
     this.setFamous(canvasSurface);
-    this.setFamousNode(this.getFamousParentNode().add(canvasSurface));
+    if (parentNode) {
+      this.setFamousNode(parentNode.add(canvasSurface));
+    }
   },
 
   famousUpdate(nextProps) {

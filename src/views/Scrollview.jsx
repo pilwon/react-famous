@@ -10,10 +10,12 @@ export default React.createClass({
 
   famousName: 'Scrollview',
 
-  famousCreate() {
+  famousCreate(parentNode) {
     let scrollview = new Scrollview(this.props.options);
     this.setFamous(scrollview);
-    this.setFamousNode(this.getFamousParentNode().add(scrollview));
+    if (parentNode) {
+      this.setFamousNode(parentNode.add(scrollview));
+    }
 
     let sequence = this.props.children.map(() => new RenderNode());
     scrollview.sequenceFrom(sequence);

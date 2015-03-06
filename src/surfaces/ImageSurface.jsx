@@ -8,10 +8,12 @@ export default React.createClass({
 
   famousName: 'ImageSurface',
 
-  famousCreate() {
+  famousCreate(parentNode) {
     let imageSurface = new ImageSurface(this.props.options);
     this.setFamous(imageSurface);
-    this.setFamousNode(this.getFamousParentNode().add(imageSurface));
+    if (parentNode) {
+      this.setFamousNode(parentNode.add(imageSurface));
+    }
   },
 
   famousUpdate(nextProps) {

@@ -8,10 +8,12 @@ export default React.createClass({
 
   famousName: 'RenderNode',
 
-  famousCreate() {
+  famousCreate(parentNode) {
     let renderNode = new RenderNode();
     this.setFamous(renderNode);
-    this.setFamousNode(this.getFamousParentNode().add(renderNode));
+    if (parentNode) {
+      this.setFamousNode(parentNode.add(renderNode));
+    }
   },
 
   render() {

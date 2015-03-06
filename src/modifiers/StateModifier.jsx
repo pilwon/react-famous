@@ -8,10 +8,12 @@ export default React.createClass({
 
   famousName: 'StateModifier',
 
-  famousCreate() {
+  famousCreate(parentNode) {
     let stateModifier = new StateModifier(this.props.options);
     this.setFamous(stateModifier);
-    this.setFamousNode(this.getFamousParentNode().add(stateModifier));
+    if (parentNode) {
+      this.setFamousNode(parentNode.add(stateModifier));
+    }
   },
 
   famousUpdate(nextProps) {

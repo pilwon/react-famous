@@ -8,10 +8,12 @@ export default React.createClass({
 
   famousName: 'RenderController',
 
-  famousCreate() {
+  famousCreate(parentNode) {
     let renderController = new RenderController(this.props.options);
     this.setFamous(renderController);
-    this.setFamousNode(this.getFamousParentNode().add(renderController));
+    if (parentNode) {
+      this.setFamousNode(parentNode.add(renderController));
+    }
   },
 
   famousUpdate(nextProps) {

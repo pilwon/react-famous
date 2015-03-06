@@ -10,10 +10,12 @@ export default React.createClass({
 
   famousName: 'FlexibleLayout',
 
-  famousCreate() {
+  famousCreate(parentNode) {
     let flexibleLayout = new FlexibleLayout(this.props.options);
     this.setFamous(flexibleLayout);
-    this.setFamousNode(this.getFamousParentNode().add(flexibleLayout));
+    if (parentNode) {
+      this.setFamousNode(parentNode.add(flexibleLayout));
+    }
 
     let sequence = this.props.children.map(() => new RenderNode());
     flexibleLayout.sequenceFrom(sequence);

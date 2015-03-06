@@ -10,10 +10,12 @@ export default React.createClass({
 
   famousName: 'SequentialLayout',
 
-  famousCreate() {
+  famousCreate(parentNode) {
     let sequentialLayout = new SequentialLayout(this.props.options);
     this.setFamous(sequentialLayout);
-    this.setFamousNode(this.getFamousParentNode().add(sequentialLayout));
+    if (parentNode) {
+      this.setFamousNode(parentNode.add(sequentialLayout));
+    }
 
     let sequence = this.props.children.map(() => new RenderNode());
     sequentialLayout.sequenceFrom(sequence);
