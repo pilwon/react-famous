@@ -2,10 +2,10 @@ import isEqual from 'lodash/lang/isEqual';
 
 import FamousUtil from './FamousUtil';
 
-const FAMOUS_KEY = '_famous';
-const FAMOUS_KEYED_NODES_KEY = '_famousKeyedNodes';
-const FAMOUS_NODE_KEY = '_famousNode';
-const FAMOUS_READY_KEY = '_famousReady';
+const FAMOUS_KEY = '__famous__';
+const FAMOUS_KEYED_NODES_KEY = '__famousKeyedNodes__';
+const FAMOUS_NODE_KEY = '__famousNode__';
+const FAMOUS_READY_KEY = '__famousReady__';
 
 export default {
   getFamous() {
