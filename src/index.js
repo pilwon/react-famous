@@ -14,7 +14,10 @@ export default {
   surfaces: {
     CanvasSurface: require('./surfaces/CanvasSurface'),
     ContainerSurface: require('./surfaces/ContainerSurface'),
-    ImageSurface: require('./surfaces/ImageSurface')
+    FormContainerSurface: require('./surfaces/FormContainerSurface'),
+    ImageSurface: require('./surfaces/ImageSurface'),
+    InputSurface: require('./surfaces/InputSurface'),
+    SubmitInputSurface: require('./surfaces/SubmitInputSurface')
   },
   views: {
     Deck: require('./views/Deck'),
