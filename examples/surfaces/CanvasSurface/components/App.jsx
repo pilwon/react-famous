@@ -7,7 +7,7 @@ import CanvasSurface from 'react-famous/surfaces/CanvasSurface';
 let CANVAS_SIZE = [400, 400];
 
 export default React.createClass({
-  onReady() {
+  componentDidMount() {
     let canvas = this.refs.canvas.getFamous();
     let ctx = canvas.getContext('2d');
 
@@ -25,7 +25,7 @@ export default React.createClass({
           Shapes are drawn on a canvas surface.
         </Surface>
         <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5], size: CANVAS_SIZE}}>
-          <CanvasSurface ref="canvas" options={{canvasSize: CANVAS_SIZE}} onReady={this.onReady}/>
+          <CanvasSurface ref="canvas" options={{canvasSize: CANVAS_SIZE}}/>
         </Modifier>
       </Context>
     );

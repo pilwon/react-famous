@@ -1,6 +1,5 @@
 import RenderNode from 'famous/core/RenderNode';
 import Deck from 'famous/views/Deck';
-import toPlainObject from 'lodash/lang/toPlainObject';
 import React from 'react';
 
 import FamousMixin from '../lib/FamousMixin';
@@ -8,18 +7,21 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  famousName: 'Deck',
+  famousCreate() {
+    return new Deck(this.props.options);
+  },
 
-  famousCreate(parentNode) {
-    let deck = new Deck(this.props.options);
-    this.setFamous(deck);
-    if (parentNode) {
-      this.setFamousNode(parentNode.add(deck));
-    }
-
-    let sequence = this.props.children.map(() => new RenderNode());
+  famousCreateNode(parentNode) {
+    let deck = this.getFamous();
+    let result = [];
+    let sequence = this.getFamousChildrenRef().map((child, idx) => {
+      let renderNode = new RenderNode();
+      result.push([child, renderNode]);
+      return renderNode;
+    });
+    parentNode.add(deck);
     deck.sequenceFrom(sequence);
-    this.setFamousKeyedNodes(toPlainObject(sequence));
+    return result;
   },
 
   famousUpdate(nextProps) {
@@ -29,11 +31,9 @@ export default React.createClass({
   },
 
   render() {
-    if (!this.getFamousReady()) { return null; }
-
     return (
-      <div data-famous={this.famousName}>
-        {this.props.children.map((child, idx) => React.cloneElement(child, {key: idx}))}
+      <div data-famous="Deck">
+        {this.getFamousChildren()}
       </div>
     );
   }

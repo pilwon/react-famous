@@ -3,15 +3,15 @@ import Transform from 'famous/core/Transform';
 import Easing from 'famous/transitions/Easing';
 import TweenTransition from 'famous/transitions/TweenTransition';
 import React from 'react';
-import StateModifier from 'react-famous/modifiers/StateModifier';
 import Surface from 'react-famous/core/Surface';
+import StateModifier from 'react-famous/modifiers/StateModifier';
 
 const EASING_NAMES = Object.keys(Easing);
 
 EASING_NAMES.forEach((name) => TweenTransition.registerCurve(name, Easing[name]));
 
 export default React.createClass({
-  onReady() {
+  componentDidMount() {
     let stateModifier = this.refs.stateModifier.getFamous();
 
     function rotate() {
@@ -40,7 +40,7 @@ export default React.createClass({
     };
 
     return (
-      <StateModifier ref="stateModifier" onReady={this.onReady}>
+      <StateModifier ref="stateModifier">
         <Surface options={options}>
           Crazy
         </Surface>

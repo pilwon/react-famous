@@ -6,14 +6,14 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  famousName: 'StateModifier',
+  famousCreate() {
+    return new StateModifier(this.props.options);
+  },
 
-  famousCreate(parentNode) {
-    let stateModifier = new StateModifier(this.props.options);
-    this.setFamous(stateModifier);
-    if (parentNode) {
-      this.setFamousNode(parentNode.add(stateModifier));
-    }
+  famousCreateNode(parentNode) {
+    let stateModifier = this.getFamous();
+    let node = parentNode.add(stateModifier);
+    return this.getFamousChildrenRef().map((child, idx) => [child, node]);
   },
 
   famousUpdate(nextProps) {
@@ -40,11 +40,9 @@ export default React.createClass({
   },
 
   render() {
-    if (!this.getFamousReady()) { return null; }
-
     return (
-      <div data-famous={this.famousName}>
-        {this.props.children}
+      <div data-famous="StateModifier">
+        {this.getFamousChildren()}
       </div>
     );
   }

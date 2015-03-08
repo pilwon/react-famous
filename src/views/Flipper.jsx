@@ -7,24 +7,21 @@ import FamousMixin from '../lib/FamousMixin';
 let Component = React.createClass({
   mixins: [FamousMixin],
 
-  famousName: 'Flipper',
+  famousCreate() {
+    return new Flipper(this.props.options);
+  },
 
-  famousCreate(parentNode) {
-    let flipper = new Flipper(this.props.options);
-    this.setFamous(flipper);
-    if (parentNode) {
-      this.setFamousNode(parentNode.add(flipper));
-    }
-
-    let backNode = new RenderNode();
-    let frontNode = new RenderNode();
-    flipper.setBack(backNode);
-    flipper.setFront(frontNode);
-
-    this.setFamousKeyedNodes({
-      back: backNode,
-      front: frontNode
-    });
+  famousCreateNode(parentNode) {
+    let flipper = this.getFamous();
+    let backRenderNode = new RenderNode();
+    let frontRenderNode = new RenderNode();
+    parentNode.add(flipper);
+    flipper.setBack(backRenderNode);
+    flipper.setFront(frontRenderNode);
+    return [
+      [this.refs.back, backRenderNode],
+      [this.refs.front, frontRenderNode]
+    ];
   },
 
   famousUpdate(nextProps) {
@@ -34,21 +31,23 @@ let Component = React.createClass({
   },
 
   render() {
-    if (!this.getFamousReady()) { return null; }
+    let children = [];
 
-    let children = this.props.children.map((child) => {
+    React.Children.forEach(this.props.children, (child) => {
       switch (child.type) {
         case Component.Back:
-          return React.cloneElement(child, {key: 'back'});
+          children.push(this.createFamousWrapper(child, {key: 'back', ref: 'back'}));
+          break;
         case Component.Front:
-          return React.cloneElement(child, {key: 'front'});
+          children.push(this.createFamousWrapper(child, {key: 'front', ref: 'front'}));
+          break;
         default:
-          return null;
+          break;
       }
     });
 
     return (
-      <div data-famous={this.famousName}>
+      <div data-famous="Flipper">
         {children}
       </div>
     );
@@ -58,20 +57,20 @@ let Component = React.createClass({
 Component.Back = React.createClass({
   mixins: [FamousMixin],
 
-  famousName: 'Flipper.Back',
-
   famousCreate() {
-    let renderNode = new RenderNode();
-    this.setFamous(renderNode);
-    this.setFamousNode(this.getFamousParentNode().add(renderNode));
+    return new RenderNode();
+  },
+
+  famousCreateNode(parentNode) {
+    let renderNode = this.getFamous();
+    let node = parentNode.add(renderNode);
+    return this.getFamousChildrenRef().map((child, idx) => [child, node]);
   },
 
   render() {
-    if (!this.getFamousReady()) { return null; }
-
     return (
-      <div data-famous={this.famousName}>
-        {this.props.children}
+      <div data-famous="Flipper.Back">
+        {this.getFamousChildren()}
       </div>
     );
   }
@@ -80,20 +79,20 @@ Component.Back = React.createClass({
 Component.Front = React.createClass({
   mixins: [FamousMixin],
 
-  famousName: 'Flipper.Front',
-
   famousCreate() {
-    let renderNode = new RenderNode();
-    this.setFamous(renderNode);
-    this.setFamousNode(this.getFamousParentNode().add(renderNode));
+    return new RenderNode();
+  },
+
+  famousCreateNode(parentNode) {
+    let renderNode = this.getFamous();
+    let node = parentNode.add(renderNode);
+    return this.getFamousChildrenRef().map((child, idx) => [child, node]);
   },
 
   render() {
-    if (!this.getFamousReady()) { return null; }
-
     return (
-      <div data-famous={this.famousName}>
-        {this.props.children}
+      <div data-famous="Flipper.Front">
+        {this.getFamousChildren()}
       </div>
     );
   }

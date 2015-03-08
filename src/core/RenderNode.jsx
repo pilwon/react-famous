@@ -6,22 +6,20 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  famousName: 'RenderNode',
+  famousCreate() {
+    return new RenderNode();
+  },
 
-  famousCreate(parentNode) {
-    let renderNode = new RenderNode();
-    this.setFamous(renderNode);
-    if (parentNode) {
-      this.setFamousNode(parentNode.add(renderNode));
-    }
+  famousCreateNode(parentNode) {
+    let renderNode = this.getFamous();
+    let node = parentNode.add(renderNode);
+    return this.getFamousChildrenRef().map((child, idx) => [child, node]);
   },
 
   render() {
-    if (!this.getFamousReady()) { return null; }
-
     return (
-      <div data-famous={this.famousName}>
-        {this.props.children}
+      <div data-famous="RenderNode">
+        {this.getFamousChildren()}
       </div>
     );
   }

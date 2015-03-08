@@ -1,7 +1,4 @@
 import range from 'lodash/utility/range';
-import SpringTransition from 'famous/transitions/SpringTransition';
-import Transitionable from 'famous/transitions/Transitionable';
-import Timer from 'famous/utilities/Timer';
 import React from 'react';
 import Context from 'react-famous/core/Context';
 import Engine from 'react-famous/core/Engine';
@@ -23,7 +20,7 @@ const INITIAL_RATIOS = [1, true, 1, true, 1, true, 1, true];
 const FINAL_RATIOS = [4, true, 1, true, 0, true, 7, true];
 
 export default React.createClass({
-  onReady() {
+  componentDidMount() {
     let flexibleLayout = this.refs.flexibleLayout.getFamous();
     let toggle = false;
 
@@ -53,7 +50,7 @@ export default React.createClass({
     return (
       <Context>
         <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
-          <FlexibleLayout ref="flexibleLayout" options={{ratios: INITIAL_RATIOS}} onReady={this.onReady}>
+          <FlexibleLayout ref="flexibleLayout" options={{ratios: INITIAL_RATIOS}}>
             {surfaces}
           </FlexibleLayout>
         </Modifier>

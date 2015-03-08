@@ -1,7 +1,5 @@
 import isFunction from 'lodash/lang/isFunction';
-import omit from 'lodash/object/omit';
 import values from 'lodash/object/values';
-import startsWith from 'lodash/string/startsWith';
 import React from 'react';
 import ReactInstanceMap from 'react/lib/ReactInstanceMap';
 
@@ -9,24 +7,20 @@ function _buildTraversePath(fromAncestor, toDescendant) {
   if (fromAncestor === toDescendant) {
     return [fromAncestor];
   }
-  let instance;
-  if (ReactInstanceMap.has(fromAncestor)) {
-    instance = ReactInstanceMap.get(fromAncestor);
-  } else {
-    instance = fromAncestor;
-  }
-  if (instance._renderedComponent) {
+  let component;
+  fromAncestor = getInstance(fromAncestor);
+  if (component._renderedComponent) {
     let traversePath;
-    if (isFunction(instance._renderedComponent.getPublicInstance)) {
-      traversePath = _buildTraversePath(instance._renderedComponent.getPublicInstance(), toDescendant);
+    if (isFunction(component._renderedComponent.getPublicInstance)) {
+      traversePath = _buildTraversePath(component._renderedComponent.getPublicInstance(), toDescendant);
     } else {
-      traversePath = _buildTraversePath(instance._renderedComponent, toDescendant);
+      traversePath = _buildTraversePath(component._renderedComponent, toDescendant);
     }
     if (traversePath) {
       return [fromAncestor].concat(traversePath);
     }
-  } else if (instance._renderedChildren) {
-    let children = values(instance._renderedChildren);
+  } else if (component._renderedChildren) {
+    let children = values(component._renderedChildren);
     for (let i = 0; i < children.length; ++i) {
       let child = children[i];
       let traversePath = _buildTraversePath(child.getPublicInstance(), toDescendant);
@@ -44,9 +38,7 @@ function _findKeyFromNearestDescendant(traversePath, root) {
       let descendants = traversePath.slice(i + 1);
       for (let j = 0; j < descendants.length; ++j) {
         let descendant = descendants[j];
-        if (ReactInstanceMap.has(descendant)) {
-          descendant = ReactInstanceMap.get(descendant);
-        }
+        descendant = getInstance(descendant);
         if (descendant._currentElement.key) {
           return descendant._currentElement.key;
         }
@@ -57,54 +49,60 @@ function _findKeyFromNearestDescendant(traversePath, root) {
   return null;
 }
 
-function _findNearestFamousAncestor(instance, searchedSubpath = []) {
-  let owner = getOwner(instance);
-  if (!owner || owner === instance) {
+function _findNearestFamousAncestor(component, searchedSubpath = []) {
+  let owner = getOwner(component);
+  if (!owner || owner === component) {
     return null;
   }
-  let traversePath = _buildTraversePath(owner, instance).concat(searchedSubpath);
-  let famousTraversePath = traversePath.slice(0, -1).filter((instance) => {
-    return isFunction(instance.isFamous) && instance.isFamous();
+  let traversePath = _buildTraversePath(owner, component).concat(searchedSubpath);
+  let famousTraversePath = traversePath.slice(0, -1).filter((component) => {
+    return isFunction(component.isFamous) && component.isFamous();
   });
   if (famousTraversePath.length) {
-    let result = famousTraversePath.slice(-1)[0];
-    let key = null;
-    if (isFunction(result.getFamousKeyedNodes) && result.getFamousKeyedNodes()) {
-      key = _findKeyFromNearestDescendant(traversePath, result);
-    }
-    return [result, key];
+    return famousTraversePath.slice(-1)[0];
   } else {
     let searchedSubpath = traversePath.slice(1);
     return _findNearestFamousAncestor(owner, searchedSubpath);
   }
 }
 
-export function getOwner(instance) {
-  let pointer = ReactInstanceMap.get(instance);
+export function getFamousChildren(component) {
+  if (component._renderedComponent &&
+      isFunction(component._renderedComponent.getPublicInstance)) {
+    return [component._renderedComponent.getPublicInstance()];
+  }
+  let instance = component;
+  while (instance._renderedComponent && !instance._renderedChildren) {
+    instance = instance._renderedComponent;
+  }
+  if (instance._renderedChildren) {
+    return values(instance._renderedChildren).map((child) => {
+      return child.getPublicInstance();
+    });
+  }
+  return [];
+}
+
+export function getFamousParent(component) {
+  return _findNearestFamousAncestor(component);
+}
+
+export function getInstance(component) {
+  if (ReactInstanceMap.has(component)) {
+    return ReactInstanceMap.get(component);
+  }
+  return component;
+}
+
+export function getOwner(component) {
+  let pointer = getInstance(component);
   let owner = null;
   do {
     pointer = pointer._currentElement._owner;
     if (!pointer) { break; }
     owner = pointer._renderedComponent.getPublicInstance();
-  } while (owner === instance);
+  } while (owner === component);
   return owner;
-}
-
-export function getFamousParentNode(instance) {
-  let result = _findNearestFamousAncestor(instance);
-
-  if (!result) { return null; }
-
-  let [famousParent, key] = result;
-  if (famousParent) {
-    if (isFunction(famousParent.getFamousKeyedNodes) && famousParent.getFamousKeyedNodes()) {
-      return famousParent.getFamousKeyedNodes()[key];
-    } else {
-      return famousParent.getFamousNode();
-    }
-  } else {
-    return null;
-  }
 }
 
 export function renderContent(obj) {
@@ -120,7 +118,9 @@ export function renderContent(obj) {
 }
 
 export default {
+  getFamousChildren,
+  getFamousParent,
+  getInstance,
   getOwner,
-  getFamousParentNode,
   renderContent
 };

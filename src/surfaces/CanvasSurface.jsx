@@ -6,14 +6,13 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  famousName: 'CanvasSurface',
+  famousCreate() {
+    return new CanvasSurface(this.props.options);
+  },
 
-  famousCreate(parentNode) {
-    let canvasSurface = new CanvasSurface(this.props.options);
-    this.setFamous(canvasSurface);
-    if (parentNode) {
-      this.setFamousNode(parentNode.add(canvasSurface));
-    }
+  famousCreateNode(parentNode) {
+    let surface = this.getFamous();
+    parentNode.add(surface);
   },
 
   famousUpdate(nextProps) {
@@ -23,10 +22,8 @@ export default React.createClass({
   },
 
   render() {
-    if (!this.getFamousReady()) { return null; }
-
     return (
-      <div data-famous={this.famousName}/>
+      <div data-famous="CanvasSurface"/>
     );
   }
 });

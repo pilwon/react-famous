@@ -5,7 +5,7 @@ import Surface from 'react-famous/core/Surface';
 import EdgeSwapper from 'react-famous/views/EdgeSwapper';
 
 export default React.createClass({
-  onReady() {
+  componentDidMount() {
     let edgeSwapper = this.refs.edgeSwapper.getFamous();
     let primary = this.refs.primary.getFamous();
     let secondary = this.refs.secondary.getFamous();
@@ -46,7 +46,7 @@ export default React.createClass({
 
     return (
       <Context>
-        <EdgeSwapper ref="edgeSwapper" onReady={this.onReady}>
+        <EdgeSwapper ref="edgeSwapper">
           <Surface ref="primary" options={primaryOptions}>
             Primary
           </Surface>

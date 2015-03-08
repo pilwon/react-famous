@@ -1,3 +1,4 @@
+import RenderNode from 'famous/core/RenderNode';
 import RenderController from 'famous/views/RenderController';
 import React from 'react';
 
@@ -6,14 +7,14 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  famousName: 'RenderController',
+  famousCreate() {
+    return new RenderController(this.props.options);
+  },
 
-  famousCreate(parentNode) {
-    let renderController = new RenderController(this.props.options);
-    this.setFamous(renderController);
-    if (parentNode) {
-      this.setFamousNode(parentNode.add(renderController));
-    }
+  famousCreateNode(parentNode) {
+    let renderController = this.getFamous();
+    parentNode.add(renderController);
+    return this.getFamousChildrenRef().map((child, idx) => [child, new RenderNode()]);
   },
 
   famousUpdate(nextProps) {
@@ -23,11 +24,9 @@ export default React.createClass({
   },
 
   render() {
-    if (!this.getFamousReady()) { return null; }
-
     return (
-      <div data-famous={this.famousName}>
-        {this.props.children}
+      <div data-famous="RenderController">
+        {this.getFamousChildren()}
       </div>
     );
   }

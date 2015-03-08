@@ -10,16 +10,16 @@ export default React.createClass({
     };
   },
 
-  onReady() {
+  componentWillUnmount() {
+    clearInterval(this._intervalId);
+  },
+
+  componentDidMount() {
     this._intervalId = setInterval(() => {
       this.setState((state) => ({
         count: state.count + 1
       }));
     }, 100);
-  },
-
-  componentWillUnmount() {
-    clearInterval(this._intervalId);
   },
 
   _textCharUpper(text, position) {
@@ -40,7 +40,7 @@ export default React.createClass({
     return (
       <Context>
         <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
-          <Surface options={{size: [150, 100], properties}} onReady={this.onReady}>
+          <Surface options={{size: [150, 100], properties}}>
             {text}
           </Surface>
         </Modifier>

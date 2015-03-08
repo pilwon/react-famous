@@ -28,7 +28,7 @@ export default React.createClass({
     return (
       <Context>
         <Surface options={{properties: {lineHeight: '100px', textAlign: 'center'}, size: [undefined, 100]}}>
-          Container surface is created, but scrollview is not being rendered since it currently draws asynchronously.
+          Container surface is created, but scrollview is not successfully rendered inside the box. (WIP)
         </Surface>
         <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
           <ContainerSurface options={{properties: {border: '1px solid black', overflow: 'hidden'}, size: [300, 300]}}>

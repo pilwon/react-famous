@@ -4,7 +4,7 @@ import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
 
 export default React.createClass({
-  onReady() {
+  componentDidMount() {
     let modifier = this.refs.modifier.getFamous();
     let angle = 0;
 
@@ -26,7 +26,7 @@ export default React.createClass({
     };
 
     return (
-      <Modifier ref="modifier" onReady={this.onReady}>
+      <Modifier ref="modifier">
         <Surface options={options}>
           Rotating
         </Surface>

@@ -1,3 +1,4 @@
+import RenderNode from 'famous/core/RenderNode';
 import EdgeSwapper from 'famous/views/EdgeSwapper';
 import React from 'react';
 
@@ -6,14 +7,14 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  famousName: 'EdgeSwapper',
+  famousCreate() {
+    return new EdgeSwapper(this.props.options);
+  },
 
-  famousCreate(parentNode) {
-    let edgeSwapper = new EdgeSwapper(this.props.options);
-    this.setFamous(edgeSwapper);
-    if (parentNode) {
-      this.setFamousNode(parentNode.add(edgeSwapper));
-    }
+  famousCreateNode(parentNode) {
+    let edgeSwapper = this.getFamous();
+    parentNode.add(edgeSwapper);
+    return this.getFamousChildrenRef().map((child, idx) => [child, new RenderNode()]);
   },
 
   famousUpdate(nextProps) {
@@ -23,11 +24,9 @@ export default React.createClass({
   },
 
   render() {
-    if (!this.getFamousReady()) { return null; }
-
     return (
-      <div data-famous={this.famousName}>
-        {this.props.children}
+      <div data-famous="DeckSwapper">
+        {this.getFamousChildren()}
       </div>
     );
   }

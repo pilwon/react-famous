@@ -1,31 +1,31 @@
-import isEqual from 'lodash/lang/isEqual';
-
-import FamousUtil from './FamousUtil';
+import merge from 'lodash/object/merge';
+import React from 'react';
 
 const FAMOUS_KEY = '__famous__';
-const FAMOUS_KEYED_NODES_KEY = '__famousKeyedNodes__';
-const FAMOUS_NODE_KEY = '__famousNode__';
-const FAMOUS_READY_KEY = '__famousReady__';
 
 export default {
+  createFamousWrapper(child, props) {
+    return React.createElement('div', merge({
+      'data-famous': 'Wrapper'
+    }, props), child);
+  },
+
   getFamous() {
     return this[FAMOUS_KEY];
   },
 
-  getFamousKeyedNodes() {
-    return this[FAMOUS_KEYED_NODES_KEY];
+  getFamousChildren() {
+    let result = [];
+    let children = React.Children.forEach(this.props.children, (child, idx) => {
+      result.push(this.createFamousWrapper(child, {key: idx, ref: idx}));
+    });
+    return result;
   },
 
-  getFamousNode() {
-    return this[FAMOUS_NODE_KEY];
-  },
-
-  getFamousParentNode() {
-    return FamousUtil.getFamousParentNode(this);
-  },
-
-  getFamousReady() {
-    return this[FAMOUS_READY_KEY];
+  getFamousChildrenRef() {
+    return this.getFamousChildren().map((child, idx) => {
+      return this.refs[idx];
+    });
   },
 
   isFamous() {
@@ -34,25 +34,9 @@ export default {
 
   releaseFamous() {
     delete this[FAMOUS_KEY];
-    delete this[FAMOUS_KEYED_NODES_KEY];
-    delete this[FAMOUS_NODE_KEY];
-    delete this[FAMOUS_READY_KEY];
-    delete this.famous;
   },
 
   setFamous(famousInstance) {
     this[FAMOUS_KEY] = famousInstance;
-  },
-
-  setFamousKeyedNodes(keyedNodes) {
-    this[FAMOUS_KEYED_NODES_KEY] = keyedNodes;
-  },
-
-  setFamousNode(famousNode) {
-    this[FAMOUS_NODE_KEY] = famousNode;
-  },
-
-  setFamousReady(ready) {
-    this[FAMOUS_READY_KEY] = ready;
   }
 };

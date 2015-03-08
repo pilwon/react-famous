@@ -1,16 +1,16 @@
 import isEqual from 'lodash/lang/isEqual';
 import isFunction from 'lodash/lang/isFunction';
-import isObject from 'lodash/lang/isObject';
+import values from 'lodash/object/values';
 import React from 'react';
 import shallowEqual from 'react/lib/shallowEqual';
 
 import FamousNodeMixin from './FamousNodeMixin';
+import FamousUtil from './FamousUtil';
 
 export default {
   mixins: [FamousNodeMixin],
 
   propTypes: {
-    onReady: React.PropTypes.func,
     options: React.PropTypes.object
   },
 
@@ -21,29 +21,39 @@ export default {
   },
 
   componentWillMount() {
-    this.setFamousReady(false);
+    if (!this.famousContext) {
+      if (isFunction(this.famousCreate)) {
+        this.setFamous(this.famousCreate());
+      }
+      if (isFunction(this.famousUpdate)) {
+        this.famousUpdate(this.props, this.state);
+      }
+    }
   },
 
-  _famousNotifyReady() {
-    this.setFamousReady(true);
-    this.forceUpdate(() => {
-      if (this.props.onReady) {
-        this.props.onReady(this.props.eventKey);
-      }
-    });
+  _createFamousNode(component, parentNode = null) {
+    if (isFunction(component.famousCreateNode)) {
+      let result = component.famousCreateNode(parentNode);
+      (result || []).forEach(([child, parentNode]) => {
+        this._createFamousNode(child, parentNode);
+      });
+    } else {
+      let instance = FamousUtil.getInstance(component);
+      FamousUtil.getFamousChildren(instance).forEach((child) => {
+        this._createFamousNode(child, parentNode);
+      });
+    }
   },
 
   componentDidMount() {
-    if (isFunction(this.famousCreate)) {
-      let parentNode = this.getFamousParentNode();
-      let result = this.famousCreate(parentNode);
-      if (isObject(result) && isFunction(result.then)) {
-        result.then(() => {
-          this._famousNotifyReady();
-        });
-      } else {
-        this._famousNotifyReady();
+    if (this.famousContext) {
+      if (isFunction(this.famousCreate)) {
+        this.setFamous(this.famousCreate());
       }
+      if (isFunction(this.famousUpdate)) {
+        this.famousUpdate(this.props, this.state);
+      }
+      this._createFamousNode(this);
     }
   },
 

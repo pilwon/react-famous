@@ -41,14 +41,8 @@ export default React.createClass({
     onTouchStart: React.PropTypes.func
   },
 
-  famousName: 'Surface',
-
-  famousCreate(parentNode) {
+  famousCreate() {
     let surface = new Surface(this.props.options);
-    this.setFamous(surface);
-    if (parentNode) {
-      this.setFamousNode(parentNode.add(surface));
-    }
 
     SURFACE_EVENTS.forEach((event) => {
       if (this.props[event.prop]) {
@@ -61,6 +55,13 @@ export default React.createClass({
     if (!isUndefined(this.props.children)) {
       surface.setContent(FamousUtil.renderContent(this.props.children));
     }
+
+    return surface;
+  },
+
+  famousCreateNode(parentNode) {
+    let surface = this.getFamous();
+    parentNode.add(surface);
   },
 
   famousUpdate(nextProps) {
@@ -74,12 +75,8 @@ export default React.createClass({
   },
 
   render() {
-    if (!this.getFamousReady()) { return null; }
-
     return (
-      <div data-famous={this.famousName}>
-        {this.props.children}
-      </div>
+      <div data-famous="Surface"/>
     );
   }
 });

@@ -16,7 +16,7 @@ export default React.createClass({
     this._position = [0, 0];
   },
 
-  onReady() {
+  componentDidMount() {
     let position = this._position;
     let surface = this.refs.surface.getFamous();
     let sync = new GenericSync({
@@ -53,7 +53,7 @@ export default React.createClass({
 
     return (
       <Modifier options={modifierOptions}>
-        <Surface ref="surface" options={surfaceOptions} onReady={this.onReady}>
+        <Surface ref="surface" options={surfaceOptions}>
           Draggable
         </Surface>
       </Modifier>

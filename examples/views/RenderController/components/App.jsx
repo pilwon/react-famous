@@ -7,10 +7,10 @@ import Surface from 'react-famous/core/Surface';
 import RenderController from 'react-famous/views/RenderController';
 
 export default React.createClass({
-  onReady() {
+  componentDidMount() {
     let renderController = this.refs.renderController.getFamous();
     let surfaces = Object.keys(this.refs)
-      .filter((key) => /surface\d+/.test(key))
+      .filter((key) => /surface_\d+/.test(key))
       .map((key) => this.refs[key].getFamous());
     let counter = 0;
 
@@ -36,7 +36,7 @@ export default React.createClass({
         }
       };
       return (
-        <Surface key={i} ref={`surface${i}`} options={options}>
+        <Surface key={i} ref={`surface_${i}`} options={options}>
           Surface: {i + 1}
         </Surface>
       );
@@ -48,7 +48,7 @@ export default React.createClass({
           Click anywhere on the screen.
         </Surface>
         <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
-          <RenderController ref="renderController" onReady={this.onReady}>
+          <RenderController ref="renderController">
             {surfaces}
           </RenderController>
         </Modifier>

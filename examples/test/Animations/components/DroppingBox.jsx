@@ -8,7 +8,7 @@ export default React.createClass({
     this._transitionable = new Transitionable([0, 0]);
   },
 
-  onReady() {
+  componentDidMount() {
     this._transitionable.set([0, 1], {
       duration: 1000,
       curve: 'easeInOut'
@@ -35,7 +35,7 @@ export default React.createClass({
 
     return (
       <Modifier ref="modifier" options={modifierOptions}>
-        <Surface options={surfaceOptions} onReady={this.onReady}>
+        <Surface options={surfaceOptions}>
           Dropping
         </Surface>
       </Modifier>

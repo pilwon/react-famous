@@ -20,7 +20,7 @@ export default React.createClass({
     this._position = new Transitionable([0, 0]);
   },
 
-  onReady() {
+  componentDidMount() {
     let position = this._position;
     let surface = this.refs.surface.getFamous();
     let sync = new GenericSync({
@@ -70,7 +70,7 @@ export default React.createClass({
 
     return (
       <Modifier options={modifierOptions}>
-        <Surface ref="surface" onReady={this.onReady} options={surfaceOptions}>
+        <Surface ref="surface" options={surfaceOptions}>
           Bouncy
         </Surface>
       </Modifier>

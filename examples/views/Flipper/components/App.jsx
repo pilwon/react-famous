@@ -6,7 +6,7 @@ import Surface from 'react-famous/core/Surface';
 import Flipper from 'react-famous/views/Flipper';
 
 export default React.createClass({
-  onReady() {
+  componentDidMount() {
     let flipper = this.refs.flipper.getFamous();
     let toggle = false;
 
@@ -47,7 +47,7 @@ export default React.createClass({
           Click anywhere on the screen.
         </Surface>
         <Modifier options={{align: [.5, .5], origin: [.5, .5]}}>
-          <Flipper ref="flipper" onReady={this.onReady} options={{headerSize: 100, footerSize: 50}}>
+          <Flipper ref="flipper" options={{headerSize: 100, footerSize: 50}}>
             <Flipper.Front>
               <Surface options={frontOptions}>
                 front

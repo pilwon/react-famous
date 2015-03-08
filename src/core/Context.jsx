@@ -1,6 +1,5 @@
 import isUndefined from 'lodash/lang/isUndefined';
 import React from 'react';
-import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
 
 import FamousMixin from '../lib/FamousMixin';
 import Engine from './Engine';
@@ -12,12 +11,15 @@ export default React.createClass({
     perspective: React.PropTypes.number
   },
 
-  famousName: 'Context',
+  famousContext: true,
 
   famousCreate() {
-    let context = Engine.createContext(React.findDOMNode(this.refs.container));
-    this.setFamous(context);
-    this.setFamousNode(context);
+    return Engine.createContext(React.findDOMNode(this.refs.container));
+  },
+
+  famousCreateNode() {
+    let context = this.getFamous();
+    return this.getFamousChildrenRef().map((child) => [child, context]);
   },
 
   famousDelete() {
@@ -33,15 +35,11 @@ export default React.createClass({
   },
 
   render() {
-    let context = (
-      <div data-famous={this.famousName} style={{display: 'none'}}>
-        {this.props.children}
-      </div>
-    );
-
     return (
       <div className="famous">
-        {this.getFamousReady() ? context : null}
+        <div data-famous="Context" style={{display: 'none'}}>
+          {this.getFamousChildren()}
+        </div>
         <div className="famous-container" ref="container"/>
       </div>
     );

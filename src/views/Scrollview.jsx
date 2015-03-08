@@ -1,6 +1,5 @@
 import RenderNode from 'famous/core/RenderNode';
 import Scrollview from 'famous/views/Scrollview';
-import toPlainObject from 'lodash/lang/toPlainObject';
 import React from 'react';
 
 import FamousMixin from '../lib/FamousMixin';
@@ -8,18 +7,21 @@ import FamousMixin from '../lib/FamousMixin';
 export default React.createClass({
   mixins: [FamousMixin],
 
-  famousName: 'Scrollview',
+  famousCreate() {
+    return new Scrollview(this.props.options);
+  },
 
-  famousCreate(parentNode) {
-    let scrollview = new Scrollview(this.props.options);
-    this.setFamous(scrollview);
-    if (parentNode) {
-      this.setFamousNode(parentNode.add(scrollview));
-    }
-
-    let sequence = this.props.children.map(() => new RenderNode());
+  famousCreateNode(parentNode) {
+    let scrollview = this.getFamous();
+    let result = [];
+    let sequence = this.getFamousChildrenRef().map((child, idx) => {
+      let renderNode = new RenderNode();
+      result.push([child, renderNode]);
+      return renderNode;
+    });
     scrollview.sequenceFrom(sequence);
-    this.setFamousKeyedNodes(toPlainObject(sequence));
+    parentNode.add(scrollview);
+    return result;
   },
 
   famousUpdate(nextProps) {
@@ -29,11 +31,9 @@ export default React.createClass({
   },
 
   render() {
-    if (!this.getFamousReady()) { return null; }
-
     return (
-      <div data-famous={this.famousName}>
-        {this.props.children.map((child, key) => React.cloneElement(child, {key}))}
+      <div data-famous="Scrollview">
+        {this.getFamousChildren()}
       </div>
     );
   }

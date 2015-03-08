@@ -7,19 +7,18 @@ import FamousMixin from '../lib/FamousMixin';
 let Component = React.createClass({
   mixins: [FamousMixin],
 
-  famousName: 'HeaderFooterLayout',
+  famousCreate() {
+    return new HeaderFooterLayout(this.props.options);
+  },
 
-  famousCreate(parentNode) {
-    let headerFooterlayout = new HeaderFooterLayout(this.props.options);
-    this.setFamous(headerFooterlayout);
-    if (parentNode) {
-      this.setFamousNode(parentNode.add(headerFooterlayout));
-    }
-    this.setFamousKeyedNodes({
-      content: headerFooterlayout.content,
-      footer: headerFooterlayout.footer,
-      header: headerFooterlayout.header
-    });
+  famousCreateNode(parentNode) {
+    let headerFooterlayout = this.getFamous();
+    parentNode.add(headerFooterlayout);
+    return [
+      [this.refs.content, headerFooterlayout.content],
+      [this.refs.footer, headerFooterlayout.footer],
+      [this.refs.header, headerFooterlayout.header]
+    ];
   },
 
   famousUpdate(nextProps) {
@@ -29,23 +28,26 @@ let Component = React.createClass({
   },
 
   render() {
-    if (!this.getFamousReady()) { return null; }
+    let children = [];
 
-    let children = this.props.children.map((child) => {
+    React.Children.forEach(this.props.children, (child) => {
       switch (child.type) {
         case Component.Content:
-          return React.cloneElement(child, {key: 'content'});
+          children.push(this.createFamousWrapper(child, {key: 'content', ref: 'content'}));
+          break;
         case Component.Footer:
-          return React.cloneElement(child, {key: 'footer'});
+          children.push(this.createFamousWrapper(child, {key: 'footer', ref: 'footer'}));
+          break;
         case Component.Header:
-          return React.cloneElement(child, {key: 'header'});
+          children.push(this.createFamousWrapper(child, {key: 'header', ref: 'header'}));
+          break;
         default:
-          return null;
+          break;
       }
     });
 
     return (
-      <div data-famous={this.famousName}>
+      <div data-famous="HeaderFooterLayout">
         {children}
       </div>
     );
@@ -55,20 +57,16 @@ let Component = React.createClass({
 Component.Content = React.createClass({
   mixins: [FamousMixin],
 
-  famousName: 'HeaderFooterLayout.Content',
-
-  famousCreate() {
-    let renderNode = new RenderNode();
-    this.setFamous(renderNode);
-    this.setFamousNode(this.getFamousParentNode().add(renderNode));
+  famousCreateNode(parentNode) {
+    let renderNode = this.getFamous();
+    let node = parentNode.add(renderNode);
+    return this.getFamousChildrenRef().map((child, idx) => [child, node]);
   },
 
   render() {
-    if (!this.getFamousReady()) { return null; }
-
     return (
-      <div data-famous={this.famousName}>
-        {this.props.children}
+      <div data-famous="HeaderFooterLayout.Content">
+        {this.getFamousChildren()}
       </div>
     );
   }
@@ -77,20 +75,16 @@ Component.Content = React.createClass({
 Component.Footer = React.createClass({
   mixins: [FamousMixin],
 
-  famousName: 'HeaderFooterLayout.Footer',
-
-  famousCreate() {
-    let renderNode = new RenderNode();
-    this.setFamous(renderNode);
-    this.setFamousNode(this.getFamousParentNode().add(renderNode));
+  famousCreateNode(parentNode) {
+    let renderNode = this.getFamous();
+    let node = parentNode.add(renderNode);
+    return this.getFamousChildrenRef().map((child, idx) => [child, node]);
   },
 
   render() {
-    if (!this.getFamousReady()) { return null; }
-
     return (
-      <div data-famous={this.famousName}>
-        {this.props.children}
+      <div data-famous="HeaderFooterLayout.Footer">
+        {this.getFamousChildren()}
       </div>
     );
   }
@@ -99,20 +93,16 @@ Component.Footer = React.createClass({
 Component.Header = React.createClass({
   mixins: [FamousMixin],
 
-  famousName: 'HeaderFooterLayout.Header',
-
-  famousCreate() {
-    let renderNode = new RenderNode();
-    this.setFamous(renderNode);
-    this.setFamousNode(this.getFamousParentNode().add(renderNode));
+  famousCreateNode(parentNode) {
+    let renderNode = this.getFamous();
+    let node = parentNode.add(renderNode);
+    return this.getFamousChildrenRef().map((child, idx) => [child, node]);
   },
 
   render() {
-    if (!this.getFamousReady()) { return null; }
-
     return (
-      <div data-famous={this.famousName}>
-        {this.props.children}
+      <div data-famous="HeaderFooterLayout.Header">
+        {this.getFamousChildren()}
       </div>
     );
   }
