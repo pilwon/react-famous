@@ -1,5 +1,6 @@
 import RenderNode from 'famous/core/RenderNode';
 import HeaderFooterLayout from 'famous/views/HeaderFooterLayout';
+import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
@@ -98,6 +99,8 @@ Component.Header = class extends FamousComponent {
       </div>
     );
   }
-};
+}
+
+defaults(Component, HeaderFooterLayout);
 
 export default Component;

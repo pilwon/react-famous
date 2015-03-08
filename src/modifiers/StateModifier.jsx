@@ -1,9 +1,10 @@
 import StateModifier from 'famous/modifiers/StateModifier';
+import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
-export default class extends FamousComponent {
+class Component extends FamousComponent {
   famousCreate() {
     return new StateModifier(this.props.options);
   }
@@ -44,4 +45,8 @@ export default class extends FamousComponent {
       </div>
     );
   }
-};
+}
+
+defaults(Component, StateModifier);
+
+export default Component;

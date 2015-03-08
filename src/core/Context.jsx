@@ -1,4 +1,6 @@
+import Context from 'famous/core/Context';
 import isUndefined from 'lodash/lang/isUndefined';
+import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
@@ -43,6 +45,8 @@ class Component extends FamousComponent {
     );
   }
 }
+
+defaults(Component, Context);
 
 Component.propTypes = {
   perspective: React.PropTypes.number

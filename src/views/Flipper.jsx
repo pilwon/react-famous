@@ -1,5 +1,6 @@
 import RenderNode from 'famous/core/RenderNode';
 import Flipper from 'famous/views/Flipper';
+import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
@@ -90,6 +91,8 @@ Component.Front = class extends FamousComponent {
       </div>
     );
   }
-};
+}
+
+defaults(Component, Flipper);
 
 export default Component;

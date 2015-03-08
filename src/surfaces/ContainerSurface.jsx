@@ -1,10 +1,11 @@
 import ContainerSurface from 'famous/surfaces/ContainerSurface';
+import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import Context from '../core/Context';
 import FamousComponent from '../lib/FamousComponent';
 
-export default class extends FamousComponent {
+class Component extends FamousComponent {
   famousCreate() {
     return new ContainerSurface(this.props.options);
   }
@@ -29,4 +30,8 @@ export default class extends FamousComponent {
       </div>
     );
   }
-};
+}
+
+defaults(Component, ContainerSurface);
+
+export default Component;

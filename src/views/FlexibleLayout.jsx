@@ -1,10 +1,11 @@
 import RenderNode from 'famous/core/RenderNode';
 import FlexibleLayout from 'famous/views/FlexibleLayout';
+import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
-export default class extends FamousComponent {
+class Component extends FamousComponent {
   famousCreate() {
     return new FlexibleLayout(this.props.options);
   }
@@ -35,4 +36,8 @@ export default class extends FamousComponent {
       </div>
     );
   }
-};
+}
+
+defaults(Component, FlexibleLayout);
+
+export default Component;

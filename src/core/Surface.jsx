@@ -1,5 +1,6 @@
 import Surface from 'famous/core/Surface';
 import isUndefined from 'lodash/lang/isUndefined';
+import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
@@ -61,6 +62,8 @@ class Component extends FamousComponent {
     );
   }
 }
+
+defaults(Component, Surface);
 
 Component.propTypes = {
   eventKey: React.PropTypes.any,
