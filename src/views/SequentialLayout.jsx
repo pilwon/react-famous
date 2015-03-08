@@ -2,14 +2,12 @@ import RenderNode from 'famous/core/RenderNode';
 import SequentialLayout from 'famous/views/SequentialLayout';
 import React from 'react';
 
-import FamousMixin from '../lib/FamousMixin';
+import FamousComponent from '../lib/FamousComponent';
 
-export default React.createClass({
-  mixins: [FamousMixin],
-
+export default class extends FamousComponent {
   famousCreate() {
     return new SequentialLayout(this.props.options);
-  },
+  }
 
   famousCreateNode(parentNode) {
     let sequentialLayout = this.getFamous();
@@ -22,13 +20,13 @@ export default React.createClass({
     sequentialLayout.sequenceFrom(sequence);
     parentNode.add(sequentialLayout);
     return result;
-  },
+  }
 
   famousUpdate(nextProps) {
     let sequentialLayout = this.getFamous();
 
     sequentialLayout.setOptions(nextProps.options);
-  },
+  }
 
   render() {
     return (
@@ -37,4 +35,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+};

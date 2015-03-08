@@ -1,20 +1,18 @@
 import StateModifier from 'famous/modifiers/StateModifier';
 import React from 'react';
 
-import FamousMixin from '../lib/FamousMixin';
+import FamousComponent from '../lib/FamousComponent';
 
-export default React.createClass({
-  mixins: [FamousMixin],
-
+export default class extends FamousComponent {
   famousCreate() {
     return new StateModifier(this.props.options);
-  },
+  }
 
   famousCreateNode(parentNode) {
     let stateModifier = this.getFamous();
     let node = parentNode.add(stateModifier);
     return this.getFamousChildrenRef().map((child, idx) => [child, node]);
-  },
+  }
 
   famousUpdate(nextProps) {
     let stateModifier = this.getFamous();
@@ -37,7 +35,7 @@ export default React.createClass({
     if (nextProps.options.proportions) {
       stateModifier.setProportions(nextProps.options.proportions);
     }
-  },
+  }
 
   render() {
     return (
@@ -46,4 +44,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+};

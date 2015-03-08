@@ -2,14 +2,12 @@ import RenderNode from 'famous/core/RenderNode';
 import Flipper from 'famous/views/Flipper';
 import React from 'react';
 
-import FamousMixin from '../lib/FamousMixin';
+import FamousComponent from '../lib/FamousComponent';
 
-let Component = React.createClass({
-  mixins: [FamousMixin],
-
+class Component extends FamousComponent {
   famousCreate() {
     return new Flipper(this.props.options);
-  },
+  }
 
   famousCreateNode(parentNode) {
     let flipper = this.getFamous();
@@ -22,13 +20,13 @@ let Component = React.createClass({
       [this.refs.back, backRenderNode],
       [this.refs.front, frontRenderNode]
     ];
-  },
+  }
 
   famousUpdate(nextProps) {
     let flipper = this.getFamous();
 
     flipper.setOptions(nextProps.options);
-  },
+  }
 
   render() {
     let children = [];
@@ -52,20 +50,18 @@ let Component = React.createClass({
       </div>
     );
   }
-});
+}
 
-Component.Back = React.createClass({
-  mixins: [FamousMixin],
-
+Component.Back = class extends FamousComponent {
   famousCreate() {
     return new RenderNode();
-  },
+  }
 
   famousCreateNode(parentNode) {
     let renderNode = this.getFamous();
     let node = parentNode.add(renderNode);
     return this.getFamousChildrenRef().map((child, idx) => [child, node]);
-  },
+  }
 
   render() {
     return (
@@ -74,20 +70,18 @@ Component.Back = React.createClass({
       </div>
     );
   }
-});
+};
 
-Component.Front = React.createClass({
-  mixins: [FamousMixin],
-
+Component.Front = class extends FamousComponent {
   famousCreate() {
     return new RenderNode();
-  },
+  }
 
   famousCreateNode(parentNode) {
     let renderNode = this.getFamous();
     let node = parentNode.add(renderNode);
     return this.getFamousChildrenRef().map((child, idx) => [child, node]);
-  },
+  }
 
   render() {
     return (
@@ -96,6 +90,6 @@ Component.Front = React.createClass({
       </div>
     );
   }
-});
+};
 
 export default Component;

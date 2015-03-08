@@ -2,14 +2,12 @@ import RenderNode from 'famous/core/RenderNode';
 import GridLayout from 'famous/views/GridLayout';
 import React from 'react';
 
-import FamousMixin from '../lib/FamousMixin';
+import FamousComponent from '../lib/FamousComponent';
 
-export default React.createClass({
-  mixins: [FamousMixin],
-
+export default class extends FamousComponent {
   famousCreate() {
     return new GridLayout(this.props.options);
-  },
+  }
 
   famousCreateNode(parentNode) {
     let gridLayout = this.getFamous();
@@ -22,13 +20,13 @@ export default React.createClass({
     gridLayout.sequenceFrom(sequence);
     parentNode.add(gridLayout);
     return result;
-  },
+  }
 
   famousUpdate(nextProps) {
     let gridLayout = this.getFamous();
 
     gridLayout.setOptions(nextProps.options);
-  },
+  }
 
   render() {
     return (
@@ -37,4 +35,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+};

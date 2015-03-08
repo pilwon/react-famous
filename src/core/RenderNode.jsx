@@ -1,20 +1,18 @@
 import RenderNode from 'famous/core/RenderNode';
 import React from 'react';
 
-import FamousMixin from '../lib/FamousMixin';
+import FamousComponent from '../lib/FamousComponent';
 
-export default React.createClass({
-  mixins: [FamousMixin],
-
+export default class extends FamousComponent {
   famousCreate() {
     return new RenderNode();
-  },
+  }
 
   famousCreateNode(parentNode) {
     let renderNode = this.getFamous();
     let node = parentNode.add(renderNode);
     return this.getFamousChildrenRef().map((child, idx) => [child, node]);
-  },
+  }
 
   render() {
     return (
@@ -23,4 +21,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+};

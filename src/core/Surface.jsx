@@ -2,7 +2,7 @@ import Surface from 'famous/core/Surface';
 import isUndefined from 'lodash/lang/isUndefined';
 import React from 'react';
 
-import FamousMixin from '../lib/FamousMixin';
+import FamousComponent from '../lib/FamousComponent';
 import FamousUtil from '../lib/FamousUtil';
 
 const SURFACE_EVENTS = [
@@ -21,26 +21,7 @@ const SURFACE_EVENTS = [
   {prop: 'onTouchStart', type: 'touchstart'}
 ];
 
-export default React.createClass({
-  mixins: [FamousMixin],
-
-  propTypes: {
-    eventKey: React.PropTypes.any,
-    onClick: React.PropTypes.func,
-    onKeyDown: React.PropTypes.func,
-    onKeyPress: React.PropTypes.func,
-    onKeyUp: React.PropTypes.func,
-    onMouseDown: React.PropTypes.func,
-    onMouseMove: React.PropTypes.func,
-    onMouseOut: React.PropTypes.func,
-    onMouseOver: React.PropTypes.func,
-    onMouseUp: React.PropTypes.func,
-    onTouchCancel: React.PropTypes.func,
-    onTouchEnd: React.PropTypes.func,
-    onTouchMove: React.PropTypes.func,
-    onTouchStart: React.PropTypes.func
-  },
-
+class Component extends FamousComponent {
   famousCreate() {
     let surface = new Surface(this.props.options);
 
@@ -57,12 +38,12 @@ export default React.createClass({
     }
 
     return surface;
-  },
+  }
 
   famousCreateNode(parentNode) {
     let surface = this.getFamous();
     parentNode.add(surface);
-  },
+  }
 
   famousUpdate(nextProps) {
     let surface = this.getFamous();
@@ -72,11 +53,30 @@ export default React.createClass({
     if (!isUndefined(nextProps.children)) {
       surface.setContent(FamousUtil.renderContent(nextProps.children));
     }
-  },
+  }
 
   render() {
     return (
       <div data-famous="Surface"/>
     );
   }
-});
+}
+
+Component.propTypes = {
+  eventKey: React.PropTypes.any,
+  onClick: React.PropTypes.func,
+  onKeyDown: React.PropTypes.func,
+  onKeyPress: React.PropTypes.func,
+  onKeyUp: React.PropTypes.func,
+  onMouseDown: React.PropTypes.func,
+  onMouseMove: React.PropTypes.func,
+  onMouseOut: React.PropTypes.func,
+  onMouseOver: React.PropTypes.func,
+  onMouseUp: React.PropTypes.func,
+  onTouchCancel: React.PropTypes.func,
+  onTouchEnd: React.PropTypes.func,
+  onTouchMove: React.PropTypes.func,
+  onTouchStart: React.PropTypes.func
+};
+
+export default Component;

@@ -2,14 +2,12 @@ import RenderNode from 'famous/core/RenderNode';
 import Scrollview from 'famous/views/Scrollview';
 import React from 'react';
 
-import FamousMixin from '../lib/FamousMixin';
+import FamousComponent from '../lib/FamousComponent';
 
-export default React.createClass({
-  mixins: [FamousMixin],
-
+export default class extends FamousComponent {
   famousCreate() {
     return new Scrollview(this.props.options);
-  },
+  }
 
   famousCreateNode(parentNode) {
     let scrollview = this.getFamous();
@@ -22,13 +20,13 @@ export default React.createClass({
     scrollview.sequenceFrom(sequence);
     parentNode.add(scrollview);
     return result;
-  },
+  }
 
   famousUpdate(nextProps) {
     let scrollview = this.getFamous();
 
     scrollview.setOptions(nextProps.options);
-  },
+  }
 
   render() {
     return (
@@ -37,4 +35,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+};

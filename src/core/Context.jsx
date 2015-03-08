@@ -1,30 +1,28 @@
 import isUndefined from 'lodash/lang/isUndefined';
 import React from 'react';
 
-import FamousMixin from '../lib/FamousMixin';
+import FamousComponent from '../lib/FamousComponent';
 import Engine from './Engine';
 
-export default React.createClass({
-  mixins: [FamousMixin],
+class Component extends FamousComponent {
+  constructor(...args) {
+    super(...args);
 
-  propTypes: {
-    perspective: React.PropTypes.number
-  },
-
-  famousContext: true,
+    this.famousContext = true;
+  }
 
   famousCreate() {
     return Engine.createContext(React.findDOMNode(this.refs.container));
-  },
+  }
 
   famousCreateNode() {
     let context = this.getFamous();
     return this.getFamousChildrenRef().map((child) => [child, context]);
-  },
+  }
 
   famousDelete() {
     Engine.deregisterContext(this.getFamousNode());
-  },
+  }
 
   famousUpdate(nextProps) {
     let context = this.getFamous();
@@ -32,7 +30,7 @@ export default React.createClass({
     if (!isUndefined(nextProps.perspective)) {
       context.setPerspective(nextProps.perspective);
     }
-  },
+  }
 
   render() {
     return (
@@ -44,4 +42,10 @@ export default React.createClass({
       </div>
     );
   }
-});
+}
+
+Component.propTypes = {
+  perspective: React.PropTypes.number
+};
+
+export default Component;

@@ -2,14 +2,12 @@ import RenderNode from 'famous/core/RenderNode';
 import FlexibleLayout from 'famous/views/FlexibleLayout';
 import React from 'react';
 
-import FamousMixin from '../lib/FamousMixin';
+import FamousComponent from '../lib/FamousComponent';
 
-export default React.createClass({
-  mixins: [FamousMixin],
-
+export default class extends FamousComponent {
   famousCreate() {
     return new FlexibleLayout(this.props.options);
-  },
+  }
 
   famousCreateNode(parentNode) {
     let flexibleLayout = this.getFamous();
@@ -22,13 +20,13 @@ export default React.createClass({
     flexibleLayout.sequenceFrom(sequence);
     parentNode.add(flexibleLayout);
     return result;
-  },
+  }
 
   famousUpdate(nextProps) {
     let flexibleLayout = this.getFamous();
 
     flexibleLayout.setOptions(nextProps.options);
-  },
+  }
 
   render() {
     return (
@@ -37,4 +35,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+};

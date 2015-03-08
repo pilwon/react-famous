@@ -2,14 +2,12 @@ import RenderNode from 'famous/core/RenderNode';
 import Deck from 'famous/views/Deck';
 import React from 'react';
 
-import FamousMixin from '../lib/FamousMixin';
+import FamousComponent from '../lib/FamousComponent';
 
-export default React.createClass({
-  mixins: [FamousMixin],
-
+export default class extends FamousComponent {
   famousCreate() {
     return new Deck(this.props.options);
-  },
+  }
 
   famousCreateNode(parentNode) {
     let deck = this.getFamous();
@@ -22,13 +20,13 @@ export default React.createClass({
     parentNode.add(deck);
     deck.sequenceFrom(sequence);
     return result;
-  },
+  }
 
   famousUpdate(nextProps) {
     let deck = this.getFamous();
 
     deck.setOptions(nextProps.options);
-  },
+  }
 
   render() {
     return (
@@ -37,4 +35,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+};

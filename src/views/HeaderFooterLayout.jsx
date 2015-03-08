@@ -2,14 +2,12 @@ import RenderNode from 'famous/core/RenderNode';
 import HeaderFooterLayout from 'famous/views/HeaderFooterLayout';
 import React from 'react';
 
-import FamousMixin from '../lib/FamousMixin';
+import FamousComponent from '../lib/FamousComponent';
 
-let Component = React.createClass({
-  mixins: [FamousMixin],
-
+class Component extends FamousComponent {
   famousCreate() {
     return new HeaderFooterLayout(this.props.options);
-  },
+  }
 
   famousCreateNode(parentNode) {
     let headerFooterlayout = this.getFamous();
@@ -19,13 +17,13 @@ let Component = React.createClass({
       [this.refs.footer, headerFooterlayout.footer],
       [this.refs.header, headerFooterlayout.header]
     ];
-  },
+  }
 
   famousUpdate(nextProps) {
     let headerFooterlayout = this.getFamous();
 
     headerFooterlayout.setOptions(nextProps.options);
-  },
+  }
 
   render() {
     let children = [];
@@ -52,16 +50,14 @@ let Component = React.createClass({
       </div>
     );
   }
-});
+};
 
-Component.Content = React.createClass({
-  mixins: [FamousMixin],
-
+Component.Content = class extends FamousComponent {
   famousCreateNode(parentNode) {
     let renderNode = this.getFamous();
     let node = parentNode.add(renderNode);
     return this.getFamousChildrenRef().map((child, idx) => [child, node]);
-  },
+  }
 
   render() {
     return (
@@ -70,16 +66,14 @@ Component.Content = React.createClass({
       </div>
     );
   }
-});
+};
 
-Component.Footer = React.createClass({
-  mixins: [FamousMixin],
-
+Component.Footer = class extends FamousComponent {
   famousCreateNode(parentNode) {
     let renderNode = this.getFamous();
     let node = parentNode.add(renderNode);
     return this.getFamousChildrenRef().map((child, idx) => [child, node]);
-  },
+  }
 
   render() {
     return (
@@ -88,16 +82,14 @@ Component.Footer = React.createClass({
       </div>
     );
   }
-});
+};
 
-Component.Header = React.createClass({
-  mixins: [FamousMixin],
-
+Component.Header = class extends FamousComponent {
   famousCreateNode(parentNode) {
     let renderNode = this.getFamous();
     let node = parentNode.add(renderNode);
     return this.getFamousChildrenRef().map((child, idx) => [child, node]);
-  },
+  }
 
   render() {
     return (
@@ -106,6 +98,6 @@ Component.Header = React.createClass({
       </div>
     );
   }
-});
+};
 
 export default Component;
