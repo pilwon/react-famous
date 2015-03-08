@@ -5,6 +5,7 @@ import React from 'react';
 import shallowEqual from 'react/lib/shallowEqual';
 
 import FamousNodeMixin from './FamousNodeMixin';
+import FamousScheduler from './FamousScheduler';
 import FamousUtil from './FamousUtil';
 
 export default {
@@ -54,6 +55,7 @@ export default {
         this.famousUpdate(this.props, this.state);
       }
       this._createFamousNode(this);
+      FamousScheduler.run();
     }
   },
 
