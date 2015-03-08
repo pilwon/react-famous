@@ -3,7 +3,7 @@ import Context from 'react-famous/core/Context';
 import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     let options = {
       size: [150, 100],
@@ -25,4 +25,4 @@ export default React.createClass({
       </Context>
     );
   }
-});
+};

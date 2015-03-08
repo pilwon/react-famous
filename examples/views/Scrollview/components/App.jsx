@@ -4,7 +4,7 @@ import Context from 'react-famous/core/Context';
 import Surface from 'react-famous/core/Surface';
 import Scrollview from 'react-famous/views/Scrollview';
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     let surfaces = range(40).map((i) => {
       let options = {
@@ -30,4 +30,4 @@ export default React.createClass({
       </Context>
     );
   }
-});
+};

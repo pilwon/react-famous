@@ -6,7 +6,7 @@ import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
 import RenderController from 'react-famous/views/RenderController';
 
-export default React.createClass({
+export default class extends React.Component {
   componentDidMount() {
     let renderController = this.refs.renderController.getFamous();
     let surfaces = Object.keys(this.refs)
@@ -23,7 +23,7 @@ export default React.createClass({
       renderController.show(surfaces[next]);
       counter += 1;
     });
-  },
+  }
 
   render() {
     let surfaces = range(10).map((i) => {
@@ -55,4 +55,4 @@ export default React.createClass({
       </Context>
     );
   }
-});
+};

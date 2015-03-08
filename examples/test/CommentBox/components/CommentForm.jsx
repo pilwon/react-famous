@@ -2,7 +2,7 @@ import React from 'react';
 import RenderNode from 'react-famous/core/RenderNode';
 import Surface from 'react-famous/core/Surface';
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     return (
       <RenderNode>
@@ -12,4 +12,4 @@ export default React.createClass({
       </RenderNode>
     );
   }
-});
+};

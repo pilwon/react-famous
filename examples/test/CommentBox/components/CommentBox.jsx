@@ -4,7 +4,7 @@ import Surface from 'react-famous/core/Surface';
 
 import CommentForm from './CommentForm';
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     return (
       <div>
@@ -19,4 +19,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+};

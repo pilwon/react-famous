@@ -3,16 +3,18 @@ import Context from 'react-famous/core/Context';
 import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
 
-export default React.createClass({
-  getInitialState() {
-    return {
+export default class extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.state = {
       count: 0
     };
-  },
+  }
 
   componentWillUnmount() {
     clearInterval(this._intervalId);
-  },
+  }
 
   componentDidMount() {
     this._intervalId = setInterval(() => {
@@ -20,13 +22,13 @@ export default React.createClass({
         count: state.count + 1
       }));
     }, 100);
-  },
+  }
 
   _textCharUpper(text, position) {
     let str = text.toLowerCase();
     let idx = position % str.length;
     return str.substr(0, idx) + str[idx].toUpperCase() + str.substr(idx + 1);
-  },
+  }
 
   render() {
     let properties = {
@@ -47,4 +49,4 @@ export default React.createClass({
       </Context>
     );
   }
-});
+};

@@ -6,7 +6,7 @@ import ImageSurface from 'react-famous/surfaces/ImageSurface';
 
 const IMAGE_URL = 'http://code.famo.us/assets/famous.jpg';
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     return (
       <Context>
@@ -19,4 +19,4 @@ export default React.createClass({
       </Context>
     );
   }
-});
+};

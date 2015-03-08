@@ -6,7 +6,7 @@ import CanvasSurface from 'react-famous/surfaces/CanvasSurface';
 
 let CANVAS_SIZE = [400, 400];
 
-export default React.createClass({
+export default class extends React.Component {
   componentDidMount() {
     let canvas = this.refs.canvas.getFamous();
     let ctx = canvas.getContext('2d');
@@ -16,7 +16,7 @@ export default React.createClass({
 
     ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
     ctx.fillRect(150, 150, 200, 200);
-  },
+  }
 
   render() {
     return (
@@ -30,4 +30,4 @@ export default React.createClass({
       </Context>
     );
   }
-});
+};

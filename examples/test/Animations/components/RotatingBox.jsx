@@ -3,7 +3,7 @@ import React from 'react';
 import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
 
-export default React.createClass({
+export default class extends React.Component {
   componentDidMount() {
     let modifier = this.refs.modifier.getFamous();
     let angle = 0;
@@ -12,7 +12,7 @@ export default React.createClass({
       angle += 0.03;
       return Transform.rotateZ(angle);
     });
-  },
+  }
 
   render() {
     let options = {
@@ -33,4 +33,4 @@ export default React.createClass({
       </Modifier>
     );
   }
-});
+};

@@ -6,7 +6,7 @@ import Surface from 'react-famous/core/Surface';
 import GridLayout from 'react-famous/views/GridLayout';
 import HeaderFooterLayout from 'react-famous/views/HeaderFooterLayout';
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     let views = range(2).map((i) => {
       let options = {
@@ -50,4 +50,4 @@ export default React.createClass({
       </Context>
     );
   }
-});
+};

@@ -3,17 +3,17 @@ import React from 'react';
 import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
 
-export default React.createClass({
+export default class extends React.Component {
   componentWillMount() {
     this._transitionable = new Transitionable([0, 0]);
-  },
+  }
 
   componentDidMount() {
     this._transitionable.set([0, 1], {
       duration: 1000,
       curve: 'easeInOut'
     });
-  },
+  }
 
   render() {
     let transitionable = this._transitionable;
@@ -41,4 +41,4 @@ export default React.createClass({
       </Modifier>
     );
   }
-});
+};

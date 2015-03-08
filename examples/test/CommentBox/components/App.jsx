@@ -3,7 +3,7 @@ import Context from 'react-famous/core/Context';
 
 import CommentBox from './CommentBox';
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     return (
       <Context>
@@ -11,4 +11,4 @@ export default React.createClass({
       </Context>
     );
   }
-});
+};

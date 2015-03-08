@@ -5,7 +5,7 @@ import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
 import Flipper from 'react-famous/views/Flipper';
 
-export default React.createClass({
+export default class extends React.Component {
   componentDidMount() {
     let flipper = this.refs.flipper.getFamous();
     let toggle = false;
@@ -18,7 +18,7 @@ export default React.createClass({
       });
       toggle = !toggle;
     });
-  },
+  }
 
   render() {
     let frontOptions = {
@@ -63,4 +63,4 @@ export default React.createClass({
       </Context>
     );
   }
-});
+};

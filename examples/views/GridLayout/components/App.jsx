@@ -5,7 +5,7 @@ import RenderNode from 'react-famous/core/RenderNode';
 import Surface from 'react-famous/core/Surface';
 import GridLayout from 'react-famous/views/GridLayout';
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     return (
       <Context>
@@ -48,4 +48,4 @@ export default React.createClass({
       </Context>
     );
   }
-});
+};

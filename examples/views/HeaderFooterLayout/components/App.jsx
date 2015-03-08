@@ -5,7 +5,7 @@ import Surface from 'react-famous/core/Surface';
 import StateModifier from 'react-famous/modifiers/StateModifier';
 import HeaderFooterLayout from 'react-famous/views/HeaderFooterLayout';
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     return (
       <Context>
@@ -31,4 +31,4 @@ export default React.createClass({
       </Context>
     );
   }
-});
+};

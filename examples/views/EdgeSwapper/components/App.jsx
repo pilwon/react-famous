@@ -4,7 +4,7 @@ import Engine from 'react-famous/core/Engine';
 import Surface from 'react-famous/core/Surface';
 import EdgeSwapper from 'react-famous/views/EdgeSwapper';
 
-export default React.createClass({
+export default class extends React.Component {
   componentDidMount() {
     let edgeSwapper = this.refs.edgeSwapper.getFamous();
     let primary = this.refs.primary.getFamous();
@@ -21,7 +21,7 @@ export default React.createClass({
       }
       showing = !showing;
     });
-  },
+  }
 
   render() {
     let primaryOptions = {
@@ -57,4 +57,4 @@ export default React.createClass({
       </Context>
     );
   }
-});
+};

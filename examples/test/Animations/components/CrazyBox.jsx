@@ -10,7 +10,7 @@ const EASING_NAMES = Object.keys(Easing);
 
 EASING_NAMES.forEach((name) => TweenTransition.registerCurve(name, Easing[name]));
 
-export default React.createClass({
+export default class extends React.Component {
   componentDidMount() {
     let stateModifier = this.refs.stateModifier.getFamous();
 
@@ -26,7 +26,7 @@ export default React.createClass({
     }
 
     rotate();
-  },
+  }
 
   render() {
     let options = {
@@ -47,4 +47,4 @@ export default React.createClass({
       </StateModifier>
     );
   }
-});
+};

@@ -19,7 +19,7 @@ const COLORS = [
 const INITIAL_RATIOS = [1, true, 1, true, 1, true, 1, true];
 const FINAL_RATIOS = [4, true, 1, true, 0, true, 7, true];
 
-export default React.createClass({
+export default class extends React.Component {
   componentDidMount() {
     let flexibleLayout = this.refs.flexibleLayout.getFamous();
     let toggle = false;
@@ -32,7 +32,7 @@ export default React.createClass({
       });
       toggle = !toggle;
     });
-  },
+  }
 
   render() {
     let surfaces = range(COLORS.length).map((idx) => {
@@ -57,4 +57,4 @@ export default React.createClass({
       </Context>
     );
   }
-});
+};

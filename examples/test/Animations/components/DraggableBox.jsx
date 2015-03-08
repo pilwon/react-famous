@@ -11,10 +11,10 @@ GenericSync.register({
   touch: TouchSync
 });
 
-export default React.createClass({
+export default class extends React.Component {
   componentWillMount() {
     this._position = [0, 0];
-  },
+  }
 
   componentDidMount() {
     let position = this._position;
@@ -30,7 +30,7 @@ export default React.createClass({
     });
 
     surface.pipe(sync);
-  },
+  }
 
   render() {
     let position = this._position;
@@ -59,4 +59,4 @@ export default React.createClass({
       </Modifier>
     );
   }
-});
+};

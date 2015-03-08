@@ -8,7 +8,7 @@ import DraggableBox from './DraggableBox';
 import DroppingBox from './DroppingBox';
 import RotatingBox from './RotatingBox';
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     return (
       <Context>
@@ -28,4 +28,4 @@ export default React.createClass({
       </Context>
     );
   }
-});
+};
