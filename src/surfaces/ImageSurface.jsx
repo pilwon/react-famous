@@ -11,7 +11,8 @@ class ImageSurface extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let imageSurface = this.getFamous();
-    parentNode.add(imageSurface);
+    let node = parentNode.add(imageSurface);
+    return [node, next];
   }
 
   famousUpdate(nextProps) {

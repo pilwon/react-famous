@@ -12,12 +12,13 @@ class HeaderFooterLayout extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let headerFooterlayout = this.getFamous();
-    parentNode.add(headerFooterlayout);
-    return [
+    let node = parentNode.add(headerFooterlayout);
+    let next = [
       [this.refs.content, headerFooterlayout.content],
       [this.refs.footer, headerFooterlayout.footer],
       [this.refs.header, headerFooterlayout.header]
     ];
+    return [node, next];
   }
 
   famousUpdate(nextProps) {
@@ -61,7 +62,8 @@ HeaderFooterLayout.Content = class extends FamousComponent {
   famousCreateNode(parentNode) {
     let renderNode = this.getFamous();
     let node = parentNode.add(renderNode);
-    return this.getFamousChildrenRef().map((child, idx) => [child, node]);
+    let next = this.getFamousChildrenRef().map((child, idx) => [child, node]);
+    return [node, next];
   }
 
   render() {
@@ -81,7 +83,8 @@ HeaderFooterLayout.Footer = class extends FamousComponent {
   famousCreateNode(parentNode) {
     let renderNode = this.getFamous();
     let node = parentNode.add(renderNode);
-    return this.getFamousChildrenRef().map((child, idx) => [child, node]);
+    let next = this.getFamousChildrenRef().map((child, idx) => [child, node]);
+    return [node, next];
   }
 
   render() {
@@ -101,7 +104,8 @@ HeaderFooterLayout.Header = class extends FamousComponent {
   famousCreateNode(parentNode) {
     let renderNode = this.getFamous();
     let node = parentNode.add(renderNode);
-    return this.getFamousChildrenRef().map((child, idx) => [child, node]);
+    let next = this.getFamousChildrenRef().map((child, idx) => [child, node]);
+    return [node, next];
   }
 
   render() {

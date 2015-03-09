@@ -12,8 +12,9 @@ class RenderController extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let renderController = this.getFamous();
-    parentNode.add(renderController);
-    return this.getFamousChildrenRef().map((child, idx) => [child, new RenderNode()]);
+    let node = parentNode.add(renderController);
+    let next = this.getFamousChildrenRef().map((child, idx) => [child, new FamousRenderNode()]);
+    return [node, next];
   }
 
   famousUpdate(nextProps) {

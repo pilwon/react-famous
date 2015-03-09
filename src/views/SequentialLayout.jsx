@@ -12,15 +12,15 @@ class SequentialLayout extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let sequentialLayout = this.getFamous();
-    let result = [];
+    let node = parentNode.add(sequentialLayout);
+    let next = [];
     let sequence = this.getFamousChildrenRef().map((child, idx) => {
-      result.push([child, renderNode]);
       let renderNode = new FamousRenderNode();
+      next.push([child, renderNode]);
       return renderNode;
     });
     sequentialLayout.sequenceFrom(sequence);
-    parentNode.add(sequentialLayout);
-    return result;
+    return [node, next];
   }
 
   famousUpdate(nextProps) {

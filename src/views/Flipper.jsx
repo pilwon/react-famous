@@ -12,15 +12,16 @@ class Flipper extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let flipper = this.getFamous();
-    parentNode.add(flipper);
-    flipper.setBack(backRenderNode);
-    flipper.setFront(frontRenderNode);
-    return [
     let backRenderNode = new FamousRenderNode();
     let frontRenderNode = new FamousRenderNode();
+    let node = parentNode.add(flipper);
+    let next = [
       [this.refs.back, backRenderNode],
       [this.refs.front, frontRenderNode]
     ];
+    flipper.setBack(backRenderNode);
+    flipper.setFront(frontRenderNode);
+    return [node, next];
   }
 
   famousUpdate(nextProps) {
@@ -61,7 +62,8 @@ Flipper.Back = class extends FamousComponent {
   famousCreateNode(parentNode) {
     let renderNode = this.getFamous();
     let node = parentNode.add(renderNode);
-    return this.getFamousChildrenRef().map((child, idx) => [child, node]);
+    let next = this.getFamousChildrenRef().map((child, idx) => [child, node]);
+    return [node, next];
   }
 
   render() {
@@ -81,7 +83,8 @@ Flipper.Front = class extends FamousComponent {
   famousCreateNode(parentNode) {
     let renderNode = this.getFamous();
     let node = parentNode.add(renderNode);
-    return this.getFamousChildrenRef().map((child, idx) => [child, node]);
+    let next = this.getFamousChildrenRef().map((child, idx) => [child, node]);
+    return [node, next];
   }
 
   render() {

@@ -12,8 +12,9 @@ class EdgeSwapper extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let edgeSwapper = this.getFamous();
-    parentNode.add(edgeSwapper);
-    return this.getFamousChildrenRef().map((child, idx) => [child, new RenderNode()]);
+    let node = parentNode.add(edgeSwapper);
+    let next = this.getFamousChildrenRef().map((child, idx) => [child, new FamousRenderNode()]);
+    return [node, next];
   }
 
   famousUpdate(nextProps) {

@@ -12,7 +12,8 @@ class Modifier extends FamousComponent {
   famousCreateNode(parentNode) {
     let modifier = this.getFamous();
     let node = parentNode.add(modifier);
-    return this.getFamousChildrenRef().map((child, idx) => [child, node]);
+    let next = this.getFamousChildrenRef().map((child, idx) => [child, node]);
+    return [node, next];
   }
 
   famousUpdate(nextProps) {

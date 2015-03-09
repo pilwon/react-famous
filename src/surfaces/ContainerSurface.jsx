@@ -13,7 +13,9 @@ class ContainerSurface extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let containerSurface = this.getFamous();
-    parentNode.add(containerSurface);
+    let node = parentNode.add(containerSurface);
+    let next = this.getFamousChildrenRef().map((child, idx) => [child, containerSurface]);
+    return [node, next];
   }
 
   famousUpdate(nextProps) {

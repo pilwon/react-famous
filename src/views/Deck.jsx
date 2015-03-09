@@ -12,15 +12,15 @@ class Deck extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let deck = this.getFamous();
-    let result = [];
+    let node = parentNode.add(deck);
+    let next = [];
     let sequence = this.getFamousChildrenRef().map((child, idx) => {
-      result.push([child, renderNode]);
       let renderNode = new FamousRenderNode();
+      next.push([child, renderNode]);
       return renderNode;
     });
-    parentNode.add(deck);
     deck.sequenceFrom(sequence);
-    return result;
+    return [node, next];
   }
 
   famousUpdate(nextProps) {

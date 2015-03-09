@@ -12,15 +12,15 @@ class FlexibleLayout extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let flexibleLayout = this.getFamous();
-    let result = [];
+    let node = parentNode.add(flexibleLayout);
+    let next = [];
     let sequence = this.getFamousChildrenRef().map((child, idx) => {
-      result.push([child, renderNode]);
       let renderNode = new FamousRenderNode();
+      next.push([child, renderNode]);
       return renderNode;
     });
     flexibleLayout.sequenceFrom(sequence);
-    parentNode.add(flexibleLayout);
-    return result;
+    return [node, next];
   }
 
   famousUpdate(nextProps) {

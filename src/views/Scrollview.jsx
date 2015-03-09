@@ -13,15 +13,15 @@ class Scrollview extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let scrollview = this.getFamous();
-    let result = [];
+    let node = parentNode.add(scrollview);
+    let next = [];
     let sequence = this.getFamousChildrenRef().map((child, idx) => {
-      result.push([child, renderNode]);
       let renderNode = new FamousRenderNode();
+      next.push([child, renderNode]);
       return renderNode;
     });
     scrollview.sequenceFrom(sequence);
-    parentNode.add(scrollview);
-    return result;
+    return [node, next];
   }
 
   famousUpdate(nextProps) {

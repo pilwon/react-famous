@@ -11,7 +11,8 @@ class SubmitInputSurface extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let submitInputSurface = this.getFamous();
-    parentNode.add(submitInputSurface);
+    let node = parentNode.add(submitInputSurface);
+    return [node, null];
   }
 
   famousUpdate(nextProps) {

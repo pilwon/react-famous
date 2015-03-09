@@ -12,15 +12,15 @@ class GridLayout extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let gridLayout = this.getFamous();
-    let result = [];
+    let node = parentNode.add(gridLayout);
+    let next = [];
     let sequence = this.getFamousChildrenRef().map((child, idx) => {
-      result.push([child, renderNode]);
       let renderNode = new FamousRenderNode();
+      next.push([child, renderNode]);
       return renderNode;
     });
     gridLayout.sequenceFrom(sequence);
-    parentNode.add(gridLayout);
-    return result;
+    return [node, next];
   }
 
   famousUpdate(nextProps) {

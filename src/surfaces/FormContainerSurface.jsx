@@ -12,7 +12,9 @@ class FormContainerSurface extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let formContainerSurface = this.getFamous();
-    parentNode.add(formContainerSurface);
+    let node = parentNode.add(formContainerSurface);
+    let next = this.getFamousChildrenRef().map((child, idx) => [child, formContainerSurface]);
+    return [node, next];
   }
 
   famousUpdate(nextProps) {

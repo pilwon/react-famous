@@ -11,7 +11,8 @@ class CanvasSurface extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let surface = this.getFamous();
-    parentNode.add(surface);
+    let node = parentNode.add(surface);
+    return [node, null];
   }
 
   famousUpdate(nextProps) {

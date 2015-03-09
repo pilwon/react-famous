@@ -11,7 +11,8 @@ class InputSurface extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let inputSurface = this.getFamous();
-    parentNode.add(inputSurface);
+    let node = parentNode.add(inputSurface);
+    return [node, null];
   }
 
   famousUpdate(nextProps) {

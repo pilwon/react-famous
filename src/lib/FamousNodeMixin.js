@@ -2,6 +2,7 @@ import merge from 'lodash/object/merge';
 import React from 'react';
 
 const FAMOUS_KEY = '__famous__';
+const FAMOUS_NODE_KEY = '__famous_node__';
 
 export default {
   createFamousWrapper(child, props) {
@@ -12,6 +13,10 @@ export default {
 
   getFamous() {
     return this[FAMOUS_KEY];
+  },
+
+  getFamousNode() {
+    return this[FAMOUS_NODE_KEY];
   },
 
   getFamousChildren() {
@@ -34,9 +39,14 @@ export default {
 
   releaseFamous() {
     delete this[FAMOUS_KEY];
+    delete this[FAMOUS_NODE_KEY];
   },
 
   setFamous(famousInstance) {
     this[FAMOUS_KEY] = famousInstance;
+  },
+
+  setFamousNode(famousNode) {
+    this[FAMOUS_NODE_KEY] = famousNode;
   }
 };

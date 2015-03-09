@@ -34,8 +34,9 @@ export default {
 
   _createFamousNode(component, parentNode = null) {
     if (isFunction(component.famousCreateNode)) {
-      let result = component.famousCreateNode(parentNode);
-      (result || []).forEach(([child, parentNode]) => {
+      let [node, next] = component.famousCreateNode(parentNode);
+      component.setFamousNode(node);
+      (next || []).forEach(([child, parentNode]) => {
         this._createFamousNode(child, parentNode);
       });
     } else {

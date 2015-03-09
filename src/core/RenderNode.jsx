@@ -12,7 +12,8 @@ class RenderNode extends FamousComponent {
   famousCreateNode(parentNode) {
     let renderNode = this.getFamous();
     let node = parentNode.add(renderNode);
-    return this.getFamousChildrenRef().map((child, idx) => [child, node]);
+    let next = this.getFamousChildrenRef().map((child, idx) => [child, node]);
+    return [node, next];
   }
 
   render() {

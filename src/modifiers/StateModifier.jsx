@@ -12,7 +12,8 @@ class StateModifier extends FamousComponent {
   famousCreateNode(parentNode) {
     let stateModifier = this.getFamous();
     let node = parentNode.add(stateModifier);
-    return this.getFamousChildrenRef().map((child, idx) => [child, node]);
+    let next = this.getFamousChildrenRef().map((child, idx) => [child, node]);
+    return [node, next];
   }
 
   famousUpdate(nextProps) {

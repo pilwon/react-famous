@@ -19,7 +19,9 @@ class Context extends FamousComponent {
 
   famousCreateNode() {
     let context = this.getFamous();
-    return this.getFamousChildrenRef().map((child) => [child, context]);
+    let node = context;
+    let next = this.getFamousChildrenRef().map((child) => [child, context]);
+    return [node, next];
   }
 
   famousDelete() {
