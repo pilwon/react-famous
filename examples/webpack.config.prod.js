@@ -12,6 +12,7 @@ module.exports = {
       {test: /\.js$/, loader: 'babel?blacklist[]=react', exclude: /node_modules/},
       {test: /\.jsx$/, loaders: ['imports?React=react', 'react-hot', 'babel']},
       {test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css')},
+      {test: /\.less$/, loader: ExtractTextPlugin.extract('style', 'css', 'less')}
     ]
   },
   output: {
