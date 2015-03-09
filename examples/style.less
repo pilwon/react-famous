@@ -1,0 +1,94 @@
+html, body {
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 14px;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 100%;
+}
+
+a {
+  color: #111;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.app {
+  padding-left: 170px;
+}
+
+.menu {
+  background-color: #eee;
+  border-right: 1px solid #c8c8c8;
+  bottom: 0;
+  height: 100%;
+  left: 170px;
+  margin-left: -170px;
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  width: 170px;
+  z-index: 1000;
+
+  > nav {
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 17px 0;
+    text-align: center;
+  }
+
+  section.group {
+    margin-bottom: 10px;
+
+    > header {
+      background-color: #c8c8c8;
+      font-size: 1.2em;
+      text-align: center;
+      padding: 5px;
+    }
+
+    > ul {
+      list-style-type: none;
+      padding: 0;
+
+      > li {
+        padding: 3px 15px;
+      }
+    }
+  }
+}
+
+.content {
+  bottom: 0;
+  position: absolute;
+  left: 170px;
+  right: 0;
+  top: 0;
+
+  .home {
+    a {
+      background-color: #eee;
+      padding: 7px 15px;
+    }
+  }
+
+  .example {
+    .source-code {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px 15px;
+      position: fixed;
+      right: 0;
+      text-align: center;
+      top: 0;
+      z-index: 999;
+
+      a {
+        color: #eee;
+      }
+    }
+  }
+}
