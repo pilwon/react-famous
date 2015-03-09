@@ -1,5 +1,4 @@
 import FamousContainerSurface from 'famous/surfaces/ContainerSurface';
-import isUndefined from 'lodash/lang/isUndefined';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
@@ -27,9 +26,7 @@ class ContainerSurface extends FamousComponent {
   render() {
     return (
       <div data-famous="ContainerSurface">
-        <Context>
-          {this.props.children}
-        </Context>
+        {this.getFamousChildren()}
       </div>
     );
   }

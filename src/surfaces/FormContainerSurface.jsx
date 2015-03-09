@@ -26,9 +26,7 @@ class FormContainerSurface extends FamousComponent {
   render() {
     return (
       <div data-famous="FormContainerSurface">
-        <Context>
-          {this.props.children}
-        </Context>
+        {this.getFamousChildren()}
       </div>
     );
   }
