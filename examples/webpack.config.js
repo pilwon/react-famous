@@ -7,7 +7,7 @@ module.exports = {
   debug: true,
   devtool: 'source-map',
   entry: {
-    examples: path.join(__dirname, 'examples')
+    main: path.join(__dirname, 'index.js')
   },
   module: {
     loaders: [
