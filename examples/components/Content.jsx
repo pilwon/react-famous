@@ -9,12 +9,23 @@ class Content extends React.Component {
   }
 
   render() {
+    let group = this.props.group;
+    let member = this.props.member;
     let content;
 
-    if (this.props.group && this.props.member) {
+    if (group && member) {
       try {
-        let Component = require(`react-proxy!./${this.props.group}/${this.props.member}/App`);
-        content = <Component/>;
+        let Component = require(`react-proxy!./${group}/${member}/App`);
+        content = (
+          <div className="example">
+            <div className="source-code">
+              <a href={`https://github.com/pilwon/react-famous/blob/master/examples/components/${group}/${member}/App.jsx`} target="_blank">
+                Source Code
+              </a>
+            </div>
+            <Component/>
+          </div>
+        );
       } catch (err) {
         if (window.history && window.history.replaceState) {
           window.history.replaceState(null, null, '/');
