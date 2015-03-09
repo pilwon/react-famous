@@ -33,12 +33,8 @@ export default class extends React.Component {
             Comments
           </Surface>
         </Modifier>
-        <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
-          <CommentList data={this.state.data}/>
-        </Modifier>
-        <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
-          <CommentForm onCommentSubmit={this._handleCommentSubmit.bind(this)}/>
-        </Modifier>
+        <CommentList data={this.state.data}/>
+        <CommentForm onCommentSubmit={this._handleCommentSubmit.bind(this)}/>
       </FlexibleLayout>
     );
   }

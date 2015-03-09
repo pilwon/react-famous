@@ -50,10 +50,12 @@ class Component extends React.Component {
     });
 
     return (
-      <Modifier options={{proportions: [0.8, undefined]}}>
-        <Scrollview>
-          {commentNodes}
-        </Scrollview>
+      <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
+        <Modifier options={{proportions: [0.8, undefined]}}>
+          <Scrollview>
+            {commentNodes}
+          </Scrollview>
+        </Modifier>
       </Modifier>
     );
   }
