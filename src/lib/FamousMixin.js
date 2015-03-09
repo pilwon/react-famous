@@ -56,7 +56,7 @@ export default {
         this.famousUpdate(this.props, this.state);
       }
       this._createFamousNode(this);
-      FamousScheduler.run();
+      setTimeout(FamousScheduler.run);
     }
   },
 
