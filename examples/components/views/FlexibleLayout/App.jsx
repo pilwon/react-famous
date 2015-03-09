@@ -1,7 +1,10 @@
+import Transform from 'famous/core/Transform';
+import GenericSync from 'famous/inputs/GenericSync';
+import MouseSync from 'famous/inputs/MouseSync';
+import TouchSync from 'famous/inputs/TouchSync';
 import range from 'lodash/utility/range';
 import React from 'react';
 import Context from 'react-famous/core/Context';
-import Engine from 'react-famous/core/Engine';
 import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
 import FlexibleLayout from 'react-famous/views/FlexibleLayout';
@@ -19,12 +22,22 @@ const COLORS = [
 const INITIAL_RATIOS = [1, true, 1, true, 1, true, 1, true];
 const FINAL_RATIOS = [4, true, 1, true, 0, true, 7, true];
 
+GenericSync.register({
+  mouse: MouseSync,
+  touch: TouchSync
+});
+
 export default class extends React.Component {
   componentDidMount() {
+    let clickSurface = this.refs.clickSurface.getFamous();
     let flexibleLayout = this.refs.flexibleLayout.getFamous();
+    let sync = new GenericSync({
+      mouse: {},
+      touch: {}
+    });
     let toggle = false;
 
-    Engine.on('click', () => {
+    sync.on('end', (data) => {
       let ratios = toggle ? INITIAL_RATIOS : FINAL_RATIOS;
       flexibleLayout.setRatios(ratios, {
         curve: 'easeOut',
@@ -32,6 +45,8 @@ export default class extends React.Component {
       });
       toggle = !toggle;
     });
+
+    clickSurface.pipe(sync);
   }
 
   render() {
@@ -53,6 +68,9 @@ export default class extends React.Component {
           <FlexibleLayout ref="flexibleLayout" options={{ratios: INITIAL_RATIOS}}>
             {surfaces}
           </FlexibleLayout>
+        </Modifier>
+        <Modifier options={{transform: Transform.inFront}}>
+          <Surface ref="clickSurface"/>
         </Modifier>
       </Context>
     );

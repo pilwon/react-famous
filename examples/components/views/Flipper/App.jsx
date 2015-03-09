@@ -1,16 +1,29 @@
+import Transform from 'famous/core/Transform';
+import GenericSync from 'famous/inputs/GenericSync';
+import MouseSync from 'famous/inputs/MouseSync';
+import TouchSync from 'famous/inputs/TouchSync';
 import React from 'react';
 import Context from 'react-famous/core/Context';
-import Engine from 'react-famous/core/Engine';
 import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
 import Flipper from 'react-famous/views/Flipper';
 
+GenericSync.register({
+  mouse: MouseSync,
+  touch: TouchSync
+});
+
 export default class extends React.Component {
   componentDidMount() {
+    let clickSurface = this.refs.clickSurface.getFamous();
     let flipper = this.refs.flipper.getFamous();
+    let sync = new GenericSync({
+      mouse: {},
+      touch: {}
+    });
     let toggle = false;
 
-    Engine.on('click', () => {
+    sync.on('end', (data) => {
       let angle = toggle ? 0 : Math.PI;
       flipper.setAngle(angle, {
         curve: 'easeOutBounce',
@@ -18,12 +31,14 @@ export default class extends React.Component {
       });
       toggle = !toggle;
     });
+
+    clickSurface.pipe(sync);
   }
 
   render() {
     let frontOptions = {
       properties: {
-        backgroundColor: 'red',
+        backgroundColor: '#990000',
         color: 'white',
         lineHeight: '200px',
         textAlign: 'center'
@@ -33,7 +48,7 @@ export default class extends React.Component {
 
     let backOptions = {
       properties: {
-        backgroundColor: 'blue',
+        backgroundColor: '#000099',
         color: 'white',
         lineHeight: '200px',
         textAlign: 'center'
@@ -59,6 +74,9 @@ export default class extends React.Component {
               </Surface>
             </Flipper.Back>
           </Flipper>
+        </Modifier>
+        <Modifier options={{transform: Transform.inFront}}>
+          <Surface ref="clickSurface"/>
         </Modifier>
       </Context>
     );

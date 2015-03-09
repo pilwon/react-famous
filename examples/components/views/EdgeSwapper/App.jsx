@@ -1,19 +1,33 @@
+import Transform from 'famous/core/Transform';
+import GenericSync from 'famous/inputs/GenericSync';
+import MouseSync from 'famous/inputs/MouseSync';
+import TouchSync from 'famous/inputs/TouchSync';
 import React from 'react';
 import Context from 'react-famous/core/Context';
-import Engine from 'react-famous/core/Engine';
+import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
 import EdgeSwapper from 'react-famous/views/EdgeSwapper';
 
+GenericSync.register({
+  mouse: MouseSync,
+  touch: TouchSync
+});
+
 export default class extends React.Component {
   componentDidMount() {
+    let clickSurface = this.refs.clickSurface.getFamous();
     let edgeSwapper = this.refs.edgeSwapper.getFamous();
     let primary = this.refs.primary.getFamous();
     let secondary = this.refs.secondary.getFamous();
     let showing = true;
+    let sync = new GenericSync({
+      mouse: {},
+      touch: {}
+    });
 
     edgeSwapper.show(primary);
 
-    Engine.on('click', () => {
+    sync.on('end', (data) => {
       if (showing) {
         edgeSwapper.show(secondary);
       } else {
@@ -21,6 +35,8 @@ export default class extends React.Component {
       }
       showing = !showing;
     });
+
+    clickSurface.pipe(sync);
   }
 
   render() {
@@ -54,6 +70,9 @@ export default class extends React.Component {
             Secondary
           </Surface>
         </EdgeSwapper>
+        <Modifier options={{transform: Transform.inFront}}>
+          <Surface ref="clickSurface"/>
+        </Modifier>
       </Context>
     );
   }
