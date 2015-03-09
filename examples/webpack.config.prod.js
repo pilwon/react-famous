@@ -1,10 +1,9 @@
 var path = require('path');
 
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var webpack = require('webpack');
 
 module.exports = {
-  debug: true,
-  devtool: 'source-map',
   entry: {
     main: path.join(__dirname, 'index.js')
   },
@@ -12,14 +11,24 @@ module.exports = {
     loaders: [
       {test: /\.js$/, loader: 'babel?blacklist[]=react', exclude: /node_modules/},
       {test: /\.jsx$/, loaders: ['imports?React=react', 'react-hot', 'babel']},
-      {test: /\.css$/, loader: 'style!css'}
+      {test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css')},
     ]
   },
   output: {
-    filename: '[name].js',
-    path: path.join(__dirname, '../dist/examples'),
-    publicPath: '/_assets/'
+    chunkFilename: 'js/[name].js?[chunkhash]',
+    filename: 'js/[name].js?[chunkhash]',
+    path: path.join(__dirname, '../dist/examples')
   },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      output: {
+        comments: false
+      }
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin('css/[name].css?[contenthash]')
+  ],
   resolve: {
     alias: {
       'react-famous': path.join(__dirname, '../src'),

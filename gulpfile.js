@@ -1,3 +1,4 @@
+var path = require('path');
 var util = require('util');
 
 var gulp = require('gulp-help')(require('gulp'));
@@ -26,8 +27,8 @@ gulp.task('build', 'Build for all targets.', [
 gulp.task('build-amd', 'Build for AMD.', function() {
   var gulpWrapAMD = require('gulp-wrap-amd');
 
-  var publish = gulp
-    .src('tools/publish/amd/**')
+  var copy = gulp
+    .src('tools/copy/amd/**')
     .pipe(gulp.dest('dist/amd'));
 
   var src = gulp
@@ -37,11 +38,11 @@ gulp.task('build-amd', 'Build for AMD.', function() {
     .pipe(gulpRename({extname: '.js'}))
     .pipe(gulp.dest('dist/amd'));
 
-  return mergeStream(publish, src);
+  return mergeStream(copy, src);
 });
 
 gulp.task('build-cjs', 'Build for CommonJS.', function () {
-  var publish = gulp
+  var copy = gulp
     .src('tools/publish/cjs/**')
     .pipe(gulp.dest('dist/cjs'));
 
@@ -51,11 +52,24 @@ gulp.task('build-cjs', 'Build for CommonJS.', function () {
     .pipe(gulpRename({extname: '.js'}))
     .pipe(gulp.dest('dist/cjs'));
 
-  return mergeStream(publish, src);
+  return mergeStream(copy, src);
 });
 
 gulp.task('build-examples', 'Build examples.', function () {
-  // node_modules/.bin/webpack --colors --config examples/webpack.config.js --profile --progress
+  var build = gulp.src('')
+    .pipe(gulpShell([
+      'node_modules/.bin/webpack',
+        '--colors',
+        '--config examples/webpack.config.prod.js',
+        '--profile',
+        '--progress'
+    ].join(' '), {cwd: __dirname}));
+
+  var copy = gulp
+    .src('tools/publish/examples/**')
+    .pipe(gulp.dest('dist/examples'));
+
+  return mergeStream(build, copy);
 });
 
 gulp.task('examples', 'Run examples.', function () {
@@ -72,15 +86,15 @@ gulp.task('examples', 'Run examples.', function () {
 
   return gulp.src('')
     .pipe(gulpShell([
-      'node_modules/.bin/webpack-dev-server ' +
-        '--colors ' +
-        '--config examples/webpack.config.js ' +
-        '--content-base examples ' +
-        '--hot ' +
-        '--inline ' +
-        util.format('--port %d ', options.port) +
+      'node_modules/.bin/webpack-dev-server',
+        '--colors',
+        '--config examples/webpack.config.js',
+        '--content-base examples',
+        '--hot',
+        '--inline',
+        util.format('--port %d', options.port),
         '--progress'
-    ], {cwd: __dirname}));
+    ].join(' '), {cwd: __dirname}));
 }, {
   options: {
     'port <port>': 'port (default: 8080)'
@@ -100,6 +114,17 @@ gulp.task('publish-cjs', 'Publish CommonJS.', function () {
     .pipe(gulpShell([
       'npm publish dist/cjs'
     ], {cwd: __dirname}));
+});
+
+gulp.task('publish-examples', 'Publish Examples.', function () {
+  return gulp.src('')
+    .pipe(gulpShell([
+      'git init',
+      'git add .',
+      'git commit -m Publish',
+      'git remote add origin git@github.com:react-famous/react-famous.github.io.git',
+      'git push -fu origin master'
+    ].join('&&'), {cwd: path.join(__dirname, 'dist/examples')}));
 });
 
 gulp.task('reload-js', false, function () {
