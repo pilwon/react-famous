@@ -6,13 +6,8 @@ class Menu extends React.Component {
     return !isEqual(this.props, nextProps) || !isEqual(this.state, nextState);
   }
 
-  _onClick(eventKey) {
-    if (eventKey) {
-      let [group, member] = eventKey.split('.');
-      this.props.onMenuChange(group, member);
-    } else {
-      this.props.onMenuChange();
-    }
+  _onClick(group, member) {
+    this.props.onMenuChange(group, member);
   }
 
   render() {
@@ -20,7 +15,7 @@ class Menu extends React.Component {
       let listItems = this.props.examples[group].map((member, idx) => {
         return (
           <li key={idx}>
-            <a href={`#${group}.${member}`} onClick={this._onClick.bind(this, `${group}.${member}`)}>{member}</a>
+            <a href={`#/${group}/${member}`} onClick={this._onClick.bind(this, group, member)}>{member}</a>
           </li>
         );
       });
@@ -38,7 +33,7 @@ class Menu extends React.Component {
     return (
       <div className="menu">
         <nav>
-          <a href="#" onClick={this._onClick.bind(this, null)}>react-famous</a>
+          <a href="#" onClick={this._onClick.bind(this)}>react-famous</a>
         </nav>
         {examples}
       </div>

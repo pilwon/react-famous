@@ -16,7 +16,9 @@ class Content extends React.Component {
         let Component = require(`react-proxy!./${this.props.group}/${this.props.member}/App`);
         content = <Component/>;
       } catch (err) {
-        console.error(err.message);
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(null, null, '/');
+        }
       }
     }
 

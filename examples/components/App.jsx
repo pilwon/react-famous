@@ -44,7 +44,7 @@ export default class extends React.Component {
   }
 
   _onHashChange() {
-    let [group, member] = window.location.hash.slice(1).split('.');
+    let [group, member] = window.location.hash.slice(2).split('/');
     if (group && member) {
       this.setState({group, member});
     }
