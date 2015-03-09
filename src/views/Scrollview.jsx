@@ -1,21 +1,22 @@
-import RenderNode from 'famous/core/RenderNode';
-import Scrollview from 'famous/views/Scrollview';
+import FamousRenderNode from 'famous/core/RenderNode';
+import FamousScrollview from 'famous/views/Scrollview';
+import isFunction from 'lodash/lang/isFunction';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
-class Component extends FamousComponent {
+class Scrollview extends FamousComponent {
   famousCreate() {
-    return new Scrollview(this.props.options);
+    return new FamousScrollview(this.props.options);
   }
 
   famousCreateNode(parentNode) {
     let scrollview = this.getFamous();
     let result = [];
     let sequence = this.getFamousChildrenRef().map((child, idx) => {
-      let renderNode = new RenderNode();
       result.push([child, renderNode]);
+      let renderNode = new FamousRenderNode();
       return renderNode;
     });
     scrollview.sequenceFrom(sequence);
@@ -38,6 +39,6 @@ class Component extends FamousComponent {
   }
 }
 
-defaults(Component, Scrollview);
+defaults(Scrollview, FamousScrollview);
 
-export default Component;
+export default Scrollview;

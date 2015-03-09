@@ -1,13 +1,14 @@
-import ContainerSurface from 'famous/surfaces/ContainerSurface';
+import FamousContainerSurface from 'famous/surfaces/ContainerSurface';
+import isUndefined from 'lodash/lang/isUndefined';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import Context from '../core/Context';
 import FamousComponent from '../lib/FamousComponent';
 
-class Component extends FamousComponent {
+class ContainerSurface extends FamousComponent {
   famousCreate() {
-    return new ContainerSurface(this.props.options);
+    return new FamousContainerSurface(this.props.options);
   }
 
   famousCreateNode(parentNode) {
@@ -32,6 +33,6 @@ class Component extends FamousComponent {
   }
 }
 
-defaults(Component, ContainerSurface);
+defaults(ContainerSurface, FamousContainerSurface);
 
-export default Component;
+export default ContainerSurface;

@@ -1,4 +1,4 @@
-import Engine from 'famous/core/Engine';
+import FamousEngine from 'famous/core/Engine';
 // import ReactUpdates from 'react/lib/ReactUpdates';
 
 // ReactUpdates.injection.injectBatchingStrategy({
@@ -7,10 +7,10 @@ import Engine from 'famous/core/Engine';
 //     callback(param);
 //   }
 // });
-// Engine.on('prerender', ReactUpdates.flushBatchedUpdates.bind(ReactUpdates));
+// FamousEngine.on('prerender', ReactUpdates.flushBatchedUpdates.bind(ReactUpdates));
 
-Engine.setOptions({
+FamousEngine.setOptions({
   appMode: false
 });
 
-export default Engine;
+export default FamousEngine;

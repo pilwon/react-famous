@@ -1,4 +1,4 @@
-import Surface from 'famous/core/Surface';
+import FamousSurface from 'famous/core/Surface';
 import isUndefined from 'lodash/lang/isUndefined';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
@@ -22,9 +22,9 @@ const SURFACE_EVENTS = [
   {prop: 'onTouchStart', type: 'touchstart'}
 ];
 
-class Component extends FamousComponent {
+class Surface extends FamousComponent {
   famousCreate() {
-    let surface = new Surface(this.props.options);
+    let surface = new FamousSurface(this.props.options);
 
     SURFACE_EVENTS.forEach((event) => {
       if (this.props[event.prop]) {
@@ -63,9 +63,9 @@ class Component extends FamousComponent {
   }
 }
 
-defaults(Component, Surface);
+defaults(Surface, FamousSurface);
 
-Component.propTypes = {
+Surface.propTypes = {
   eventKey: React.PropTypes.any,
   onClick: React.PropTypes.func,
   onKeyDown: React.PropTypes.func,
@@ -82,4 +82,4 @@ Component.propTypes = {
   onTouchStart: React.PropTypes.func
 };
 
-export default Component;
+export default Surface;

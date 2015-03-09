@@ -1,12 +1,12 @@
-import ImageSurface from 'famous/surfaces/ImageSurface';
+import FamousImageSurface from 'famous/surfaces/ImageSurface';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
-class Component extends FamousComponent {
+class ImageSurface extends FamousComponent {
   famousCreate() {
-    return new ImageSurface(this.props.options);
+    return new FamousImageSurface(this.props.options);
   }
 
   famousCreateNode(parentNode) {
@@ -27,6 +27,6 @@ class Component extends FamousComponent {
   }
 }
 
-defaults(Component, ImageSurface);
+defaults(ImageSurface, FamousImageSurface);
 
-export default Component;
+export default ImageSurface;

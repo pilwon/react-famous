@@ -1,12 +1,12 @@
-import SubmitInputSurface from 'famous/surfaces/SubmitInputSurface';
+import FamousSubmitInputSurface from 'famous/surfaces/SubmitInputSurface';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
-class Component extends FamousComponent {
+class SubmitInputSurface extends FamousComponent {
   famousCreate() {
-    return new SubmitInputSurface(this.props.options);
+    return new FamousSubmitInputSurface(this.props.options);
   }
 
   famousCreateNode(parentNode) {
@@ -27,6 +27,6 @@ class Component extends FamousComponent {
   }
 }
 
-defaults(Component, SubmitInputSurface);
+defaults(SubmitInputSurface, FamousSubmitInputSurface);
 
-export default Component;
+export default SubmitInputSurface;

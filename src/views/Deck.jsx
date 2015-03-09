@@ -1,21 +1,21 @@
-import RenderNode from 'famous/core/RenderNode';
-import Deck from 'famous/views/Deck';
+import FamousRenderNode from 'famous/core/RenderNode';
+import FamousDeck from 'famous/views/Deck';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
-class Component extends FamousComponent {
+class Deck extends FamousComponent {
   famousCreate() {
-    return new Deck(this.props.options);
+    return new FamousDeck(this.props.options);
   }
 
   famousCreateNode(parentNode) {
     let deck = this.getFamous();
     let result = [];
     let sequence = this.getFamousChildrenRef().map((child, idx) => {
-      let renderNode = new RenderNode();
       result.push([child, renderNode]);
+      let renderNode = new FamousRenderNode();
       return renderNode;
     });
     parentNode.add(deck);
@@ -38,6 +38,6 @@ class Component extends FamousComponent {
   }
 }
 
-defaults(Component, Deck);
+defaults(Deck, FamousDeck);
 
-export default Component;
+export default Deck;

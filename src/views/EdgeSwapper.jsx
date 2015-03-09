@@ -1,13 +1,13 @@
-import RenderNode from 'famous/core/RenderNode';
-import EdgeSwapper from 'famous/views/EdgeSwapper';
+import FamousRenderNode from 'famous/core/RenderNode';
+import FamousEdgeSwapper from 'famous/views/EdgeSwapper';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
-class Component extends FamousComponent {
+class EdgeSwapper extends FamousComponent {
   famousCreate() {
-    return new EdgeSwapper(this.props.options);
+    return new FamousEdgeSwapper(this.props.options);
   }
 
   famousCreateNode(parentNode) {
@@ -31,6 +31,6 @@ class Component extends FamousComponent {
   }
 }
 
-defaults(Component, EdgeSwapper);
+defaults(EdgeSwapper, FamousEdgeSwapper);
 
-export default Component;
+export default EdgeSwapper;

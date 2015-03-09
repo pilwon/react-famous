@@ -1,4 +1,4 @@
-import Context from 'famous/core/Context';
+import FamousContext from 'famous/core/Context';
 import isUndefined from 'lodash/lang/isUndefined';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
@@ -6,7 +6,7 @@ import React from 'react';
 import FamousComponent from '../lib/FamousComponent';
 import Engine from './Engine';
 
-class Component extends FamousComponent {
+class Context extends FamousComponent {
   constructor(...args) {
     super(...args);
 
@@ -46,10 +46,10 @@ class Component extends FamousComponent {
   }
 }
 
-defaults(Component, Context);
+defaults(Context, FamousContext);
 
-Component.propTypes = {
+Context.propTypes = {
   perspective: React.PropTypes.number
 };
 
-export default Component;
+export default Context;

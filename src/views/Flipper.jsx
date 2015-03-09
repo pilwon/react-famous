@@ -1,23 +1,23 @@
-import RenderNode from 'famous/core/RenderNode';
-import Flipper from 'famous/views/Flipper';
+import FamousRenderNode from 'famous/core/RenderNode';
+import FamousFlipper from 'famous/views/Flipper';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
-class Component extends FamousComponent {
+class Flipper extends FamousComponent {
   famousCreate() {
-    return new Flipper(this.props.options);
+    return new FamousFlipper(this.props.options);
   }
 
   famousCreateNode(parentNode) {
     let flipper = this.getFamous();
-    let backRenderNode = new RenderNode();
-    let frontRenderNode = new RenderNode();
     parentNode.add(flipper);
     flipper.setBack(backRenderNode);
     flipper.setFront(frontRenderNode);
     return [
+    let backRenderNode = new FamousRenderNode();
+    let frontRenderNode = new FamousRenderNode();
       [this.refs.back, backRenderNode],
       [this.refs.front, frontRenderNode]
     ];
@@ -34,10 +34,10 @@ class Component extends FamousComponent {
 
     React.Children.forEach(this.props.children, (child) => {
       switch (child.type) {
-        case Component.Back:
+        case Flipper.Back:
           children.push(this.createFamousWrapper(child, {key: 'back', ref: 'back'}));
           break;
-        case Component.Front:
+        case Flipper.Front:
           children.push(this.createFamousWrapper(child, {key: 'front', ref: 'front'}));
           break;
         default:
@@ -53,9 +53,9 @@ class Component extends FamousComponent {
   }
 }
 
-Component.Back = class extends FamousComponent {
+Flipper.Back = class extends FamousComponent {
   famousCreate() {
-    return new RenderNode();
+    return new FamousRenderNode();
   }
 
   famousCreateNode(parentNode) {
@@ -73,9 +73,9 @@ Component.Back = class extends FamousComponent {
   }
 };
 
-Component.Front = class extends FamousComponent {
+Flipper.Front = class extends FamousComponent {
   famousCreate() {
-    return new RenderNode();
+    return new FamousRenderNode();
   }
 
   famousCreateNode(parentNode) {
@@ -93,6 +93,6 @@ Component.Front = class extends FamousComponent {
   }
 }
 
-defaults(Component, Flipper);
+defaults(Flipper, FamousFlipper);
 
-export default Component;
+export default Flipper;

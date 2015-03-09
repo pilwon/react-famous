@@ -1,21 +1,21 @@
-import RenderNode from 'famous/core/RenderNode';
-import FlexibleLayout from 'famous/views/FlexibleLayout';
+import FamousRenderNode from 'famous/core/RenderNode';
+import FamousFlexibleLayout from 'famous/views/FlexibleLayout';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
-class Component extends FamousComponent {
+class FlexibleLayout extends FamousComponent {
   famousCreate() {
-    return new FlexibleLayout(this.props.options);
+    return new FamousFlexibleLayout(this.props.options);
   }
 
   famousCreateNode(parentNode) {
     let flexibleLayout = this.getFamous();
     let result = [];
     let sequence = this.getFamousChildrenRef().map((child, idx) => {
-      let renderNode = new RenderNode();
       result.push([child, renderNode]);
+      let renderNode = new FamousRenderNode();
       return renderNode;
     });
     flexibleLayout.sequenceFrom(sequence);
@@ -38,6 +38,6 @@ class Component extends FamousComponent {
   }
 }
 
-defaults(Component, FlexibleLayout);
+defaults(FlexibleLayout, FamousFlexibleLayout);
 
-export default Component;
+export default FlexibleLayout;

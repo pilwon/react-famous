@@ -1,12 +1,12 @@
-import Modifier from 'famous/core/Modifier';
+import FamousModifier from 'famous/core/Modifier';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
-class Component extends FamousComponent {
+class Modifier extends FamousComponent {
   famousCreate() {
-    return new Modifier(this.props.options);
+    return new FamousModifier(this.props.options);
   }
 
   famousCreateNode(parentNode) {
@@ -47,6 +47,6 @@ class Component extends FamousComponent {
   }
 }
 
-defaults(Component, Modifier);
+defaults(Modifier, FamousModifier);
 
-export default Component;
+export default Modifier;

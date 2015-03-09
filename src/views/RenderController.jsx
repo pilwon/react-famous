@@ -1,13 +1,13 @@
-import RenderNode from 'famous/core/RenderNode';
-import RenderController from 'famous/views/RenderController';
+import FamousRenderNode from 'famous/core/RenderNode';
+import FamousRenderController from 'famous/views/RenderController';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
-class Component extends FamousComponent {
+class RenderController extends FamousComponent {
   famousCreate() {
-    return new RenderController(this.props.options);
+    return new FamousRenderController(this.props.options);
   }
 
   famousCreateNode(parentNode) {
@@ -31,6 +31,6 @@ class Component extends FamousComponent {
   }
 }
 
-defaults(Component, RenderController);
+defaults(RenderController, FamousRenderController);
 
-export default Component;
+export default RenderController;

@@ -1,13 +1,13 @@
-import RenderNode from 'famous/core/RenderNode';
-import HeaderFooterLayout from 'famous/views/HeaderFooterLayout';
+import FamousRenderNode from 'famous/core/RenderNode';
+import FamousHeaderFooterLayout from 'famous/views/HeaderFooterLayout';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
-class Component extends FamousComponent {
+class HeaderFooterLayout extends FamousComponent {
   famousCreate() {
-    return new HeaderFooterLayout(this.props.options);
+    return new FamousHeaderFooterLayout(this.props.options);
   }
 
   famousCreateNode(parentNode) {
@@ -31,13 +31,13 @@ class Component extends FamousComponent {
 
     React.Children.forEach(this.props.children, (child) => {
       switch (child.type) {
-        case Component.Content:
+        case HeaderFooterLayout.Content:
           children.push(this.createFamousWrapper(child, {key: 'content', ref: 'content'}));
           break;
-        case Component.Footer:
+        case HeaderFooterLayout.Footer:
           children.push(this.createFamousWrapper(child, {key: 'footer', ref: 'footer'}));
           break;
-        case Component.Header:
+        case HeaderFooterLayout.Header:
           children.push(this.createFamousWrapper(child, {key: 'header', ref: 'header'}));
           break;
         default:
@@ -53,7 +53,11 @@ class Component extends FamousComponent {
   }
 };
 
-Component.Content = class extends FamousComponent {
+HeaderFooterLayout.Content = class extends FamousComponent {
+  famousCreate() {
+    return new FamousRenderNode();
+  }
+
   famousCreateNode(parentNode) {
     let renderNode = this.getFamous();
     let node = parentNode.add(renderNode);
@@ -69,7 +73,11 @@ Component.Content = class extends FamousComponent {
   }
 };
 
-Component.Footer = class extends FamousComponent {
+HeaderFooterLayout.Footer = class extends FamousComponent {
+  famousCreate() {
+    return new FamousRenderNode();
+  }
+
   famousCreateNode(parentNode) {
     let renderNode = this.getFamous();
     let node = parentNode.add(renderNode);
@@ -85,7 +93,11 @@ Component.Footer = class extends FamousComponent {
   }
 };
 
-Component.Header = class extends FamousComponent {
+HeaderFooterLayout.Header = class extends FamousComponent {
+  famousCreate() {
+    return new FamousRenderNode();
+  }
+
   famousCreateNode(parentNode) {
     let renderNode = this.getFamous();
     let node = parentNode.add(renderNode);
@@ -101,6 +113,6 @@ Component.Header = class extends FamousComponent {
   }
 }
 
-defaults(Component, HeaderFooterLayout);
+defaults(HeaderFooterLayout, FamousHeaderFooterLayout);
 
-export default Component;
+export default HeaderFooterLayout;

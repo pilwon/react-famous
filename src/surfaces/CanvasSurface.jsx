@@ -1,12 +1,12 @@
-import CanvasSurface from 'famous/surfaces/CanvasSurface';
+import FamousCanvasSurface from 'famous/surfaces/CanvasSurface';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
-class Component extends FamousComponent {
+class CanvasSurface extends FamousComponent {
   famousCreate() {
-    return new CanvasSurface(this.props.options);
+    return new FamousCanvasSurface(this.props.options);
   }
 
   famousCreateNode(parentNode) {
@@ -27,6 +27,6 @@ class Component extends FamousComponent {
   }
 }
 
-defaults(Component, CanvasSurface);
+defaults(CanvasSurface, FamousCanvasSurface);
 
-export default Component;
+export default CanvasSurface;

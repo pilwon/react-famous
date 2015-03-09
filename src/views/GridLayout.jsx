@@ -1,21 +1,21 @@
-import RenderNode from 'famous/core/RenderNode';
-import GridLayout from 'famous/views/GridLayout';
+import FamousRenderNode from 'famous/core/RenderNode';
+import FamousGridLayout from 'famous/views/GridLayout';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
-class Component extends FamousComponent {
+class GridLayout extends FamousComponent {
   famousCreate() {
-    return new GridLayout(this.props.options);
+    return new FamousGridLayout(this.props.options);
   }
 
   famousCreateNode(parentNode) {
     let gridLayout = this.getFamous();
     let result = [];
     let sequence = this.getFamousChildrenRef().map((child, idx) => {
-      let renderNode = new RenderNode();
       result.push([child, renderNode]);
+      let renderNode = new FamousRenderNode();
       return renderNode;
     });
     gridLayout.sequenceFrom(sequence);
@@ -38,6 +38,6 @@ class Component extends FamousComponent {
   }
 }
 
-defaults(Component, GridLayout);
+defaults(GridLayout, FamousGridLayout);
 
-export default Component;
+export default GridLayout;

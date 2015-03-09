@@ -1,13 +1,13 @@
-import FormContainerSurface from 'famous/surfaces/FormContainerSurface';
+import FamousFormContainerSurface from 'famous/surfaces/FormContainerSurface';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import Context from '../core/Context';
 import FamousComponent from '../lib/FamousComponent';
 
-class Component extends FamousComponent {
+class FormContainerSurface extends FamousComponent {
   famousCreate() {
-    return new FormContainerSurface(this.props.options);
+    return new FamousFormContainerSurface(this.props.options);
   }
 
   famousCreateNode(parentNode) {
@@ -32,6 +32,6 @@ class Component extends FamousComponent {
   }
 }
 
-defaults(Component, FormContainerSurface);
+defaults(FormContainerSurface, FamousFormContainerSurface);
 
-export default Component;
+export default FormContainerSurface;

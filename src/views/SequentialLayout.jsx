@@ -1,21 +1,21 @@
-import RenderNode from 'famous/core/RenderNode';
-import SequentialLayout from 'famous/views/SequentialLayout';
+import FamousRenderNode from 'famous/core/RenderNode';
+import FamousSequentialLayout from 'famous/views/SequentialLayout';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
-class Component extends FamousComponent {
+class SequentialLayout extends FamousComponent {
   famousCreate() {
-    return new SequentialLayout(this.props.options);
+    return new FamousSequentialLayout(this.props.options);
   }
 
   famousCreateNode(parentNode) {
     let sequentialLayout = this.getFamous();
     let result = [];
     let sequence = this.getFamousChildrenRef().map((child, idx) => {
-      let renderNode = new RenderNode();
       result.push([child, renderNode]);
+      let renderNode = new FamousRenderNode();
       return renderNode;
     });
     sequentialLayout.sequenceFrom(sequence);
@@ -38,6 +38,6 @@ class Component extends FamousComponent {
   }
 }
 
-defaults(Component, SequentialLayout);
+defaults(SequentialLayout, FamousSequentialLayout);
 
-export default Component;
+export default SequentialLayout;

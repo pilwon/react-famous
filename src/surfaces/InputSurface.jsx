@@ -1,12 +1,12 @@
-import InputSurface from 'famous/surfaces/InputSurface';
+import FamousInputSurface from 'famous/surfaces/InputSurface';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
-class Component extends FamousComponent {
+class InputSurface extends FamousComponent {
   famousCreate() {
-    return new InputSurface(this.props.options);
+    return new FamousInputSurface(this.props.options);
   }
 
   famousCreateNode(parentNode) {
@@ -27,6 +27,6 @@ class Component extends FamousComponent {
   }
 }
 
-defaults(Component, InputSurface);
+defaults(InputSurface, FamousInputSurface);
 
-export default Component;
+export default InputSurface;
