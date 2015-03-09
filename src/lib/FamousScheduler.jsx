@@ -5,13 +5,15 @@ export function schedule(cb, delay) {
 }
 
 export function run() {
-  _callbacks.forEach(([cb, delay]) => {
+  if (_callbacks.length) {
+    let [cb, delay] = _callbacks.shift();
+    
     if (delay) {
       setTimeout(cb, delay);
     } else {
       cb();
     }
-  });
+  }
 }
 
 export default {
