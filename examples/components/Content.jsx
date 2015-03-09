@@ -3,7 +3,7 @@ import React from 'react';
 
 import Home from './Home';
 
-class Example extends React.Component {
+class Content extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     return !isEqual(this.props, nextProps) || !isEqual(this.state, nextState);
   }
@@ -12,23 +12,25 @@ class Example extends React.Component {
     let content;
 
     if (this.props.group && this.props.member) {
-      let Component = require(`react-proxy!./${this.props.group}/${this.props.member}/App`);
-      content = <Component/>
-    } else {
-      content = <Home/>;
+      try {
+        let Component = require(`react-proxy!./${this.props.group}/${this.props.member}/App`);
+        content = <Component/>;
+      } catch (err) {
+        console.error(err.message);
+      }
     }
 
     return (
-      <div className="example">
-        {content}
+      <div className="content">
+        {content ? content : <Home/>}
       </div>
     );
   }
 }
 
-Example.propTypes = {
+Content.propTypes = {
   group: React.PropTypes.string,
   member: React.PropTypes.string
 };
 
-export default Example;
+export default Content;

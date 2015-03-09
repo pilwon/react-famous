@@ -1,7 +1,7 @@
 import isEqual from 'lodash/lang/isEqual';
 import React from 'react';
 
-import Example from './Example';
+import Content from './Content';
 import Menu from './Menu';
 
 const EXAMPLES = {
@@ -13,13 +13,6 @@ const EXAMPLES = {
     'ContainerSurface',
     'ImageSurface',
   ],
-  test: [
-    'Animations',
-    'CommentBox',
-    'HelloWorld',
-    'HelloWorldDynamic',
-    'Layout'
-  ],
   views: [
     'Deck',
     'EdgeSwapper',
@@ -30,6 +23,13 @@ const EXAMPLES = {
     'RenderController',
     'Scrollview',
     'SequentialLayout'
+  ],
+  test: [
+    'Animations',
+    'CommentBox',
+    'HelloWorld',
+    'HelloWorldDynamic',
+    'Layout'
   ]
 };
 
@@ -52,6 +52,7 @@ export default class extends React.Component {
 
   componentWillMount() {
     window.addEventListener('hashchange', this._onHashChange.bind(this), false);
+    this._onHashChange();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -66,7 +67,7 @@ export default class extends React.Component {
     return (
       <div className="app">
         <Menu examples={EXAMPLES} onMenuChange={this._onMenuChange.bind(this)}/>
-        <Example group={this.state.group} member={this.state.member}/>
+        <Content group={this.state.group} member={this.state.member}/>
       </div>
     );
   }
