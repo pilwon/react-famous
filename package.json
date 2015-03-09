@@ -20,6 +20,7 @@
     "minimist": "^1.1.0",
     "react": "^0.13.0-rc2",
     "react-hot-loader": "^1.1.7",
+    "react-proxy-loader": "^0.3.3",
     "style-loader": "^0.8.3",
     "webpack": "^1.7.2",
     "webpack-dev-server": "^1.7.0"

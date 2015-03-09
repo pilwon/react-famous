@@ -42,7 +42,7 @@ export default class extends React.Component {
           Scrollview is created inside a container surface.
         </Surface>
         <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
-          <ContainerSurface options={{properties: {border: '1px solid black', overflow: 'hidden'}, size: [300, 300]}}>
+          <ContainerSurface options={{properties: {overflow: 'hidden'}, size: [300, 300]}}>
             <Scrollview ref="scrollview">
               {surfaces}
             </Scrollview>
