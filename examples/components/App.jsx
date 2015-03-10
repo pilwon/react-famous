@@ -22,6 +22,7 @@ const EXAMPLES = {
     'GridLayout',
     'HeaderFooterLayout',
     'RenderController',
+    'ScrollContainer',
     'Scrollview',
     'SequentialLayout'
   ],
