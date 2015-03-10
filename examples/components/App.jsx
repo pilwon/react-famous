@@ -6,7 +6,7 @@ import Menu from './Menu';
 
 const EXAMPLES = {
   modifiers: [
-    'Draggable',
+    'Draggable'
   ],
   surfaces: [
     'CanvasSurface',
