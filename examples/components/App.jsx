@@ -12,6 +12,7 @@ const EXAMPLES = {
     'CanvasSurface',
     'ContainerSurface',
     'ImageSurface',
+    'VideoSurface'
   ],
   views: [
     'Deck',
