@@ -21,6 +21,7 @@ const EXAMPLES = {
     'Flipper',
     'GridLayout',
     'HeaderFooterLayout',
+    'Lightbox',
     'RenderController',
     'ScrollContainer',
     'Scrollview',
