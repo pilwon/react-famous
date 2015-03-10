@@ -1,6 +1,5 @@
 import FamousDraggable from 'famous/modifiers/Draggable';
 import defaults from 'lodash/object/defaults';
-import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 

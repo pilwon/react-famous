@@ -1,6 +1,5 @@
 import FamousModifier from 'famous/core/Modifier';
 import defaults from 'lodash/object/defaults';
-import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 

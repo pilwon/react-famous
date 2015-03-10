@@ -1,6 +1,5 @@
 import FamousCanvasSurface from 'famous/surfaces/CanvasSurface';
 import defaults from 'lodash/object/defaults';
-import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 

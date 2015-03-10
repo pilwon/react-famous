@@ -1,7 +1,6 @@
 import FamousRenderNode from 'famous/core/RenderNode';
 import FamousLightbox from 'famous/views/Lightbox';
 import defaults from 'lodash/object/defaults';
-import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
