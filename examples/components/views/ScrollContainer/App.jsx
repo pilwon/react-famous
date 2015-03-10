@@ -29,7 +29,7 @@ export default class extends React.Component {
       };
       return (
         <Surface key={idx} ref={`surface_${idx}`} options={surfaceOptions}>
-          Surface {idx}
+          Surface {idx + 1}
         </Surface>
       );
     });
