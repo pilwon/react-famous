@@ -62,7 +62,7 @@ export default class extends React.Component {
           Click anywhere on the screen.
         </Surface>
         <Modifier options={{align: [.5, .5], origin: [.5, .5]}}>
-          <Flipper ref="flipper" options={{headerSize: 100, footerSize: 50}}>
+          <Flipper ref="flipper">
             <Flipper.Front>
               <Surface options={frontOptions}>
                 front
