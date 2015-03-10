@@ -12,13 +12,7 @@ class Lightbox extends FamousComponent {
   famousCreateNode(parentNode) {
     let lightbox = this.getFamous();
     let node = parentNode.add(lightbox);
-    let next = [];
-    let sequence = this.getFamousChildrenRef().map((child, idx) => {
-      let renderNode = new FamousRenderNode();
-      next.push([child, renderNode]);
-      return renderNode;
-    });
-    lightbox.sequenceFrom(sequence);
+    let next = this.getFamousChildrenRef().map((child, idx) => [child, new FamousRenderNode()]);
     return [node, next];
   }
 
