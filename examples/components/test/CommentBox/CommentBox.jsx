@@ -21,10 +21,6 @@ export default class extends React.Component {
     };
   }
 
-  _handleCommentSubmit() {
-
-  }
-
   render() {
     return (
       <FlexibleLayout options={{direction: FlexibleLayout.DIRECTION_Y, ratios: [0.2, 0.6, 0.2]}}>
@@ -34,7 +30,7 @@ export default class extends React.Component {
           </Surface>
         </Modifier>
         <CommentList data={this.state.data}/>
-        <CommentForm onCommentSubmit={this._handleCommentSubmit.bind(this)}/>
+        <CommentForm/>
       </FlexibleLayout>
     );
   }
