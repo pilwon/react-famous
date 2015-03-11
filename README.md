@@ -14,7 +14,7 @@ Using `react-famous`, you can:
 
 ## Demo
 
-* [Examples App](http://react-famous.github.io/) ([Source Code](https://github.com/pilwon/react-famous/tree/master/examples))
+* [Examples App](http://react-famous.github.io/) ([source code](https://github.com/pilwon/react-famous/tree/master/examples))
 
 
 ## Requirements
