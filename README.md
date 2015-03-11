@@ -26,7 +26,7 @@ Using `react-famous`, you can:
 ## Try it out
 
 This project is currently [WIP](http://en.wikipedia.org/wiki/Work_in_process) therefore it is not yet avaialble on [NPM](https://www.npmjs.com/) registry.
-In the meantime, please run and modify the examples app play with `react-famous`:
+In the meantime, you can run and modify the [Examples App](http://react-famous.github.io/) to play with `react-famous`:
 
     git clone git@github.com:pilwon/react-famous.git
     cd react-famous
