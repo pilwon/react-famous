@@ -5,6 +5,7 @@ import TouchSync from 'famous/inputs/TouchSync';
 import React from 'react';
 import Context from 'react-famous/core/Context';
 import Modifier from 'react-famous/core/Modifier';
+import RenderNode from 'react-famous/core/RenderNode';
 import Surface from 'react-famous/core/Surface';
 import FamousScheduler from 'react-famous/lib/FamousScheduler';
 import EdgeSwapper from 'react-famous/views/EdgeSwapper';
@@ -43,35 +44,33 @@ export default class extends React.Component {
   }
 
   render() {
-    let primaryOptions = {
+    let surfaceOptions = {
+      size: [true, true],
       properties: {
-        backgroundColor: '#990000',
         color: 'white',
-        fontSize: '2em',
-        lineHeight: `${window.innerHeight}px`,
-        textAlign: 'center'
-      }
-    };
-
-    let secondaryOptions = {
-      properties: {
-        backgroundColor: '#000099',
-        color: 'white',
-        fontSize: '2em',
-        lineHeight: `${window.innerHeight}px`,
-        textAlign: 'center'
+        fontSize: '2em'
       }
     };
 
     return (
       <Context>
         <EdgeSwapper ref="edgeSwapper">
-          <Surface ref="primary" options={primaryOptions}>
-            Primary
-          </Surface>
-          <Surface ref="secondary" options={secondaryOptions}>
-            Secondary
-          </Surface>
+          <RenderNode ref="primary">
+            <Surface options={{properties: {backgroundColor: '#990000'}}}/>
+            <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
+              <Surface options={surfaceOptions}>
+                Primary
+              </Surface>
+            </Modifier>
+          </RenderNode>
+          <RenderNode ref="secondary">
+            <Surface options={{properties: {backgroundColor: '#000099'}}}/>
+            <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
+              <Surface options={surfaceOptions}>
+                Secondary
+              </Surface>
+            </Modifier>
+          </RenderNode>
         </EdgeSwapper>
         <Modifier options={{transform: Transform.inFront}}>
           <Surface ref="clickSurface"/>
