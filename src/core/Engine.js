@@ -1,6 +1,8 @@
 import FamousEngine from 'famous/core/Engine';
 // import ReactUpdates from 'react/lib/ReactUpdates';
 
+import '../lib/FamousPatch';
+
 // ReactUpdates.injection.injectBatchingStrategy({
 //   isBatchingUpdates: true,
 //   batchedUpdates(callback, param) {
