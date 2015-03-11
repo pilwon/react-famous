@@ -12,10 +12,7 @@ var minimist = require('minimist');
 
 gulp.task('clean', 'Clean built files.', function (cb) {
   var del = require('del');
-  del([
-    'build',
-    'dist'
-  ], cb);
+  del('dist', cb);
 });
 
 gulp.task('build', 'Build for all targets.', [
@@ -24,7 +21,7 @@ gulp.task('build', 'Build for all targets.', [
   'build-examples'
 ]);
 
-gulp.task('build-amd', 'Build for AMD.', function() {
+gulp.task('build-amd', 'Build for AMD.', function () {
   var gulpWrapAMD = require('gulp-wrap-amd');
 
   var copy = gulp
@@ -125,11 +122,6 @@ gulp.task('publish-examples', 'Publish Examples.', function () {
       'git remote add origin git@github.com:react-famous/react-famous.github.io.git',
       'git push -fu origin master'
     ].join('&&'), {cwd: path.join(__dirname, 'dist/examples')}));
-});
-
-gulp.task('reload-js', false, function () {
-  return gulp.src('dist/**/*.js')
-    .pipe(connect.reload());
 });
 
 gulp.task('default', false, ['help']);
