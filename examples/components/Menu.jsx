@@ -33,7 +33,7 @@ class Menu extends React.Component {
     return (
       <div className="menu">
         <nav>
-          <a href="#" onClick={this._onClick.bind(this)}>react-famous</a>
+          <a href="#" onClick={this._onClick.bind(this, null, null)}>react-famous</a>
         </nav>
         {examples}
       </div>
