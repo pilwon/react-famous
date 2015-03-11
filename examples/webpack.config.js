@@ -11,7 +11,7 @@ module.exports = {
   module: {
     loaders: [
       {test: /\.js$/, loader: 'babel?blacklist[]=react', exclude: /node_modules/},
-      {test: /\.jsx$/, loaders: ['imports?React=react', 'react-hot', 'babel']},
+      {test: /\.jsx$/, loaders: ['react-hot', 'babel']},
       {test: /\.css$/, loader: 'style!css'},
       {test: /\.less$/, loader: 'style!css!less'}
     ]

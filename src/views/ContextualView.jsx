@@ -1,5 +1,6 @@
 import FamousContextualView from 'famous/views/ContextualView';
 import defaults from 'lodash/object/defaults';
+import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 

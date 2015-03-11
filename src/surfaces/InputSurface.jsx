@@ -1,5 +1,6 @@
 import FamousInputSurface from 'famous/surfaces/InputSurface';
 import defaults from 'lodash/object/defaults';
+import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 

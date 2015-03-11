@@ -1,5 +1,6 @@
 import FamousFormContainerSurface from 'famous/surfaces/FormContainerSurface';
 import defaults from 'lodash/object/defaults';
+import React from 'react';
 
 import Context from '../core/Context';
 import FamousComponent from '../lib/FamousComponent';

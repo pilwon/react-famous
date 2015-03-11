@@ -1,5 +1,6 @@
 import FamousImageSurface from 'famous/surfaces/ImageSurface';
 import defaults from 'lodash/object/defaults';
+import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 import FamousConstants from '../lib/FamousConstants';

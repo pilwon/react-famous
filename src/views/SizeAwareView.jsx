@@ -1,5 +1,6 @@
 import FamousSizeAwareView from 'famous/views/SizeAwareView';
 import defaults from 'lodash/object/defaults';
+import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 

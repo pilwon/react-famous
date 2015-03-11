@@ -1,6 +1,7 @@
 import FamousRenderNode from 'famous/core/RenderNode';
 import FamousScrollview from 'famous/views/Scrollview';
 import defaults from 'lodash/object/defaults';
+import React from 'react';
 
 import FamousComponent from '../lib/FamousComponent';
 
