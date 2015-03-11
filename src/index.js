@@ -8,9 +8,14 @@ export default {
     View: require('./core/View')
   },
   lib: {
+    FamousComponent: require('./lib/FamousComponent'),
+    FamousConstants: require('./lib/FamousConstants'),
     FamousMixin: require('./lib/FamousMixin'),
     FamousNodeMixin: require('./lib/FamousNodeMixin'),
-    FamousUtil: require('./lib/FamousUtil')
+    FamousPatch: require('./lib/FamousPatch'),
+    FamousScheduler: require('./lib/FamousScheduler'),
+    FamousUtil: require('./lib/FamousUtil'),
+    ReactNode: require('./lib/ReactNode')
   },
   modifiers: {
     Draggable: require('./modifiers/Draggable'),
