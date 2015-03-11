@@ -5,7 +5,7 @@ export function schedule(cb, delay) {
 }
 
 export function run() {
-  if (_callbacks.length) {
+  while (_callbacks.length) {
     let [cb, delay] = _callbacks.shift();
     
     if (delay) {
