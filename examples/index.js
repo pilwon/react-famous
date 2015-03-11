@@ -1,7 +1,7 @@
 import React from 'react';
 
 import 'famous/core/famous.css';
-import './style.less';
+import './styles/index.less';
 import App from './components/App';
 
 import './overscroll';
