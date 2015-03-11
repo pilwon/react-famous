@@ -7,24 +7,40 @@ import HeaderFooterLayout from 'react-famous/views/HeaderFooterLayout';
 
 export default class extends React.Component {
   render() {
+    let modifierOptions = {
+      align: [.5, .5],
+      origin: [.5, .5],
+      proportions: [0.5, 0.7],
+      transform: Transform.rotateZ(.2)
+    };
+
     return (
       <Context>
-        <Modifier options={{align: [.5, .5], origin: [.5, .5], size: [300, 300], transform: Transform.rotateZ(.2)}}>
-          <HeaderFooterLayout options={{headerSize: 100, footerSize: 50}}>
+        <Modifier options={modifierOptions}>
+          <HeaderFooterLayout options={{headerSize: 70, footerSize: 50}}>
             <HeaderFooterLayout.Header>
-              <Surface options={{properties: {backgroundColor: '#ff8888', lineHeight: '100px', textAlign: 'center'}, size: [undefined, 100]}}>
-                Header
-              </Surface>
+              <Surface options={{properties: {backgroundColor: '#ff8888'}}}/>
+              <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
+                <Surface options={{size: [true, true]}}>
+                  Header
+                </Surface>
+              </Modifier>
             </HeaderFooterLayout.Header>
             <HeaderFooterLayout.Content>
-              <Surface options={{properties: {backgroundColor: '#88ff88', lineHeight: '150px', textAlign: 'center'}}}>
-                Content
-              </Surface>
+              <Surface options={{properties: {backgroundColor: '#88ff88'}}}/>
+              <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
+                <Surface options={{size: [true, true]}}>
+                  Content
+                </Surface>
+              </Modifier>
             </HeaderFooterLayout.Content>
             <HeaderFooterLayout.Footer>
-              <Surface options={{properties: {backgroundColor: '#8888ff', lineHeight: '50px', textAlign: 'center'}, size: [undefined, 50]}}>
-                Footer
-              </Surface>
+              <Surface options={{properties: {backgroundColor: '#8888ff'}}}/>
+              <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
+                <Surface options={{size: [true, true]}}>
+                  Footer
+                </Surface>
+              </Modifier>
             </HeaderFooterLayout.Footer>
           </HeaderFooterLayout>
         </Modifier>
