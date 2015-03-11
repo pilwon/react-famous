@@ -1,7 +1,7 @@
 {
   "name": "react-famous",
-  "description": "Famo.us components build with React",
-  "version": "0.1.1",
+  "description": "React bridge to Famo.us",
+  "version": "0.1.2",
   "homepage": "https://github.com/pilwon/react-famous",
   "keywords": [
     "react",
@@ -20,6 +20,6 @@
   },
   "peerDependencies": {
     "famous": ">=0.3.5",
-    "react": ">=0.13.0-rc1"
+    "react": ">=0.13.0"
   }
 }
