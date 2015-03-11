@@ -11,7 +11,13 @@ import Deck from 'react-famous/views/Deck';
 Transitionable.registerMethod('spring', SpringTransition);
 
 export default class extends React.Component {
-  onSurfaceClick(eventKey) {
+  constructor(...args) {
+    super(...args);
+
+    this._onSurfaceClick = this._onSurfaceClick.bind(this);
+  }
+
+  _onSurfaceClick(eventKey) {
     let deck = this.refs.deck.getFamous();
 
     console.log('Clicked surface #' + eventKey);
@@ -30,7 +36,7 @@ export default class extends React.Component {
         size: [100, 200]
       };
       return (
-        <Surface eventKey={i} key={i} onClick={this.onSurfaceClick.bind(this)} options={options}>
+        <Surface eventKey={i} key={i} onClick={this._onSurfaceClick} options={options}>
           {i}
         </Surface>
       );

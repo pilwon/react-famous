@@ -45,6 +45,9 @@ export default class extends React.Component {
       group: null,
       member: null
     };
+
+    this._onHashChange = this._onHashChange.bind(this);
+    this._onMenuChange = this._onMenuChange.bind(this);
   }
 
   _onHashChange() {
@@ -55,7 +58,7 @@ export default class extends React.Component {
   }
 
   componentWillMount() {
-    window.addEventListener('hashchange', this._onHashChange.bind(this), false);
+    window.addEventListener('hashchange', this._onHashChange, false);
     this._onHashChange();
   }
 
@@ -70,7 +73,7 @@ export default class extends React.Component {
   render() {
     return (
       <div className="app">
-        <Menu examples={EXAMPLES} onMenuChange={this._onMenuChange.bind(this)}/>
+        <Menu examples={EXAMPLES} onMenuChange={this._onMenuChange}/>
         <Content group={this.state.group} member={this.state.member}/>
       </div>
     );
