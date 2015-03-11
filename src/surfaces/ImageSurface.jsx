@@ -2,10 +2,21 @@ import FamousImageSurface from 'famous/surfaces/ImageSurface';
 import defaults from 'lodash/object/defaults';
 
 import FamousComponent from '../lib/FamousComponent';
+import FamousConstants from '../lib/FamousConstants';
 
 class ImageSurface extends FamousComponent {
   famousCreate() {
-    return new FamousImageSurface(this.props.options);
+    let imageSurface = new FamousImageSurface(this.props.options);
+
+    FamousConstants.SURFACE_EVENTS.forEach((event) => {
+      if (this.props[event.prop]) {
+        imageSurface.on(event.type, () => {
+          this.props[event.prop](this.props.eventKey);
+        });
+      }
+    });
+
+    return imageSurface;
   }
 
   famousCreateNode(parentNode) {
@@ -28,5 +39,7 @@ class ImageSurface extends FamousComponent {
 }
 
 defaults(ImageSurface, FamousImageSurface);
+
+ImageSurface.propTypes = defaults({}, FamousConstants.SURFACE_PROPTYPES);
 
 export default ImageSurface;
