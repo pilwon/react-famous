@@ -8,7 +8,7 @@ export default class extends React.Component {
     let options = {
       size: [150, 100],
       properties: {
-        backgroundColor: 'red',
+        backgroundColor: '#000099',
         color: '#fff',
         textAlign: 'center',
         lineHeight: '100px'

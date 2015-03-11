@@ -32,7 +32,7 @@ export default class extends React.Component {
 
   render() {
     let properties = {
-      backgroundColor: this.state.count % 2 ? 'red' : 'maroon',
+      backgroundColor: this.state.count % 2 ? '#990000' : '#ff0000',
       color: '#fff',
       textAlign: 'center',
       lineHeight: '100px'
