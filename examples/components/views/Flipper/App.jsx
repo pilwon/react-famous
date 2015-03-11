@@ -36,26 +36,6 @@ export default class extends React.Component {
   }
 
   render() {
-    let frontOptions = {
-      properties: {
-        backgroundColor: '#990000',
-        color: 'white',
-        lineHeight: '200px',
-        textAlign: 'center'
-      },
-      size: [200, 200]
-    };
-
-    let backOptions = {
-      properties: {
-        backgroundColor: '#000099',
-        color: 'white',
-        lineHeight: '200px',
-        textAlign: 'center'
-      }, 
-      size: [200, 200]
-    };
-
     return (
       <Context perspective={500}>
         <Surface options={{properties: {lineHeight: '100px', textAlign: 'center'}, size: [undefined, 100]}}>
@@ -64,14 +44,24 @@ export default class extends React.Component {
         <Modifier options={{align: [.5, .5], origin: [.5, .5]}}>
           <Flipper ref="flipper">
             <Flipper.Front>
-              <Surface options={frontOptions}>
-                front
-              </Surface>
+              <Modifier options={{proportions: [0.3, 0.3]}}>
+                <Surface options={{properties: {backgroundColor: '#990000'}}}/>
+                <Modifier options={{align: [.5, .5], origin: [.5, .5]}}>
+                  <Surface options={{properties: {color: 'white'}, size: [true, true]}}>
+                    Front
+                  </Surface>
+                </Modifier>
+              </Modifier>
             </Flipper.Front>
             <Flipper.Back>
-              <Surface options={backOptions}>
-                back
-              </Surface>
+              <Modifier options={{proportions: [0.3, 0.3]}}>
+                <Surface options={{properties: {backgroundColor: '#000099'}}}/>
+                <Modifier options={{align: [.5, .5], origin: [.5, .5]}}>
+                  <Surface options={{properties: {color: 'white'}, size: [true, true]}}>
+                    Back
+                  </Surface>
+                </Modifier>
+              </Modifier>
             </Flipper.Back>
           </Flipper>
         </Modifier>
