@@ -7,6 +7,7 @@ import React from 'react';
 import Context from 'react-famous/core/Context';
 import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
+import FamousScheduler from 'react-famous/lib/FamousScheduler';
 import RenderController from 'react-famous/views/RenderController';
 
 GenericSync.register({
@@ -27,10 +28,6 @@ export default class extends React.Component {
     });
     let counter = 0;
 
-    if (surfaces[0]) {
-      renderController.show(surfaces[0]);
-    }
-
     sync.on('end', (data) => {
       let next = (counter + 1) % surfaces.length;
       renderController.show(surfaces[next]);
@@ -38,6 +35,12 @@ export default class extends React.Component {
     });
 
     clickSurface.pipe(sync);
+
+    FamousScheduler.schedule(() => {
+      if (surfaces[0]) {
+        renderController.show(surfaces[0]);
+      }
+    });
   }
 
   render() {

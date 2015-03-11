@@ -2,6 +2,7 @@ import React from 'react';
 import Context from 'react-famous/core/Context';
 import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
+import FamousScheduler from 'react-famous/lib/FamousScheduler';
 
 export default class extends React.Component {
   constructor(...args) {
@@ -17,11 +18,13 @@ export default class extends React.Component {
   }
 
   componentDidMount() {
-    this._intervalId = setInterval(() => {
-      this.setState((state) => ({
-        count: state.count + 1
-      }));
-    }, 100);
+    FamousScheduler.schedule(() => {
+      this._intervalId = setInterval(() => {
+        this.setState((state) => ({
+          count: state.count + 1
+        }));
+      }, 100);
+    });
   }
 
   _textCharUpper(text, position) {

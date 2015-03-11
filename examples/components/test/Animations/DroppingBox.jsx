@@ -2,6 +2,7 @@ import Transitionable from 'famous/transitions/Transitionable';
 import React from 'react';
 import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
+import FamousScheduler from 'react-famous/lib/FamousScheduler';
 
 export default class extends React.Component {
   componentWillMount() {
@@ -9,9 +10,11 @@ export default class extends React.Component {
   }
 
   componentDidMount() {
-    this._transitionable.set([0, 1], {
-      duration: 1000,
-      curve: 'easeInOut'
+    FamousScheduler.schedule(() => {
+      this._transitionable.set([0, 1], {
+        duration: 1000,
+        curve: 'easeInOut'
+      });
     });
   }
 

@@ -6,6 +6,7 @@ import React from 'react';
 import Context from 'react-famous/core/Context';
 import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
+import FamousScheduler from 'react-famous/lib/FamousScheduler';
 import EdgeSwapper from 'react-famous/views/EdgeSwapper';
 
 GenericSync.register({
@@ -25,8 +26,6 @@ export default class extends React.Component {
       touch: {}
     });
 
-    edgeSwapper.show(primary);
-
     sync.on('end', (data) => {
       if (showing) {
         edgeSwapper.show(secondary);
@@ -37,6 +36,10 @@ export default class extends React.Component {
     });
 
     clickSurface.pipe(sync);
+
+    FamousScheduler.schedule(() => {
+      edgeSwapper.show(primary);
+    });
   }
 
   render() {

@@ -4,6 +4,7 @@ import Easing from 'famous/transitions/Easing';
 import TweenTransition from 'famous/transitions/TweenTransition';
 import React from 'react';
 import Surface from 'react-famous/core/Surface';
+import FamousScheduler from 'react-famous/lib/FamousScheduler';
 import StateModifier from 'react-famous/modifiers/StateModifier';
 
 const EASING_NAMES = Object.keys(Easing);
@@ -25,7 +26,7 @@ export default class extends React.Component {
       });
     }
 
-    rotate();
+    FamousScheduler.schedule(rotate);
   }
 
   render() {
