@@ -34,10 +34,6 @@ class Surface extends FamousComponent {
       }
     });
 
-    if (!isUndefined(this.props.children)) {
-      surface.setContent(FamousUtil.renderContent(this.props.children));
-    }
-
     return surface;
   }
 
@@ -49,12 +45,13 @@ class Surface extends FamousComponent {
 
   famousUpdate(nextProps) {
     let surface = this.getFamous();
-
-    surface.setOptions(nextProps.options);
+    let content;
 
     if (!isUndefined(nextProps.children)) {
-      surface.setContent(FamousUtil.renderContent(nextProps.children));
+      content = FamousUtil.renderContent(nextProps.children);
     }
+
+    surface.setOptions(defaults({}, nextProps.options, {content}));
   }
 
   render() {
