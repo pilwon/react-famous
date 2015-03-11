@@ -32,7 +32,8 @@ const EXAMPLES = {
     'CommentBox',
     'HelloWorld',
     'HelloWorldDynamic',
-    'Layout'
+    'Layout',
+    'ReactNode'
   ]
 };
 
