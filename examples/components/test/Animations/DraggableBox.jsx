@@ -18,7 +18,7 @@ export default class extends React.Component {
 
   componentDidMount() {
     let position = this._position;
-    let surface = this.refs.surface.getFamous();
+    let clickSurface = this.refs.clickSurface.getFamous();
     let sync = new GenericSync({
       mouse: {},
       touch: {}
@@ -29,33 +29,30 @@ export default class extends React.Component {
       position[1] += data.delta[1];
     });
 
-    surface.pipe(sync);
+    clickSurface.pipe(sync);
   }
 
   render() {
     let position = this._position;
 
     let modifierOptions = {
+      proportions: [0.2, 0.2],
       transform: () => {
         return Transform.translate(position[0], position[1]);
       }
     };
 
-    let surfaceOptions = {
-      size: [100, 100],
-      properties: {
-        background: '#990000',
-        color: 'white',
-        lineHeight: '100px',
-        textAlign: 'center'
-      }
-    };
-
     return (
       <Modifier options={modifierOptions}>
-        <Surface ref="surface" options={surfaceOptions}>
-          Draggable
-        </Surface>
+        <Surface options={{properties: {backgroundColor: '#990000'}}}/>
+        <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
+          <Surface options={{properties: {color: 'white'}, size: [true, true]}}>
+            Draggable
+          </Surface>
+        </Modifier>
+        <Modifier options={{transform: Transform.inFront}}>
+          <Surface ref="clickSurface"/>
+        </Modifier>
       </Modifier>
     );
   }

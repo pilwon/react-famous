@@ -23,24 +23,19 @@ export default class extends React.Component {
 
     let modifierOptions = {
       align: () => transitionable.get(),
-      origin: () => transitionable.get()
-    };
-
-    let surfaceOptions = {
-      size: [undefined, 50],
-      properties: {
-        backgroundColor: '#333',
-        color: 'white',
-        lineHeight: '50px',
-        textAlign: 'center'
-      }
+      opacity: 0.7,
+      origin: () => transitionable.get(),
+      proportions: [1, 0.1]
     };
 
     return (
       <Modifier ref="modifier" options={modifierOptions}>
-        <Surface options={surfaceOptions}>
-          Dropping
-        </Surface>
+        <Surface options={{properties: {backgroundColor: '#333'}}}/>
+        <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
+          <Surface options={{properties: {color: 'white'}, size: [true, true]}}>
+            Dropping
+          </Surface>
+        </Modifier>
       </Modifier>
     );
   }

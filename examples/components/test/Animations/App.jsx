@@ -12,16 +12,16 @@ export default class extends React.Component {
   render() {
     return (
       <Context>
-        <Modifier options={{align: [0.25, 0.25], origin: [0.5, 0.5]}}>
+        <Modifier options={{align: [0.3, 0.3], origin: [0.5, 0.5]}}>
           <DraggableBox/>
         </Modifier>
-        <Modifier options={{align: [0.75, 0.25], origin: [0.5, 0.5]}}>
+        <Modifier options={{align: [0.7, 0.3], origin: [0.5, 0.5]}}>
           <BouncyBox/>
         </Modifier>
-        <Modifier options={{align: [0.25, 0.75], origin: [0.5, 0.5]}}>
+        <Modifier options={{align: [0.3, 0.7], origin: [0.5, 0.5]}}>
           <RotatingBox/>
         </Modifier>
-        <Modifier options={{align: [0.75, 0.75], origin: [0.5, 0.5]}}>
+        <Modifier options={{align: [0.7, 0.7], origin: [0.5, 0.5]}}>
           <CrazyBox/>
         </Modifier>
         <DroppingBox/>

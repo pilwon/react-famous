@@ -3,6 +3,7 @@ import Transform from 'famous/core/Transform';
 import Easing from 'famous/transitions/Easing';
 import TweenTransition from 'famous/transitions/TweenTransition';
 import React from 'react';
+import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
 import FamousScheduler from 'react-famous/lib/FamousScheduler';
 import StateModifier from 'react-famous/modifiers/StateModifier';
@@ -30,21 +31,14 @@ export default class extends React.Component {
   }
 
   render() {
-    let options = {
-      size: [100, 100],
-      properties: {
-        backgroundColor: '#990099',
-        color: 'white',
-        lineHeight: '100px',
-        textAlign: 'center'
-      }
-    };
-
     return (
-      <StateModifier ref="stateModifier">
-        <Surface options={options}>
-          Crazy
-        </Surface>
+      <StateModifier ref="stateModifier" options={{proportions: [0.2, 0.2]}}>
+        <Surface options={{properties: {backgroundColor: '#990099'}}}/>
+        <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
+          <Surface options={{properties: {color: 'white'}, size: [true, true]}}>
+            Crazy
+          </Surface>
+        </Modifier>
       </StateModifier>
     );
   }

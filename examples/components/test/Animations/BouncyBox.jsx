@@ -22,7 +22,7 @@ export default class extends React.Component {
 
   componentDidMount() {
     let position = this._position;
-    let surface = this.refs.surface.getFamous();
+    let clickSurface = this.refs.clickSurface.getFamous();
     let sync = new GenericSync({
       mouse: {},
       touch: {}
@@ -45,34 +45,31 @@ export default class extends React.Component {
       });
     });
 
-    surface.pipe(sync);
+    clickSurface.pipe(sync);
   }
 
   render() {
     let position = this._position;
 
     let modifierOptions = {
+      proportions: [0.2, 0.2],
       transform: () => {
         let currentPosition = position.get();
         return Transform.translate(currentPosition[0], currentPosition[1]);
       }
     };
 
-    let surfaceOptions = {
-      size: [100, 100],
-      properties: {
-        backgroundColor: '#009900',
-        color: 'white',
-        lineHeight: '100px',
-        textAlign: 'center'
-      }
-    };
-
     return (
       <Modifier options={modifierOptions}>
-        <Surface ref="surface" options={surfaceOptions}>
-          Bouncy
-        </Surface>
+        <Surface options={{properties: {backgroundColor: '#009900'}}}/>
+        <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
+          <Surface options={{properties: {color: 'white'}, size: [true, true]}}>
+            Bouncy
+          </Surface>
+        </Modifier>
+        <Modifier options={{transform: Transform.inFront}}>
+          <Surface ref="clickSurface"/>
+        </Modifier>
       </Modifier>
     );
   }

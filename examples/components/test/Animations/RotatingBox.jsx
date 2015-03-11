@@ -18,21 +18,14 @@ export default class extends React.Component {
   }
 
   render() {
-    let options = {
-      size: [100, 100],
-      properties: {
-        backgroundColor: '#000099',
-        color: 'white',
-        lineHeight: '100px',
-        textAlign: 'center'
-      }
-    };
-
     return (
-      <Modifier ref="modifier">
-        <Surface options={options}>
-          Rotating
-        </Surface>
+      <Modifier ref="modifier" options={{proportions: [0.2, 0.2]}}>
+        <Surface options={{properties: {backgroundColor: '#000099'}}}/>
+        <Modifier options={{align: [0.5, 0.5], origin: [0.5, 0.5]}}>
+          <Surface options={{properties: {color: 'white'}, size: [true, true]}}>
+            Rotating
+          </Surface>
+        </Modifier>
       </Modifier>
     );
   }
