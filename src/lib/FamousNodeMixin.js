@@ -33,9 +33,7 @@ export default {
     });
   },
 
-  isFamous() {
-    return true;
-  },
+  isFamous: true,
 
   releaseFamous() {
     delete this[FAMOUS_KEY];

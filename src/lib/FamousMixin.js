@@ -33,12 +33,14 @@ export default {
   },
 
   _createFamousNode(component, parentNode = null) {
-    if (isFunction(component.famousCreateNode)) {
+    if (component.isFamous) {
+      if (isFunction(component.famousCreateNode)) {
       let [node, next] = component.famousCreateNode(parentNode);
-      component.setFamousNode(node);
-      (next || []).forEach(([child, parentNode]) => {
-        this._createFamousNode(child, parentNode);
-      });
+        component.setFamousNode(node);
+        (next || []).forEach(([child, parentNode]) => {
+          this._createFamousNode(child, parentNode);
+        });
+      }
     } else {
       let instance = FamousUtil.getInstance(component);
       FamousUtil.getFamousChildren(instance).forEach((child) => {
