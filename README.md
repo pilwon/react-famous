@@ -19,13 +19,13 @@ Using `react-famous`, you can:
 
 ## Requirements
 
-* [Famo.us](http://famo.us): (v0.3.5)
-* [React](http://facebook.github.io/react/) (v0.13)
+* [Famo.us](http://famo.us): v0.3.5
+* [React](http://facebook.github.io/react/): v0.13
 
 
 ## Try it out
 
-This project is currently WIP therefore it is not yet avaialble on [NPM](https://www.npmjs.com/) registry.
+This project is currently [WIP](http://en.wikipedia.org/wiki/Work_in_process) therefore it is not yet avaialble on [NPM](https://www.npmjs.com/) registry.
 In the meantime, please run and modify the examples app play with `react-famous`:
 
     git clone git@github.com:pilwon/react-famous.git
