@@ -33,7 +33,7 @@ export default {
   },
 
   _createFamousNode(component, parentNode = null) {
-    if (component.isFamous) {
+    if (FamousUtil.isFamous(component)) {
       if (isFunction(component.famousCreateNode)) {
       let [node, next] = component.famousCreateNode(parentNode);
         component.setFamousNode(node);

@@ -33,8 +33,6 @@ export default {
     });
   },
 
-  isFamous: true,
-
   releaseFamous() {
     delete this[FAMOUS_KEY];
     delete this[FAMOUS_NODE_KEY];

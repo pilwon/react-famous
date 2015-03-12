@@ -55,7 +55,7 @@ function _findNearestFamousAncestor(component, searchedSubpath = []) {
     return null;
   }
   let traversePath = _buildTraversePath(owner, component).concat(searchedSubpath);
-  let famousTraversePath = traversePath.slice(0, -1).filter((component) => component.isFamous);
+  let famousTraversePath = traversePath.slice(0, -1).filter(isFamous);
   if (famousTraversePath.length) {
     return famousTraversePath.slice(-1)[0];
   } else {
@@ -103,6 +103,11 @@ export function getOwner(component) {
   return owner;
 }
 
+export function isFamous(component) {
+  let FamousComponent = require('./FamousComponent');
+  return component instanceof FamousComponent;
+}
+
 export function renderContent(obj) {
   if (Array.isArray(obj)) {
     return obj.map((obj) => {
@@ -120,5 +125,6 @@ export default {
   getFamousParent,
   getInstance,
   getOwner,
+  isFamous,
   renderContent
 };
