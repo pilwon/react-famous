@@ -33,7 +33,8 @@ const EXAMPLES = {
     'HelloWorld',
     'HelloWorldDynamic',
     'Layout',
-    'ReactNode'
+    'ReactNode',
+    'Seed'
   ]
 };
 
