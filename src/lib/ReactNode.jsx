@@ -1,4 +1,5 @@
 import FamousSurface from 'famous/core/Surface';
+import isString from 'lodash/lang/isString';
 import defaults from 'lodash/object/defaults';
 import React from 'react';
 
@@ -20,6 +21,12 @@ export class FamousReactNode extends FamousSurface {
     let content = this.getContent();
     let context = this._reactContext;
     let target = this._currentTarget;
+
+    if (isString(content)) {
+      content = (
+        <span>{content}</span>
+      );
+    }
 
     if (React.isValidElement(content)) {
       if (context) {
