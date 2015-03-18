@@ -16,7 +16,8 @@ export default class extends React.Component {
 
     Object.keys(this.refs)
       .filter((key) => startsWith(key, SURFACE_REF_PREFIX))
-      .forEach((key) => this.refs[key].getFamous().pipe(scrollview));
+      .map((key) => this.refs[key].getFamous())
+      .forEach((surface) => surface.pipe(scrollview));
   }
 
   render() {
