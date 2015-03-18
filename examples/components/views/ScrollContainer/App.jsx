@@ -1,3 +1,4 @@
+import startsWith from 'lodash/string/startsWith';
 import range from 'lodash/utility/range';
 import React from 'react';
 import Context from 'react-famous/core/Context';
@@ -6,15 +7,15 @@ import Surface from 'react-famous/core/Surface';
 import ScrollContainer from 'react-famous/views/ScrollContainer';
 
 const NUM_SURFACES = 40;
+const SURFACE_REF_PREFIX = 'surface_';
 
 export default class extends React.Component {
   componentDidMount() {
     let scrollContainer = this.refs.scrollContainer.getFamous();
 
-    range(NUM_SURFACES).forEach((idx) => {
-      let surface = this.refs[`surface_${idx}`].getFamous();
-      surface.pipe(scrollContainer.scrollview);
-    });
+    Object.keys(this.refs)
+      .filter((key) => startsWith(key, SURFACE_REF_PREFIX))
+      .forEach((key) => this.refs[key].getFamous().pipe(scrollContainer.scrollview));
   }
 
   render() {
@@ -28,7 +29,7 @@ export default class extends React.Component {
         }
       };
       return (
-        <Surface key={idx} ref={`surface_${idx}`} options={surfaceOptions}>
+        <Surface key={idx} ref={`${SURFACE_REF_PREFIX}${idx}`} options={surfaceOptions}>
           Surface {idx + 1}
         </Surface>
       );
