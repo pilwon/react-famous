@@ -2,8 +2,8 @@ import ElementAllocator from 'famous/core/ElementAllocator';
 
 let _allocate = ElementAllocator.prototype.allocate;
 
-ElementAllocator.prototype.allocate = function (...args) {
-  let result = _allocate.apply(this, args);
+ElementAllocator.prototype.allocate = function () {
+  let result = _allocate.apply(this, arguments);
   this.container.appendChild(result);
   return result;
 };
