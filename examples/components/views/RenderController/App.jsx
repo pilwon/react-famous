@@ -2,6 +2,7 @@ import Transform from 'famous/core/Transform';
 import GenericSync from 'famous/inputs/GenericSync';
 import MouseSync from 'famous/inputs/MouseSync';
 import TouchSync from 'famous/inputs/TouchSync';
+import startsWith from 'lodash/string/startsWith';
 import range from 'lodash/utility/range';
 import React from 'react';
 import Context from 'react-famous/core/Context';
@@ -9,6 +10,9 @@ import Modifier from 'react-famous/core/Modifier';
 import Surface from 'react-famous/core/Surface';
 import FamousScheduler from 'react-famous/lib/FamousScheduler';
 import RenderController from 'react-famous/views/RenderController';
+
+const NUM_SURFACES = 10;
+const SURFACE_REF_PREFIX = 'surface_';
 
 GenericSync.register({
   mouse: MouseSync,
@@ -20,7 +24,7 @@ export default class extends React.Component {
     let clickSurface = this.refs.clickSurface.getFamous();
     let renderController = this.refs.renderController.getFamous();
     let surfaces = Object.keys(this.refs)
-      .filter((key) => /surface_\d+/.test(key))
+      .filter((key) => startsWith(key, SURFACE_REF_PREFIX))
       .map((key) => this.refs[key].getFamous());
     let sync = new GenericSync({
       mouse: {},
@@ -44,17 +48,17 @@ export default class extends React.Component {
   }
 
   render() {
-    let surfaces = range(10).map((i) => {
+    let surfaces = range(NUM_SURFACES).map((i) => {
       let options = {
         size: [200, 200],
         properties: {
-          backgroundColor: 'hsl(' + (i * 360 / 10) + ', 100%, 50%)',
+          backgroundColor: 'hsl(' + (i * 360 / NUM_SURFACES) + ', 100%, 50%)',
           lineHeight: '200px',
           textAlign: 'center'
         }
       };
       return (
-        <Surface key={i} ref={`surface_${i}`} options={options}>
+        <Surface key={i} ref={`${SURFACE_REF_PREFIX}${i}`} options={options}>
           Surface: {i + 1}
         </Surface>
       );
