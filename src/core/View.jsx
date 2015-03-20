@@ -11,9 +11,9 @@ class View extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let view = this.getFamous();
-    let node = parentNode.add(view);
-    let next = this.getFamousChildrenRef().map((child, idx) => [child, node]);
-    return [node, next];
+    parentNode.add(view);
+    let next = this.getFamousChildrenRef().map((child, idx) => [child, view]);
+    return [view, next];
   }
 
   famousUpdate(nextProps) {

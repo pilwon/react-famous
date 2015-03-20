@@ -25,7 +25,8 @@ const EXAMPLES = {
     'RenderController',
     'ScrollContainer',
     'Scrollview',
-    'SequentialLayout'
+    'SequentialLayout',
+    'SizeAwareView'
   ],
   test: [
     'Animations',

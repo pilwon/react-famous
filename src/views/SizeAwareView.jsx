@@ -11,9 +11,9 @@ class SizeAwareView extends FamousComponent {
 
   famousCreateNode(parentNode) {
     let sizeAwareView = this.getFamous();
-    let node = parentNode.add(sizeAwareView);
-    let next = this.getFamousChildrenRef().map((child, idx) => [child, node]);
-    return [node, next];
+    parentNode.add(sizeAwareView);
+    let next = this.getFamousChildrenRef().map((child, idx) => [child, sizeAwareView]);
+    return [sizeAwareView, next];
   }
 
   famousUpdate(nextProps) {
