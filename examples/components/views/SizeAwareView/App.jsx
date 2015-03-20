@@ -9,9 +9,8 @@ export default class extends React.Component {
     let sizeAwareView = this.refs.sizeAwareView.getFamous();
     let surface = this.refs.surface.getFamous();
 
-    sizeAwareView._eventInput.on('parentResize', () => {
-      let content = `Parent Size: ${JSON.stringify(sizeAwareView.getParentSize())}`;
-      surface.setContent(content);
+    sizeAwareView._eventInput.on('parentResize', ([width, height]) => {
+      surface.setContent(`Parent Size: ${width}px x ${height}px`);
     });
   }
 
