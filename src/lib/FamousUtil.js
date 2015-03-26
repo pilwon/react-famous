@@ -112,7 +112,7 @@ export function renderContent(obj) {
   if (Array.isArray(obj)) {
     return obj.map((obj) => {
       return renderContent(obj);
-    }).join('\n');
+    }).join('');
   } else if (React.isValidElement(obj)) {
     return React.renderToString(obj);
   } else {
