@@ -21,6 +21,12 @@ module.exports = {
     path: path.join(__dirname, '../dist/examples')
   },
   plugins: [
+    new webpack.DefinePlugin({
+      '__DEV__': false,
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
     new webpack.optimize.UglifyJsPlugin({
       output: {
         comments: false

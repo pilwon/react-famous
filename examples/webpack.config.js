@@ -21,6 +21,11 @@ module.exports = {
     path: path.join(__dirname, '../dist/examples'),
     publicPath: '/_assets/'
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      __DEV__: true
+    })
+  ],
   resolve: {
     alias: {
       'react-famous': path.join(__dirname, '../src'),
