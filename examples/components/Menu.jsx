@@ -1,13 +1,10 @@
 import isEqual from 'lodash/lang/isEqual';
 import React from 'react';
+import { Link } from 'react-router';
 
 class Menu extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     return !isEqual(this.props, nextProps) || !isEqual(this.state, nextState);
-  }
-
-  _onClick(group, member) {
-    this.props.onMenuChange(group, member);
   }
 
   render() {
@@ -15,7 +12,7 @@ class Menu extends React.Component {
       let listItems = this.props.examples[group].map((member, idx) => {
         return (
           <li key={idx}>
-            <a href={`#/${group}/${member}`} onClick={this._onClick.bind(this, group, member)}>{member}</a>
+            <Link to={`${group}.${member}`}>{member}</Link>
           </li>
         );
       });
@@ -33,7 +30,7 @@ class Menu extends React.Component {
     return (
       <div className="menu">
         <nav>
-          <a href="#" onClick={this._onClick.bind(this, null, null)}>react-famous</a>
+          <a href="#">react-famous</a>
         </nav>
         {examples}
       </div>
@@ -42,8 +39,7 @@ class Menu extends React.Component {
 }
 
 Menu.propTypes = {
-  examples: React.PropTypes.object.isRequired,
-  onMenuChange: React.PropTypes.func.isRequired
+  examples: React.PropTypes.object.isRequired
 };
 
 export default Menu;
