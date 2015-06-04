@@ -1,14 +1,20 @@
+import FamousEngine from 'famous/core/FamousEngine';
+import isArray from 'lodash/lang/isArray';
+import isEqual from 'lodash/lang/isEqual';
 import isFunction from 'lodash/lang/isFunction';
+import isString from 'lodash/lang/isString';
+import isUndefined from 'lodash/lang/isUndefined';
 import values from 'lodash/object/values';
 import React from 'react';
 import ReactInstanceMap from 'react/lib/ReactInstanceMap';
+
+const clock = FamousEngine.getClock();
 
 function _buildTraversePath(fromAncestor, toDescendant) {
   if (fromAncestor === toDescendant) {
     return [fromAncestor];
   }
-  let component;
-  fromAncestor = getInstance(fromAncestor);
+  let component = getInstance(fromAncestor);
   if (component._renderedComponent) {
     let traversePath;
     if (isFunction(component._renderedComponent.getPublicInstance)) {
@@ -16,7 +22,7 @@ function _buildTraversePath(fromAncestor, toDescendant) {
     } else {
       traversePath = _buildTraversePath(component._renderedComponent, toDescendant);
     }
-    if (traversePath) {
+    if (traversePath.length) {
       return [fromAncestor].concat(traversePath);
     }
   } else if (component._renderedChildren) {
@@ -24,29 +30,12 @@ function _buildTraversePath(fromAncestor, toDescendant) {
     for (let i = 0; i < children.length; ++i) {
       let child = children[i];
       let traversePath = _buildTraversePath(child.getPublicInstance(), toDescendant);
-      if (traversePath) {
+      if (traversePath.length) {
         return [fromAncestor].concat(traversePath);
       }
     }
   }
-  return null;
-}
-
-function _findKeyFromNearestDescendant(traversePath, root) {
-  for (let i = 0; i < traversePath.length; ++i) {
-    if (traversePath[i] === root) {
-      let descendants = traversePath.slice(i + 1);
-      for (let j = 0; j < descendants.length; ++j) {
-        let descendant = descendants[j];
-        descendant = getInstance(descendant);
-        if (descendant._currentElement.key) {
-          return descendant._currentElement.key;
-        }
-      }
-      break;
-    }
-  }
-  return null;
+  return [];
 }
 
 function _findNearestFamousAncestor(component, searchedSubpath = []) {
@@ -58,27 +47,44 @@ function _findNearestFamousAncestor(component, searchedSubpath = []) {
   let famousTraversePath = traversePath.slice(0, -1).filter(isFamous);
   if (famousTraversePath.length) {
     return famousTraversePath.slice(-1)[0];
-  } else {
-    let searchedSubpath = traversePath.slice(1);
-    return _findNearestFamousAncestor(owner, searchedSubpath);
   }
+  return _findNearestFamousAncestor(owner, traversePath.slice(1));
 }
 
-export function getFamousChildren(component) {
-  if (component._renderedComponent &&
-      isFunction(component._renderedComponent.getPublicInstance)) {
-    return [component._renderedComponent.getPublicInstance()];
-  }
-  let instance = component;
-  while (instance._renderedComponent && !instance._renderedChildren) {
-    instance = instance._renderedComponent;
-  }
-  if (instance._renderedChildren) {
-    return values(instance._renderedChildren).map((child) => {
-      return child.getPublicInstance();
-    });
-  }
-  return [];
+export function clearTimer() {
+  return clock.clearTimer.apply(clock, arguments);
+}
+
+export function getClock() {
+  return clock;
+}
+
+export function getContextTypes() {
+  return {
+    routeDepth: React.PropTypes.number,
+    router: React.PropTypes.func
+  };
+}
+
+export function getDOMNodeFromNode(node) {
+  return new Promise((resolve) => {
+    (function query() {
+      let nodeId = node.getLocation();
+      let elements = document
+        .querySelector(nodeId.split('/')[0])
+        .querySelectorAll('[data-fa-path]');
+      for (let i = 0; i < elements.length; ++i) {
+        if (elements[i].getAttribute('data-fa-path') === nodeId) {
+          return resolve(elements[i]);
+        }
+      }
+      clock.setTimeout(query, 16);
+    })();
+  });
+}
+
+export function getEngine() {
+  return FamousEngine;
 }
 
 export function getFamousParent(component) {
@@ -104,27 +110,63 @@ export function getOwner(component) {
 }
 
 export function isFamous(component) {
-  let FamousComponent = require('./FamousComponent');
-  return component instanceof FamousComponent;
+  return isFunction(component.getFamous);
 }
 
-export function renderContent(obj) {
-  if (Array.isArray(obj)) {
-    return obj.map((obj) => {
-      return renderContent(obj);
-    }).join('');
-  } else if (React.isValidElement(obj)) {
-    return React.renderToString(obj);
-  } else {
-    return obj;
+export function onSizeChange(node, cb) {
+  if (!(node instanceof Node)) {
+    throw new Error('node must be an instance of Node.');
+  }
+
+  let component = {
+    onSizeChange(size) {
+      node.removeComponent(component);
+      cb(size);
+    }
+  };
+
+  node.addComponent(component);
+}
+
+export function propsToTargetWithMapper(mapper, target, from, to) {
+  let mapped;
+  let toValue;
+
+  for (let key in mapper) {
+    toValue = to[key];
+    if (!isUndefined(toValue) && !isEqual(from[key], toValue)) {
+      mapped = mapper[key];
+      if (isString(mapped)) {
+        target[mapped].apply(target, isArray(toValue) ? toValue : [toValue]);
+      } else if (isFunction(mapped)) {
+        mapped(target, toValue);
+      } else {
+        throw new Error('Mapper can only map to string or function.');
+      }
+    }
   }
 }
 
+export function setInterval() {
+  return clock.setInterval.apply(clock, arguments);
+}
+
+export function setTimeout() {
+  return clock.setTimeout.apply(clock, arguments);
+}
+
 export default {
-  getFamousChildren,
+  clearTimer,
+  getClock,
+  getContextTypes,
+  getDOMNodeFromNode,
+  getEngine,
   getFamousParent,
   getInstance,
   getOwner,
   isFamous,
-  renderContent
+  onSizeChange,
+  propsToTargetWithMapper,
+  setInterval,
+  setTimeout,
 };
